@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مصر 2030 - المسابقة التكنولوجية</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <meta name="language" content="ar">
+</head>
+<body>
+    <!-- شاشة التحميل الجديدة - Preloader with Progress Bar (بدون الإحصائيات) -->
+    <div id="loading-screen">
+        <div class="preloader-container">
+            <!-- الخلفية المتحركة -->
+            <div class="preloader-bg">
+                <div class="gradient-sphere"></div>
+                <div class="grid-lines"></div>
+            </div>
+            
+            <!-- المحتوى الرئيسي -->
+            <div class="preloader-content">
+                <!-- النص الرئيسي مع تأثير Glitch -->
+                <div class="glitch-wrapper">
+                    <h1 class="glitch-title" data-text="مصر 2030">مصر 2030</h1>
+                </div>
+                
+                <!-- الكلمة فوق شريط التقدم -->
+                <div class="progress-label">مصر 2023</div>
+                
+                <!-- شريط التقدم المتطور -->
+                <div class="neo-progress-container">
+                    <div class="neo-progress-bar" id="loading-progress-bar" style="width: 0%">
+                        <div class="progress-glow"></div>
+                    </div>
+                </div>
+                
+                <!-- النسبة المئوية -->
+                <div class="progress-percentage-neon" id="loading-percentage-neon">0%</div>
+                
+                <!-- رسالة التحميل الديناميكية (بدون النقاط) -->
+                <div class="loading-message-neon" id="loading-message-neon">
+                    جاري تجهيز رؤية مصر 2030
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط التنقل - مدمج مع الخلفية -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">مصر<span>2030</span></div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">الرئيسية</a></li>
+                <li><a href="#vision">الرؤية</a></li>
+                <li><a href="#projects">المشاريع</a></li>
+                <li><a href="#ai">الذكاء الاصطناعي</a></li>
+                <li><a href="#stats">الإحصائيات</a></li>
+                <li><a href="#contact">تواصل</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="main-title">
+                <span class="egypt">مصر</span>
+                <span class="year">2030</span>
+            </h1>
+            <p class="hero-subtitle">تقنيات المستقبل لخدمة المواطن المصري</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="number">15</span>
+                    <span class="label">مدينة ذكية</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">42</span>
+                    <span class="label">مشروع قومي</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">100+</span>
+                    <span class="label">خدمة رقمية</span>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <button class="btn-primary" id="discover-btn">
+                    <i class="fas fa-rocket"></i>
+                    ابدأ الرحلة
+                </button>
+                <button class="btn-secondary" id="video-btn">
+                    <i class="fas fa-play"></i>
+                    عرض الفيديو
+                </button>
+            </div>
+        </div>
+        
+        <div id="three-canvas"></div>
+        
+        <div class="scroll-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </section>
+
+    <!-- قسم الرؤية - محدث بمحتوى كامل -->
+    <section id="vision" class="vision">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">الرؤية</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">التنمية المستدامة.. نحو جمهورية جديدة</p>
+            
+            <!-- محتوى الرؤية الكامل -->
+            <div class="vision-full-content">
+                <div class="vision-intro glass" data-aos="fade-up">
+                    <h3>رؤية مصر 2030</h3>
+                    <p>رؤية مصر 2030 هي أجندة وطنية أطلقت في فبراير 2016، وتعكس الخطة الاستراتيجية طويلة المدى للدولة لتحقيق مبادئ وأهداف التنمية المستدامة في كل المجالات، والعمل على توطينها بأجهزة الدولة المصرية المختلفة. تستند الرؤية إلى محاور التنمية المستدامة الثلاثة: الاقتصادي، الاجتماعي، البيئي، بالإضافة إلى البعد الرابع وهو البعد الحضري.</p>
+                </div>
+                
+                <div class="vision-highlights">
+                    <div class="vision-highlight-card glass" data-aos="flip-right" data-aos-delay="100">
+                        <div class="highlight-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>الاقتصاد التنافسي</h4>
+                        <p>اقتصاد سوق معرفي ومنافس ومتنوع، يحقق نموًا مستدامًا وشاملًا ويوفر فرص عمل منتجة</p>
+                    </div>
+                    
+                    <div class="vision-highlight-card glass" data-aos="flip-right" data-aos-delay="200">
+                        <div class="highlight-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h4>العدالة الاجتماعية</h4>
+                        <p>تكافؤ الفرص وتوزيع عادل لثمار التنمية، وشبكات حماية اجتماعية متكاملة</p>
+                    </div>
+                    
+                    <div class="vision-highlight-card glass" data-aos="flip-right" data-aos-delay="300">
+                        <div class="highlight-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h4>الاستدامة البيئية</h4>
+                        <p>حماية الموارد الطبيعية ودعم التحول نحو الاقتصاد الأخضر والمشروعات صديقة البيئة</p>
+                    </div>
+                    
+                    <div class="vision-highlight-card glass" data-aos="flip-right" data-aos-delay="400">
+                        <div class="highlight-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h4>التحول الرقمي</h4>
+                        <p>ميكنة جميع الخدمات الحكومية وبناء مصر الرقمية لتسهيل حياة المواطنين</p>
+                    </div>
+                    
+                    <div class="vision-highlight-card glass" data-aos="flip-right" data-aos-delay="500">
+                        <div class="highlight-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>التعليم والتدريب</h4>
+                        <p>نظام تعليمي متطور يواكب المعايير العالمية ويساهم في بناء الإنسان المصري</p>
+                    </div>
+                    
+                    <div class="vision-highlight-card glass" data-aos="flip-right" data-aos-delay="600">
+                        <div class="highlight-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h4>الصحة والحماية</h4>
+                        <p>منظومة صحية متكاملة تغطي جميع المواطنين وتقدم خدمات عالية الجودة</p>
+                    </div>
+                </div>
+                
+                <!-- الأهداف الاستراتيجية -->
+                <div class="vision-goals" data-aos="fade-up">
+                    <h3>الأهداف الاستراتيجية 2030</h3>
+                    <div class="goals-grid">
+                        <div class="goal-item">
+                            <span class="goal-number">1</span>
+                            <span class="goal-text">نمو الناتج المحلي 8% سنوياً</span>
+                        </div>
+                        <div class="goal-item">
+                            <span class="goal-number">2</span>
+                            <span class="goal-text">خفض البطالة إلى 5%</span>
+                        </div>
+                        <div class="goal-item">
+                            <span class="goal-number">3</span>
+                            <span class="goal-text">20% طاقة متجددة</span>
+                        </div>
+                        <div class="goal-item">
+                            <span class="goal-number">4</span>
+                            <span class="goal-text">100% خدمات رقمية</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- خريطة الطريق الرقمية (كانت موجودة) -->
+            <div class="roadmap-preview" data-aos="fade-up" data-aos-delay="500">
+                <h3>خريطة الطريق الرقمية</h3>
+                <div class="roadmap-steps">
+                    <div class="step">
+                        <span class="year">2023</span>
+                        <span class="desc">البنية التحتية</span>
+                    </div>
+                    <div class="step">
+                        <span class="year">2025</span>
+                        <span class="desc">التحول الرقمي</span>
+                    </div>
+                    <div class="step">
+                        <span class="year">2027</span>
+                        <span class="desc">المدن الذكية</span>
+                    </div>
+                    <div class="step">
+                        <span class="year">2030</span>
+                        <span class="desc">الريادة الرقمية</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المشاريع القومية -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">المشاريع</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">أكبر المشاريع التنموية في الشرق الأوسط</p>
+            
+            <div class="projects-showcase">
+                <div class="project-highlight glass" data-aos="fade-left">
+                    <div class="project-number">15</div>
+                    <div class="project-info">
+                        <h3>مدن الجيل الرابع</h3>
+                        <p>مدن ذكية متكاملة في مختلف أنحاء الجمهورية</p>
+                    </div>
+                </div>
+                
+                <div class="project-highlight glass" data-aos="fade-right">
+                    <div class="project-number">42</div>
+                    <div class="project-info">
+                        <h3>مشروع قومي</h3>
+                        <p>عملاق في مجالات الطاقة والإسكان والنقل</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="swiper projects-swiper" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="project-card glass">
+                            <div class="project-image">
+                                <div class="image-overlay"></div>
+                                <i class="fas fa-city"></i>
+                            </div>
+                            <div class="project-content">
+                                <h3>العاصمة الإدارية</h3>
+                                <p>أحدث مدينة ذكية في الشرق الأوسط</p>
+                                <div class="project-stats">
+                                    <span><i class="fas fa-expand"></i> 700 كم²</span>
+                                    <span><i class="fas fa-wifi"></i> ذكية بالكامل</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="project-card glass">
+                            <div class="project-image">
+                                <div class="image-overlay"></div>
+                                <i class="fas fa-solar-panel"></i>
+                            </div>
+                            <div class="project-content">
+                                <h3>محطة بنبان</h3>
+                                <p>أكبر محطة طاقة شمسية في العالم</p>
+                                <div class="project-stats">
+                                    <span><i class="fas fa-bolt"></i> 2000 ميجاوات</span>
+                                    <span><i class="fas fa-leaf"></i> طاقة نظيفة</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="project-card glass">
+                            <div class="project-image">
+                                <div class="image-overlay"></div>
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="project-content">
+                                <h3>التحول الرقمي</h3>
+                                <p>ميكنة جميع الخدمات الحكومية</p>
+                                <div class="project-stats">
+                                    <span><i class="fas fa-globe"></i> 100+ خدمة</span>
+                                    <span><i class="fas fa-mobile-alt"></i> رقمية بالكامل</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="project-card glass">
+                            <div class="project-image">
+                                <div class="image-overlay"></div>
+                                <i class="fas fa-train"></i>
+                            </div>
+                            <div class="project-content">
+                                <h3>شبكة القطار الكهربائي</h3>
+                                <p>أحدث وسائل النقل الأخضر</p>
+                                <div class="project-stats">
+                                    <span><i class="fas fa-road"></i> 2000 كم</span>
+                                    <span><i class="fas fa-battery-full"></i> كهربائي بالكامل</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الذكاء الاصطناعي - محدث بمحتوى كامل -->
+    <section id="ai" class="ai">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">الذكاء الاصطناعي</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">تقنيات المستقبل لخدمة المواطن المصري</p>
+            
+            <div class="ai-full-content">
+                <!-- مقدمة عن الذكاء الاصطناعي في مصر -->
+                <div class="ai-intro glass" data-aos="fade-up">
+                    <h3>الاستراتيجية الوطنية للذكاء الاصطناعي</h3>
+                    <p>أطلقت مصر الاستراتيجية الوطنية للذكاء الاصطناعي في 2021 بهدف توظيف تقنيات الذكاء الاصطناعي لتحقيق أهداف رؤية مصر 2030، وتعزيز مكانة مصر كمركز إقليمي ودولي في مجال الذكاء الاصطناعي.</p>
+                </div>
+                
+                <!-- المجالات الرئيسية -->
+                <div class="ai-categories">
+                    <div class="ai-category glass" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="category-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>التعليم الذكي</h4>
+                        <div class="ai-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-progress="90"></div>
+                            </div>
+                            <span class="progress-value">90%</span>
+                        </div>
+                        <p>منصة مصر التعليمية (EdTech) تستخدم الذكاء الاصطناعي لتخصيص المحتوى التعليمي لأكثر من 25 مليون طالب</p>
+                        <ul class="ai-features">
+                            <li><i class="fas fa-check-circle"></i> منصات تعلم تفاعلية</li>
+                            <li><i class="fas fa-check-circle"></i> تحليل أداء الطلاب</li>
+                            <li><i class="fas fa-check-circle"></i> محتوى مخصص لكل طالب</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="ai-category glass" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="category-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h4>الصحة الرقمية</h4>
+                        <div class="ai-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-progress="95"></div>
+                            </div>
+                            <span class="progress-value">95%</span>
+                        </div>
+                        <p>أنظمة ذكاء اصطناعي لتشخيص الأمراض ودعم مبادرة "100 مليون صحة" والكشف المبكر عن الأورام</p>
+                        <ul class="ai-features">
+                            <li><i class="fas fa-check-circle"></i> تشخيص مبكر للأمراض</li>
+                            <li><i class="fas fa-check-circle"></i> تحليل الأشعة</li>
+                            <li><i class="fas fa-check-circle"></i> متابعة المرضى عن بعد</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="ai-category glass" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="category-icon">
+                            <i class="fas fa-bus"></i>
+                        </div>
+                        <h4>النقل الذكي</h4>
+                        <div class="ai-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-progress="88"></div>
+                            </div>
+                            <span class="progress-value">88%</span>
+                        </div>
+                        <p>نظام إدارة مروري ذكي في المدن الجديدة يعتمد على تحليل البيانات لتقليل الازدحام بنسبة 40%</p>
+                        <ul class="ai-features">
+                            <li><i class="fas fa-check-circle"></i> إدارة المرور بالذكاء الاصطناعي</li>
+                            <li><i class="fas fa-check-circle"></i> تطبيقات الملاحة الذكية</li>
+                            <li><i class="fas fa-check-circle"></i> المواصلات ذاتية القيادة</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="ai-category glass" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="category-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>الأمن السيبراني</h4>
+                        <div class="ai-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-progress="92"></div>
+                            </div>
+                            <span class="progress-value">92%</span>
+                        </div>
+                        <p>مركز مصر للاستجابة للطوارئ الحاسوبية (EG-CERT) وأنظمة الذكاء الاصطناعي لحماية البنية التحتية</p>
+                        <ul class="ai-features">
+                            <li><i class="fas fa-check-circle"></i> كشف الاختراقات</li>
+                            <li><i class="fas fa-check-circle"></i> حماية البيانات</li>
+                            <li><i class="fas fa-check-circle"></i> تأمين المعاملات</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- إحصائيات الذكاء الاصطناعي -->
+                <div class="ai-stats-grid" data-aos="fade-up">
+                    <div class="ai-stat-item glass">
+                        <div class="ai-stat-number">+25</div>
+                        <div class="ai-stat-label">مليون طالب</div>
+                    </div>
+                    <div class="ai-stat-item glass">
+                        <div class="ai-stat-number">+60</div>
+                        <div class="ai-stat-label">مليون مواطن</div>
+                    </div>
+                    <div class="ai-stat-item glass">
+                        <div class="ai-stat-number">40%</div>
+                        <div class="ai-stat-label">خفض الازدحام</div>
+                    </div>
+                    <div class="ai-stat-item glass">
+                        <div class="ai-stat-number">92%</div>
+                        <div class="ai-stat-label">أمان سيبراني</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الإحصائيات المتطور -->
+    <section id="stats" class="stats">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">الإحصائيات</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">مؤشرات الأداء الرئيسية للمشروعات القومية</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card glass" data-aos="flip-up" data-aos-delay="100">
+                    <i class="fas fa-city"></i>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">مدينة ذكية</div>
+                </div>
+                
+                <div class="stat-card glass" data-aos="flip-up" data-aos-delay="200">
+                    <i class="fas fa-database"></i>
+                    <div class="stat-number" data-target="42">0</div>
+                    <div class="stat-label">مشروع قومي</div>
+                </div>
+                
+                <div class="stat-card glass" data-aos="flip-up" data-aos-delay="300">
+                    <i class="fas fa-wifi"></i>
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">خدمة رقمية</div>
+                </div>
+                
+                <div class="stat-card glass" data-aos="flip-up" data-aos-delay="400">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-number" data-target="60">0</div>
+                    <div class="stat-label">مليون مستخدم</div>
+                </div>
+            </div>
+            
+            <!-- قسم الجرافات والرسوم البيانية -->
+            <div class="charts-container" data-aos="fade-up" data-aos-delay="200">
+                <!-- الرسم البياني الدائري -->
+                <div class="chart-card glass">
+                    <h3><i class="fas fa-chart-pie"></i> توزيع المشروعات القومية</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="pieChart" class="static-chart"></canvas>
+                    </div>
+                    <div class="chart-legend" id="pieLegend"></div>
+                </div>
+                
+                <!-- الرسم البياني الخطي -->
+                <div class="chart-card glass">
+                    <h3><i class="fas fa-chart-line"></i> نمو الخدمات الرقمية</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="lineChart" class="static-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- الرسم البياني الشريطي -->
+                <div class="chart-card glass">
+                    <h3><i class="fas fa-chart-bar"></i> مؤشرات الذكاء الاصطناعي</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="barChart" class="static-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- جراف دائري متعدد -->
+                <div class="chart-card glass">
+                    <h3><i class="fas fa-chart-simple"></i> توزيع المدن الذكية</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="doughnutChart" class="static-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- إحصائيات إضافية مع جرافات صغيرة -->
+            <div class="stats-mini-grid">
+                <div class="mini-stat glass" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="mini-chart">
+                        <canvas id="miniChart1" width="80" height="80" class="static-chart"></canvas>
+                    </div>
+                    <div class="mini-info">
+                        <span class="mini-value">85%</span>
+                        <span class="mini-label">التحول الرقمي</span>
+                    </div>
+                </div>
+                
+                <div class="mini-stat glass" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="mini-chart">
+                        <canvas id="miniChart2" width="80" height="80" class="static-chart"></canvas>
+                    </div>
+                    <div class="mini-info">
+                        <span class="mini-value">92%</span>
+                        <span class="mini-label">التغطية الرقمية</span>
+                    </div>
+                </div>
+                
+                <div class="mini-stat glass" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="mini-chart">
+                        <canvas id="miniChart3" width="80" height="80" class="static-chart"></canvas>
+                    </div>
+                    <div class="mini-info">
+                        <span class="mini-value">78%</span>
+                        <span class="mini-label">رضاء المواطنين</span>
+                    </div>
+                </div>
+                
+                <div class="mini-stat glass" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="mini-chart">
+                        <canvas id="miniChart4" width="80" height="80" class="static-chart"></canvas>
+                    </div>
+                    <div class="mini-info">
+                        <span class="mini-value">88%</span>
+                        <span class="mini-label">الأمن السيبراني</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم تواصل معنا -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">تواصل</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">كن جزءاً من مستقبل مصر الرقمية</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info glass" data-aos="fade-left">
+                    <h3>معلومات الاتصال</h3>
+                    <div class="info-items">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>القاهرة، جمهورية مصر العربية</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@egypt2030.gov.eg</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+20 123 456 7890</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>السبت - الخميس: 9ص - 5م</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <form class="contact-form glass" data-aos="fade-right" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="الاسم الكامل" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="البريد الإلكتروني" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="الموضوع" required>
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="رسالتك" rows="5" required></textarea>
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        إرسال الرسالة
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h2>مصر<span>2030</span></h2>
+                    </div>
+                    <p>رؤية مصر للتحول الرقمي والتنمية المستدامة</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                        <li><a href="#vision"><i class="fas fa-chevron-left"></i> الرؤية</a></li>
+                        <li><a href="#projects"><i class="fas fa-chevron-left"></i> المشاريع</a></li>
+                        <li><a href="#ai"><i class="fas fa-chevron-left"></i> الذكاء الاصطناعي</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>الدعم</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> شروط الاستخدام</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-left"></i> تواصل معنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>النشرة البريدية</h4>
+                    <p>اشترك لتصلك آخر الأخبار</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="بريدك الإلكتروني">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 مصر 2030 - جميع الحقوق محفوظة. تصميم وتنفيذ: المسابقة التكنولوجية</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- الشات بوت الذكي -->
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-toggle glass">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-window glass">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> المستشار الذكي</h3>
+                <button class="close-chat"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-content">
+                        <p>مرحباً! أنا المستشار الذكي لمستقبل مصر 2030. كيف يمكنني مساعدتك؟</p>
+                    </div>
+                    <span class="message-time">الآن</span>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="userInput" placeholder="اكتب سؤالك هنا...">
+                <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+            }
+        }
+    </script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    
+    <script type="module" src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>
