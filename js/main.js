@@ -1,97 +1,12 @@
 // ================================================
-// أداة كشف المشاكل - تشغل عند F12
-// ================================================
-if (window.location.hash === '#debug') {
-    setTimeout(() => {
-        console.group('🔍 تحليل المشاكل');
-        
-        // الكشف عن overflow
-        const allElements = document.querySelectorAll('*');
-        let overflowElements = [];
-        
-        allElements.forEach((el, index) => {
-            const styles = window.getComputedStyle(el);
-            if (el.scrollWidth > el.clientWidth + 2 || 
-                el.scrollHeight > el.clientHeight + 2) {
-                overflowElements.push({
-                    element: el.tagName,
-                    id: el.id || 'بدون id',
-                    class: el.className.slice(0, 30),
-                    diffWidth: (el.scrollWidth - el.clientWidth).toFixed(0),
-                    diffHeight: (el.scrollHeight - el.clientHeight).toFixed(0),
-                    position: styles.position,
-                    width: styles.width,
-                    maxWidth: styles.maxWidth
-                });
-            }
-        });
-        
-        if (overflowElements.length > 0) {
-            console.warn('⚠️ عناصر بها overflow:', overflowElements.length);
-            console.table(overflowElements.slice(0, 20));
-        } else {
-            console.log('✅ لا يوجد overflow');
-        }
-        
-        // الكشف عن transform scale
-        let scaledElements = [];
-        allElements.forEach(el => {
-            const transform = window.getComputedStyle(el).transform;
-            if (transform !== 'none' && transform.includes('matrix')) {
-                scaledElements.push({
-                    element: el.tagName,
-                    class: el.className.slice(0, 30),
-                    transform: transform
-                });
-            }
-        });
-        
-        if (scaledElements.length > 0) {
-            console.warn('⚠️ عناصر بها transform:', scaledElements.length);
-            console.table(scaledElements.slice(0, 10));
-        } else {
-            console.log('✅ لا يوجد transform scale');
-        }
-        
-        // الكشف عن العناصر الثابتة
-        console.log('📐 Viewport:', window.innerWidth + 'x' + window.innerHeight);
-        console.log('🔤 Font size base:', getComputedStyle(document.documentElement).fontSize);
-        
-        // الكشف عن مشاكل Three.js canvas
-        const canvas = document.getElementById('three-canvas');
-        if (canvas) {
-            const canvasRect = canvas.getBoundingClientRect();
-            console.log('🎨 Three.js canvas:', {
-                width: canvasRect.width,
-                height: canvasRect.height,
-                position: getComputedStyle(canvas).position
-            });
-        }
-        
-        console.groupEnd();
-        
-        // رسم حدود حمراء للعناصر المشبوهة
-        if (confirm('عرض حدود العناصر بالأحمر؟')) {
-            allElements.forEach(el => {
-                if (el.scrollWidth > el.clientWidth + 2) {
-                    el.style.outline = '2px solid red';
-                } else if (el.scrollHeight > el.clientHeight + 2) {
-                    el.style.outline = '2px solid blue';
-                }
-            });
-        }
-    }, 3000);
-}
-
-
-// ================================================
-// الملف الرئيسي - يجمع كل وظائف الموقع
+// الملف الرئيسي - معدل للعمل مع الملفات المحلية
 // ================================================
 
+// استيراد مشهد Three.js
 import { initThreeScene } from './three-scene.js';
 
 // ================================================
-// شاشة التحميل الجديدة - بدون إحصائيات
+// شاشة التحميل
 // ================================================
 
 class NewLoadingScreen {
@@ -261,7 +176,7 @@ class StatsManager {
 }
 
 // ================================================
-// تهيئة الرسوم البيانية والجرافات (بدون حركة)
+// تهيئة الرسوم البيانية
 // ================================================
 function initCharts() {
     // الرسم البياني الدائري (Pie Chart)
@@ -287,7 +202,7 @@ function initCharts() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: false, // تعطيل الحركة
+                animation: false,
                 plugins: {
                     legend: {
                         display: false,
@@ -312,7 +227,7 @@ function initCharts() {
         
         const pieLegend = document.getElementById('pieLegend');
         if (pieLegend) {
-            const labels = ['مدن ذكية (15)', 'مشروعات بنية تحتية (12)', 'مشروعات طاقة (8)', 'مشروعات رقمية (5)', 'مشروعات نقل (2)'];
+            const labels = ['مدن ذكية (30)', 'مشروعات بنية تحتية (22)', 'مشروعات طاقة الخضراء (36)', 'مشروعات رقمية (210)', 'مشروعات نقل (107)'];
             const colors = ['#00eaff', '#6a5cff', '#ff6b6b', '#ffd93d', '#6bffb8'];
             
             labels.forEach((label, index) => {
@@ -327,7 +242,7 @@ function initCharts() {
         }
     }
 
-    // الرسم البياني الخطي (Line Chart)
+    // الرسم البياني الخطي
     const lineCtx = document.getElementById('lineChart')?.getContext('2d');
     if (lineCtx) {
         new Chart(lineCtx, {
@@ -384,7 +299,7 @@ function initCharts() {
         });
     }
 
-    // الرسم البياني الشريطي (Bar Chart)
+    // الرسم البياني الشريطي
     const barCtx = document.getElementById('barChart')?.getContext('2d');
     if (barCtx) {
         new Chart(barCtx, {
@@ -393,7 +308,7 @@ function initCharts() {
                 labels: ['التعليم', 'الصحة', 'النقل', 'الأمن'],
                 datasets: [{
                     label: 'نسبة التقدم',
-                    data: [90, 85, 95, 88],
+                    data: [90, 85, 92, 88],
                     backgroundColor: [
                         'rgba(0, 234, 255, 0.8)',
                         'rgba(106, 92, 255, 0.8)',
@@ -447,15 +362,15 @@ function initCharts() {
         });
     }
 
-    // الرسم البياني الدائري المتعدد (Doughnut Chart)
+    // الرسم البياني الدائري المتعدد
     const doughnutCtx = document.getElementById('doughnutChart')?.getContext('2d');
     if (doughnutCtx) {
         new Chart(doughnutCtx, {
             type: 'doughnut',
             data: {
-                labels: ['القاهرة', 'الإسكندرية', 'أسوان', 'الأقصر', 'العلمين'],
+                labels: ['القاهرة', 'الإسكندرية', 'أسوان', 'الأقصر', 'الجيزة'],
                 datasets: [{
-                    data: [5, 3, 2, 3, 2],
+                    data: [3, 3, 1, 1, 4],
                     backgroundColor: [
                         '#00eaff',
                         '#6a5cff',
@@ -495,7 +410,7 @@ function initCharts() {
         });
     }
 
-    // الجرافات الصغيرة (Mini Charts) - بدون حركة
+    // الجرافات الصغيرة
     createMiniChart('miniChart1', 85);
     createMiniChart('miniChart2', 92);
     createMiniChart('miniChart3', 78);
@@ -530,7 +445,6 @@ function createMiniChart(elementId, percentage) {
     });
 }
 
-// منع أي حركة للرسوم البيانية عند التمرير
 function freezeChartsOnScroll() {
     const charts = document.querySelectorAll('.chart-wrapper canvas, .mini-chart canvas');
     charts.forEach(chart => {
@@ -540,77 +454,8 @@ function freezeChartsOnScroll() {
 }
 
 // ================================================
-// تهيئة المكتبات عند تحميل الصفحة
+// دوال مساعدة
 // ================================================
-document.addEventListener('DOMContentLoaded', () => {
-    // استخدام شاشة التحميل الجديدة
-    const loader = new NewLoadingScreen();
-    window.pageLoader = loader;
-
-    AOS.init({
-        duration: 800,
-        once: true,
-        offset: 100,
-        easing: 'ease-in-out',
-        mirror: false
-    });
-
-    new Swiper('.projects-swiper', {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-            640: {
-                slidesPerView: 2,
-            },
-            1024: {
-                slidesPerView: 3,
-            },
-        },
-    });
-
-    setTimeout(() => {
-        initThreeScene();
-    }, 500);
-
-    initNavbar();
-    initSmoothScroll();
-    initNavbarScroll();
-    initProgressBars();
-    new StatsManager();
-
-    setTimeout(() => {
-        loader.updateProgress(45);
-        loader.updateMessage(loader.loadingMessages[1]);
-    }, 500);
-    
-    setTimeout(() => {
-        loader.updateProgress(78);
-        loader.updateMessage(loader.loadingMessages[3]);
-    }, 1500);
-
-    setTimeout(() => {
-        initCharts();
-        freezeChartsOnScroll();
-    }, 4000);
-
-    initLottieAnimations();
-    
-    window.addEventListener('scroll', freezeChartsOnScroll);
-    window.addEventListener('resize', freezeChartsOnScroll);
-});
 
 function initNavbar() {
     const menuToggle = document.getElementById('menu-toggle');
@@ -733,23 +578,6 @@ function initProgressBars() {
     progressBars.forEach(bar => observer.observe(bar));
 }
 
-function initLottieAnimations() {
-    // يمكن إضافة تأثيرات Lottie هنا
-}
-
-document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    
-    console.log('Form submitted:', data);
-    
-    showNotification('تم إرسال رسالتك بنجاح!', 'success');
-    
-    e.target.reset();
-});
-
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
@@ -783,22 +611,299 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-if ('loading' in HTMLImageElement.prototype) {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    images.forEach(img => {
-        img.loading = 'lazy';
-    });
-} else {
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-    document.body.appendChild(script);
-}
+// ================================================
+// التهيئة الرئيسية
+// ================================================
 
-window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const hero = document.querySelector('.hero');
-    
-    if (hero) {
-        hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+document.addEventListener('DOMContentLoaded', () => {
+    // شاشة التحميل
+    const loader = new NewLoadingScreen();
+    window.pageLoader = loader;
+
+    // تهيئة AOS (مكتبة Animations On Scroll)
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            easing: 'ease-in-out',
+            mirror: false
+        });
     }
+
+    // تهيئة Swiper
+    if (typeof Swiper !== 'undefined') {
+        new Swiper('.projects-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    }
+
+    // تهيئة Three.js بعد تأخير بسيط
+    setTimeout(() => {
+        try {
+            initThreeScene();
+        } catch (error) {
+            console.error('Three.js initialization error:', error);
+        }
+    }, 500);
+
+    // تهيئة المكونات الأخرى
+    initNavbar();
+    initSmoothScroll();
+    initNavbarScroll();
+    initProgressBars();
+    new StatsManager();
+
+    // تحديث شاشة التحميل
+    setTimeout(() => {
+        loader.updateProgress(45);
+        loader.updateMessage(loader.loadingMessages[1]);
+    }, 500);
+    
+    setTimeout(() => {
+        loader.updateProgress(78);
+        loader.updateMessage(loader.loadingMessages[3]);
+    }, 1500);
+
+    // تهيئة الرسوم البيانية بعد انتهاء التحميل
+    setTimeout(() => {
+        initCharts();
+        freezeChartsOnScroll();
+    }, 4000);
+
+    // معالجة حدث التمرير لتجميد الرسوم البيانية
+    window.addEventListener('scroll', freezeChartsOnScroll);
+    window.addEventListener('resize', freezeChartsOnScroll);
 });
+
+// معالجة نموذج الاتصال
+document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    
+    console.log('Form submitted:', data);
+    
+    showNotification('تم إرسال رسالتك بنجاح!', 'success');
+    
+    e.target.reset();
+});
+
+// ========== نظام Pop-up المتقدم للمشروعات ==========
+(function initProjectPopup() {
+    // الحصول على عناصر الـ Popup
+    const popup = document.getElementById('project-popup');
+    if (!popup) return; // التأكد من وجود العنصر
+    
+    const popupTitle = document.getElementById('popup-title');
+    const popupImage = document.getElementById('popup-image');
+    const popupDesc = document.getElementById('popup-description');
+    const popupProgress = document.getElementById('popup-progress');
+    const popupStartDate = document.getElementById('popup-start-date');
+    const popupCost = document.getElementById('popup-cost');
+    const popupFeaturesList = document.getElementById('popup-features-list');
+    const closePopupBtn = document.querySelector('.close-popup');
+    const closeBtnAlt = document.getElementById('popup-close-btn');
+
+    // قاعدة بيانات المشروعات (مفصلة)
+    const projectsDatabase = [
+        {
+            id: 0,
+            title: 'العاصمة الإدارية الجديدة',
+            image: 'images/Projects/Administratibe capital.jpg',
+            description: 'أول مدينة ذكية ومستدامة من الجيل الرابع في مصر، تمثل المركز الإداري والاقتصادي الجديد. تضم حي مال وأعمال عالمي، والبرج الأيقوني، ومركز قيادة وسيطرة ذكي يدير كافة مرافق المدينة بتقنيات الذكاء الاصطناعي',
+            progress: '98%',
+            startDate: '2016',
+            cost: '800 مليار جنيه',
+            features: [
+                'أطول برج في إفريقيا بارتفاع 393.8 متر ويعد علامة معمارية عالمية',
+                'أكبر مركز بيانات وحوسبة سحابية في المنطقة لتأمين وإدارة بيانات الدولة',
+                'يضم أكبر تجمع للمساحات الخضراء والبحيرات الصناعية، بمساحة تتجاوز 6000 فدان',
+                'ترابط كامل عبر المونوريل والقطار الكهربائي الخفيف (LRT) الذي يربطها بالقاهرة الكبرى',
+                'تعتمد بالكامل على تكنولوجيا Internet of Things (IoT) في إدارة المرور، النفايات، والطاقة'
+            ]
+        },
+        {
+            id: 1,
+            title: 'محطة بنبان للطاقة الشمسية',
+            image: 'images/Projects/Bnban.jpg',
+            description: 'يُعد أحد أكبر مجمعات الطاقة الشمسية في العالم، ويمتد على مساحة 37 كم². يضم 32 محطة بقدرة إجمالية تصل إلى 1465 ميجاوات (كقدرة تشغيلية فعلية مستقرة)، مع خطط توسعية لرفع القدرات الإجمالية للمنطقة المحيطة. يمثل المشروع ركيزة أساسية لتحويل مصر إلى مركز إقليمي للطاقة الخضراء',
+            progress: '100%',
+            startDate: '2017',
+            cost: '2.2 مليار دولار',
+            features: [
+                'رابع أكبر مجمع شمسي في العالم و الأكبر في أفريقيا والشرق الأوسط',
+                'يقلل الانبعاثات الكربونية بمقدار 2 مليون طن سنوياً',
+                'وفر أكثر من 10 آلاف فرصة عمل مباشرة وغير مباشرة',
+                'حائز على جائزة التميز من البنك الدولي وجائزة التميز الحكومي العربي',
+                'يغطي مساحة 37 كم²'
+            ]
+        },
+        {
+            id: 2,
+            title: 'مشروع التحول الرقمي',
+            image: 'images/Projects/Digital transformation.png',
+            description: 'يهدف إلى ميكنة جميع الخدمات الحكومية وتقديمها عبر منصة "مصر الرقمية". يشمل ذلك خدمات الأحوال المدنية، المرور، الضرائب، الشهر العقاري، والتوثيق. تم تدريب آلاف الموظفين على النظام الجديد، وتم إنشاء مراكز بيانات عملاقة لتأمين المعلومات. الهدف هو توفير الوقت والجهد على المواطنين وتحسين كفاءة الأداء الحكومي.',
+            progress: '95%',
+            startDate: '2018',
+            cost: '50 مليار جنيه',
+            features: [
+                'أكثر من 200+ خدمة حكومية متاحة أونلاين',
+                'منظومة الدفع الموحد: ربط شامل بكافة الوسائل الإلكترونية (كروت ميزة، محافظ المحمول، والعملات الرقمية المقننة)',
+                'تطبيق موحد للهواتف الذكية',
+                'ربط 100% من الجهات: تم ربط جميع الوزارات والهيئات (أكثر من 50 جهة حكومية) بمنصة تبادل البيانات',
+                'الهوية الرقمية: تفعيل التوقيع الإلكتروني والهوية الرقمية للمواطنين في كافة المعاملات الرسمية'
+            ]
+        },
+        {
+            id: 3,
+            title: 'شبكة القطار الكهربائي',
+            image: 'images/Projects/Fast tarin.jpg',
+            description: 'منظومة نقل ذكية ومتكاملة تُعد قناة سويس جديدة على قضبان، تربط البحر الأحمر بالبحر المتوسط وكافة أنحاء الجمهورية. تتكون من 4 خطوط رئيسية (بعد إضافة الخط الرابع) بطول يتجاوز 2250 كم، لتوفر وسيلة نقل حضارية فائقة السرعة وصديقة للبيئة',
+            progress: '85%',
+            startDate: '2020',
+            cost: '360 مليار جنيه',
+            features: [
+                'سرعة تصل إلى 250 كم/ساعة',
+                'ربط موانئ البحر الأحمر بموانئ البحر المتوسط (السخنة - العلمين - مطروح)',
+                'نقل أكثر من 2.5 مليون راكب يومياً عند اكتمال المنظومة',
+                'خفض انبعاثات الكربون بنسبة تصل إلى 70% مقارنة بالنقل البري التقليدي',
+                'الاعتماد على نظام التحكم الآلي الأوروبي (ETCS Level 2) لضمان أعلى معايير الأمان العالمية'
+            ]
+        }
+    ];
+
+    // إضافة حدث النقر لكل بطاقة مشروع
+    document.querySelectorAll('.project-card').forEach((card) => {
+        // إضافة مؤشر لليد لتوضيح إمكانية الضغط
+        card.style.cursor = 'pointer';
+        
+        card.addEventListener('click', function(e) {
+            // منع انتشار الحدث إذا تم الضغط على رابط داخل البطاقة
+            e.stopPropagation();
+            
+            // الحصول على ID المشروع من البيانات المخصصة
+            const projectId = this.getAttribute('data-project-id');
+            
+            if (projectId !== null) {
+                const project = projectsDatabase[parseInt(projectId)];
+                if (project) {
+                    openPopup(project);
+                }
+            }
+        });
+
+        // إضافة تأثيرات GSAP للبطاقة
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                scale: 1.05,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+    });
+
+    // دالة فتح الـ Popup
+    function openPopup(project) {
+        // تعبئة البيانات
+        popupTitle.textContent = project.title;
+        popupImage.src = project.image;
+        popupImage.alt = project.title;
+        popupDesc.textContent = project.description;
+        popupProgress.textContent = project.progress;
+        popupStartDate.textContent = project.startDate;
+        popupCost.textContent = project.cost;
+        
+        // تعبئة قائمة المميزات
+        popupFeaturesList.innerHTML = '';
+        project.features.forEach(feature => {
+            const li = document.createElement('li');
+            li.textContent = feature;
+            popupFeaturesList.appendChild(li);
+        });
+
+        // إظهار الـ Popup
+        popup.classList.add('show');
+        
+        // منع تمرير الصفحة خلف الـ Popup
+        document.body.style.overflow = 'hidden';
+        
+        // تأثير إضافي عند الفتح
+        if (typeof gsap !== 'undefined') {
+            gsap.fromTo(popup.querySelector('.popup-content'), 
+                { scale: 0.8, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.2)' }
+            );
+        }
+    }
+
+    // دالة إغلاق الـ Popup
+    function closePopup() {
+        popup.classList.remove('show');
+        document.body.style.overflow = 'auto';
+        
+        // تأثير عند الإغلاق
+        if (typeof gsap !== 'undefined') {
+            gsap.to(popup.querySelector('.popup-content'), {
+                scale: 0.8,
+                opacity: 0,
+                duration: 0.3,
+                ease: 'power2.in'
+            });
+        }
+    }
+
+    // إضافة أحداث الإغلاق
+    if (closePopupBtn) {
+        closePopupBtn.addEventListener('click', closePopup);
+    }
+    
+    if (closeBtnAlt) {
+        closeBtnAlt.addEventListener('click', closePopup);
+    }
+
+    // إغلاق عند الضغط خارج محتوى الـ Popup
+    popup.addEventListener('click', function(e) {
+        if (e.target === popup) {
+            closePopup();
+        }
+    });
+
+    // إغلاق عند الضغط على زر ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && popup.classList.contains('show')) {
+            closePopup();
+        }
+    });
+})();

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مصر 2030 - الإحصاءات</title>
+    <link href="/fonts/Cairo/Cairo-VariableFont_slnt,wght.ttf">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/libs/all.min.css" rel="stylesheet">
+    <link href="/css/fonts.css" rel="stylesheet">
+    <script src="/libs/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: body-entrance 0.5s ease-out forwards;
+        }
+        
+        @keyframes body-entrance {
+            to { opacity: 1; }
+        }
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #0a0f1c;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            padding: clamp(20px, 4vmin, 40px);
+            z-index: 1;
+            opacity: 0;
+            animation: slide-appear 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.3s;
+        }
+        
+        @keyframes slide-appear {
+            0% { opacity: 0; transform: scale(0.95) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0;
+            z-index: 0;
+        }
+        
+        .blob-1 {
+            width: 40vmax;
+            height: 40vmax;
+            background-color: #00eaff;
+            top: -10vmin;
+            right: -10vmin;
+            animation: blob-enter 1s ease-out forwards 0.5s, pulse 8s infinite alternate;
+        }
+        
+        .blob-2 {
+            width: 35vmax;
+            height: 35vmax;
+            background-color: #6a5cff;
+            bottom: -10vmin;
+            left: -10vmin;
+            animation: blob-enter 1s ease-out forwards 0.7s, pulse 10s infinite alternate-reverse;
+        }
+        
+        @keyframes blob-enter {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 0.3; transform: scale(1); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.1); opacity: 0.4; }
+        }
+        
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 6vmin, 3.5rem);
+            font-weight: 900;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: title-entrance 1s ease-out forwards 1s;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: clamp(1rem, 2.5vmin, 1.2rem);
+            margin-bottom: clamp(30px, 5vmin, 50px);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: subtitle-entrance 1s ease-out forwards 1.2s;
+        }
+        
+        @keyframes title-entrance {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes subtitle-entrance {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: clamp(20px, 3vmin, 30px);
+            margin-bottom: clamp(30px, 5vmin, 50px);
+        }
+        
+        .stat-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: clamp(20px, 3vmin, 30px);
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: stat-entrance 0.8s ease-out forwards;
+        }
+        
+        .stat-card:nth-child(1) { animation-delay: 1.4s; }
+        .stat-card:nth-child(2) { animation-delay: 1.6s; }
+        .stat-card:nth-child(3) { animation-delay: 1.8s; }
+        .stat-card:nth-child(4) { animation-delay: 2s; }
+        
+        @keyframes stat-entrance {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: #00eaff;
+            box-shadow: 0 15px 30px rgba(0, 234, 255, 0.2);
+        }
+        
+        .stat-card i {
+            font-size: clamp(2rem, 4vmin, 3rem);
+            color: #00eaff;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-number {
+            font-size: clamp(2rem, 5vmin, 3.5rem);
+            font-weight: 800;
+            color: #00eaff;
+            line-height: 1.2;
+        }
+        
+        .stat-label {
+            color: #94a3b8;
+            font-size: clamp(0.9rem, 2vmin, 1.1rem);
+        }
+        
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(20px, 3vmin, 30px);
+            margin-bottom: clamp(30px, 5vmin, 50px);
+        }
+        
+        .chart-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: clamp(20px, 3vmin, 25px);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: chart-entrance 0.8s ease-out forwards;
+        }
+        
+        .chart-card:nth-child(1) { animation-delay: 2.2s; }
+        .chart-card:nth-child(2) { animation-delay: 2.4s; }
+        .chart-card:nth-child(3) { animation-delay: 2.6s; }
+        .chart-card:nth-child(4) { animation-delay: 2.8s; }
+        
+        @keyframes chart-entrance {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chart-card h3 {
+            color: #fff;
+            font-size: clamp(1rem, 2.5vmin, 1.3rem);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .chart-card h3 i {
+            color: #00eaff;
+        }
+        
+        .chart-wrapper {
+            height: 200px;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+            .stat-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <div class="slide-container">
+        <div class="content">
+            <h1 class="section-title">الإحصاءات</h1>
+            <p class="section-subtitle">مؤشرات الأداء الرئيسية للمشروعات القومية</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-city"></i>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">مدينة ذكية</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-database"></i>
+                    <div class="stat-number" data-target="42">0</div>
+                    <div class="stat-label">مشروع قومي</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-wifi"></i>
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">خدمة رقمية</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-number" data-target="60">0</div>
+                    <div class="stat-label">مليون مستخدم</div>
+                </div>
+            </div>
+            
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3><i class="fas fa-chart-pie"></i> توزيع المشروعات القومية</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3><i class="fas fa-chart-line"></i> نمو الخدمات الرقمية</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3><i class="fas fa-chart-bar"></i> مؤشرات الذكاء الاصطناعي</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3><i class="fas fa-chart-simple"></i> توزيع المدن الذكية</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="doughnutChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; opacity: 0; animation: fadeIn 1s 3s forwards;">
+                <button class="access-btn" onclick="parent.next()" style="background: linear-gradient(135deg, #00eaff, #6a5cff); color: #0a0f1c; border: none; padding: 1rem 3rem; font-size: 1.2rem; font-weight: 700; border-radius: 50px; cursor: pointer;">
+                    <i class="fas fa-image"></i> معرض المشروعات
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('touchstart', function(e) {
+                if (e.touches.length > 1) e.preventDefault();
+            }, { passive: false });
+            
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+            
+            // تشغيل العدادات
+            setTimeout(() => {
+                const counters = document.querySelectorAll('.stat-number[data-target]');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 50;
+                    
+                    const updateCounter = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            counter.textContent = target;
+                            clearInterval(updateCounter);
+                        } else {
+                            counter.textContent = Math.floor(current);
+                        }
+                    }, 30);
+                });
+            }, 2000);
+            
+            // تهيئة الرسوم البيانية
+            setTimeout(() => {
+                // Pie Chart
+                new Chart(document.getElementById('pieChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['مدن ذكية', 'بنية تحتية', 'طاقة', 'مشروعات رقمية', 'نقل'],
+                        datasets: [{
+                            data: [15, 12, 8, 5, 2],
+                            backgroundColor: ['#00eaff', '#6a5cff', '#ff6b6b', '#ffd93d', '#6bffb8']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: { duration: 1500 },
+                        plugins: {
+                            legend: { labels: { color: '#fff', font: { family: 'Cairo' } } }
+                        }
+                    }
+                });
+                
+                // Line Chart
+                new Chart(document.getElementById('lineChart'), {
+                    type: 'line',
+                    data: {
+                        labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2030'],
+                        datasets: [{
+                            label: 'الخدمات الرقمية',
+                            data: [10, 25, 45, 70, 100, 150, 250],
+                            borderColor: '#00eaff',
+                            backgroundColor: 'rgba(0,234,255,0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: { duration: 1500 },
+                        scales: {
+                            y: { ticks: { color: '#fff' } },
+                            x: { ticks: { color: '#fff' } }
+                        }
+                    }
+                });
+                
+                // Bar Chart
+                new Chart(document.getElementById('barChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['التعليم', 'الصحة', 'النقل', 'الأمن'],
+                        datasets: [{
+                            label: 'نسبة التقدم',
+                            data: [90, 85, 95, 88],
+                            backgroundColor: ['#00eaff', '#6a5cff', '#ff6b6b', '#ffd93d']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: { duration: 1500 },
+                        scales: {
+                            y: { max: 100, ticks: { callback: value => value + '%', color: '#fff' } },
+                            x: { ticks: { color: '#fff' } }
+                        }
+                    }
+                });
+                
+                // Doughnut Chart
+                new Chart(document.getElementById('doughnutChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['القاهرة', 'الإسكندرية', 'أسوان', 'الأقصر', 'العلمين'],
+                        datasets: [{
+                            data: [5, 3, 2, 3, 2],
+                            backgroundColor: ['#00eaff', '#6a5cff', '#ff6b6b', '#ffd93d', '#6bffb8']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '60%',
+                        animation: { duration: 1500 },
+                        plugins: {
+                            legend: { labels: { color: '#fff', font: { family: 'Cairo' } } }
+                        }
+                    }
+                });
+            }, 2500);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,10 +1,17 @@
 // ================================================
-// تأثيرات GSAP والحركات المتقدمة
+// تأثيرات GSAP - معدلة للعمل مع الملفات المحلية
 // ================================================
 
-gsap.registerPlugin(ScrollTrigger);
+// GSAP متاح عالمياً بعد تحميل المكتبة محلياً
+// gsap متاح كمتغير عام
+
+if (typeof gsap !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 function initEntranceAnimations() {
+    if (typeof gsap === 'undefined') return;
+    
     gsap.from('.navbar', {
         y: -100,
         opacity: 0,
@@ -48,6 +55,8 @@ function initEntranceAnimations() {
 }
 
 function initScrollAnimations() {
+    if (typeof gsap === 'undefined') return;
+    
     gsap.utils.toArray('.vision-card, .vision-highlight-card, .ai-category').forEach((card, i) => {
         gsap.from(card, {
             scrollTrigger: {
@@ -138,6 +147,8 @@ function initScrollAnimations() {
 }
 
 function initHoverAnimations() {
+    if (typeof gsap === 'undefined') return;
+    
     document.querySelectorAll('.vision-card, .project-card, .ai-category, .stat-card, .vision-highlight-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
             gsap.to(card, {
@@ -176,6 +187,8 @@ function initHoverAnimations() {
 }
 
 function initParallax() {
+    if (typeof gsap === 'undefined') return;
+    
     gsap.to('body', {
         scrollTrigger: {
             trigger: 'body',
@@ -202,6 +215,8 @@ function initParallax() {
 }
 
 function initChartAnimations() {
+    if (typeof gsap === 'undefined') return;
+    
     gsap.utils.toArray('.chart-card').forEach((card, i) => {
         gsap.from(card, {
             scrollTrigger: {
@@ -236,6 +251,8 @@ function initChartAnimations() {
 }
 
 function initTypingEffect() {
+    if (typeof gsap === 'undefined') return;
+    
     const texts = [
         'تقنيات المستقبل لخدمة المواطن المصري',
         'نحو جمهورية جديدة',
@@ -265,6 +282,8 @@ function initTypingEffect() {
 }
 
 function initAdvancedEffects() {
+    if (typeof gsap === 'undefined') return;
+    
     gsap.utils.toArray('.card-icon, .category-icon, .highlight-icon').forEach(icon => {
         gsap.to(icon, {
             rotation: 360,
@@ -292,6 +311,8 @@ function initAdvancedEffects() {
 }
 
 function initProgressTriggers() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    
     ScrollTrigger.create({
         trigger: '.ai',
         start: 'top 70%',
@@ -308,6 +329,7 @@ function initProgressTriggers() {
     });
 }
 
+// تهيئة جميع التأثيرات بعد تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         initEntranceAnimations();
@@ -318,19 +340,22 @@ document.addEventListener('DOMContentLoaded', () => {
         initAdvancedEffects();
         initProgressTriggers();
         initTypingEffect();
+        
+        // تأثيرات إضافية للفوتر
+        if (typeof gsap !== 'undefined') {
+            gsap.from('.footer-section', {
+                scrollTrigger: {
+                    trigger: '.footer',
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        }
     }, 4000);
-});
-
-gsap.from('.footer-section', {
-    scrollTrigger: {
-        trigger: '.footer',
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse'
-    },
-    y: 50,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: 'power3.out'
 });

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مصر 2030 - فريق العمل (Offline)</title>
+    
+    <!-- Fonts & Icons (Local) -->
+    <link href="./fonts/Cairo/Cairo-VariableFont_slnt,wght.ttf" as="font" type="font/ttf" crossorigin>
+    <script defer src="/libs/all.min.js"></script>
+    <link href="/libs/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Cairo Font Local */
+        @font-face {
+            font-family: 'Cairo';
+            src: url('./fonts/Cairo/Cairo-VariableFont_slnt,wght.ttf') format('truetype');
+            font-weight: 300 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Tailwind Core (Minimal - فقط المستخدم) */
+        *, ::after, ::before { box-sizing: border-box; border-width: 0; border-style: solid; }
+        html { line-height: 1.5; -webkit-text-size-adjust: 100%; -moz-tab-size: 4; tab-size: 4; }
+        body { margin: 0; line-height: inherit; }
+        hr { height: 0; color: inherit; border-top-width: 1px; }
+        h1, h2, h3, p { margin: 0; }
+        a { color: inherit; text-decoration: inherit; }
+        img { display: block; max-width: 100%; height: auto; }
+        button, input { font-family: inherit; font-size: 100%; line-height: inherit; color: inherit; margin: 0; padding: 0; }
+        button { text-transform: none; }
+        [type="button"], button { -webkit-appearance: button; background-color: transparent; background-image: none; }
+        ::-webkit-inner-spin-button, ::-webkit-outer-spin-button { height: auto; }
+        ::-webkit-search-decoration { -webkit-appearance: none; }
+        ::-webkit-file-upload-button { -webkit-appearance: button; font: inherit; }
+        hr { border-top-width: 1px; }
+        img { border-style: solid; }
+        textarea { resize: vertical; }
+        input::placeholder, textarea::placeholder { opacity: 1; color: #9ca3af; }
+        button { cursor: pointer; }
+        :disabled { cursor: default; }
+        audio, canvas, embed, iframe, img, object, svg, video { display: block; vertical-align: middle; }
+        [hidden] { display: none; }
+        *, ::before, ::after { --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; }
+        ::-webkit-search-cancel-button, ::-webkit-search-decoration { -webkit-appearance: none; }
+        ::-webkit-file-upload-button { -webkit-appearance: button; font: inherit; }
+
+        /* Custom Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInBody 1s ease forwards;
+        }
+        
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #0a0f1c;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(20px, 4vmin, 40px);
+            z-index: 1;
+            opacity: 0;
+            animation: slide-appear 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.3s;
+        }
+        
+        @keyframes slide-appear {
+            0% { opacity: 0; transform: scale(0.95) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0;
+            z-index: 0;
+        }
+        
+        .blob-1 {
+            width: 40vmax;
+            height: 40vmax;
+            background-color: #00eaff;
+            top: -15vmin;
+            right: 10%;
+            animation: blob-enter 1s ease-out forwards 0.5s, pulse 8s infinite alternate 2s;
+        }
+        
+        .blob-2 {
+            width: 35vmax;
+            height: 35vmax;
+            background-color: #6a5cff;
+            bottom: -12vmin;
+            left: 5%;
+            animation: blob-enter 1s ease-out forwards 0.7s, pulse 10s infinite alternate-reverse 2.5s;
+        }
+        
+        @keyframes blob-enter {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 0.3; transform: scale(1); }
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+            opacity: 0;
+            animation: grid-fade 1s 1s ease forwards;
+            pointer-events: none;
+        }
+        
+        @keyframes grid-fade {
+            to { opacity: 0.2; }
+        }
+        
+        .header-section {
+            z-index: 10;
+            text-align: center;
+            margin-bottom: clamp(30px, 5vmin, 50px);
+            position: relative;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: slideDown 1s 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        
+        @keyframes slideDown {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .main-title {
+            font-size: clamp(2rem, 6vmin, 4rem);
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: clamp(0.9rem, 2.5vmin, 1.2rem);
+            color: #cbd5e1;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: clamp(4px, 1vmin, 8px) clamp(12px, 2vmin, 20px);
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            animation: fadeIn 0.6s 1.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .team-grid {
+            display: flex;
+            gap: clamp(20px, 4vmin, 40px);
+            justify-content: center;
+            flex-wrap: wrap;
+            z-index: 10;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .team-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: clamp(20px, 3vmin, 30px);
+            padding: clamp(20px, 3vmin, 30px);
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 234, 255, 0.2);
+            border-bottom: 4px solid transparent;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .team-card:nth-child(1) {
+            animation: card-entrance 0.8s 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        
+        .team-card:nth-child(2) {
+            animation: card-entrance 0.8s 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        
+        .team-card:nth-child(3) {
+            animation: card-entrance 0.8s 2.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        
+        @keyframes card-entrance {
+            0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+            70% { transform: translateY(-10px) scale(1.02); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .team-card:hover {
+            transform: perspective(1000px) rotateX(0deg) translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 234, 255, 0.5);
+            border-bottom: 4px solid #00eaff;
+        }
+        
+        .team-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #00eaff, #6a5cff);
+            color: #0a0f1c;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+        }
+        
+        .team-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            border: 4px solid #00eaff;
+            box-shadow: 0 0 30px rgba(0, 234, 255, 0.5);
+            background: linear-gradient(135deg, #1a2a3a, #0a1a2a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #00eaff;
+        }
+        
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0.5rem 0;
+        }
+        
+        .team-role {
+            font-size: 1.2rem;
+            color: #00eaff;
+            margin-bottom: 1rem;
+            padding: 0.3rem 1.5rem;
+            background: rgba(0, 234, 255, 0.15);
+            border-radius: 50px;
+            display: inline-block;
+        }
+        
+        .team-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+        }
+        
+        .team-social {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .team-social a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 234, 255, 0.3);
+            text-decoration: none;
+        }
+        
+        .team-social a:hover {
+            background: linear-gradient(135deg, #00eaff, #6a5cff);
+            color: #0a0f1c;
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 234, 255, 0.5);
+        }
+        
+        .floating-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00eaff;
+            border-radius: 50%;
+            animation: float-particle 6s linear infinite;
+            opacity: 0.5;
+        }
+        
+        @keyframes float-particle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+        }
+        
+        @media (max-width: 1024px) {
+            .team-grid {
+                gap: 20px;
+            }
+            .team-card {
+                min-width: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide-container {
+                overflow-y: auto;
+                justify-content: flex-start;
+                padding: 20px;
+            }
+            .team-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            .team-card {
+                width: 100%;
+                max-width: 400px;
+            }
+            .team-image {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+            }
+            .team-name {
+                font-size: 1.5rem;
+            }
+            .team-social {
+                gap: 0.7rem;
+            }
+            .team-social a {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="grid-overlay"></div>
+
+    <div class="slide-container">
+        <div class="header-section">
+            <h1 class="main-title">فريق العمل</h1>
+            <div class="subtitle">
+                <i class="fas fa-users"></i>
+                <span>شباب يصنع المستقبل</span>
+            </div>
+        </div>
+                <!-- About us-->
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-badge">قائد الفريق</div>
+                <div class="team-image">
+                    <img src="/images/Team/Ahmed-Al-Saudi.jpg" alt="أحمد محمد السعودي" onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user-tie\'></i>'">
+                </div>
+                <h3 class="team-name">أحمد محمد السعودي</h3>
+                <div class="team-role">مدير المشروع</div>
+                <p class="team-description">
+                    قائد استراتيجي متخصص في تخطيط وتنفيذ المشاريع المعقدة.
+                </p>
+                <div class="team-social">
+                    <a href="https://www.facebook.com/share/18Fm4AXJ1v/" target="_blank" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/201140334323" target="_blank" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-badge">باحث رقمي</div>
+                <div class="team-image">
+                    <img src="/images/Team/Hassan-Adel.jpg" alt="الحسن عادل سيف" onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user-graduate\'></i>'">
+                </div>
+                <h3 class="team-name">الحسن عادل سيف</h3>
+                <div class="team-role">خبير معلومات</div>
+                <p class="team-description">
+                    متخصص في التنقيب عن البيانات وتحليل التوجهات الرقمية، خبير في استخلاص الرؤى من المصادر المفتوحة.
+                </p>
+                <div class="team-social">
+                    <a href="https://www.facebook.com/share/18DPtbjnbi/" target="_blank" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/201099702094" target="_blank" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-badge">مطور واجهات</div>
+                <div class="team-image">
+                    <img src="/images/Team/Omar-Abdelrahman.jpg" alt="عمر عبدالرحمن فتحي" onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user-cog\'></i>'">
+                </div>
+                <h3 class="team-name">عمر عبدالرحمن فتحي</h3>
+                <div class="team-role">Frontend Developer</div>
+                <p class="team-description">
+                    متخصص في تحويل التصاميم إلى واجهات تفاعلية، خبرة في HTML5, CSS5, JavaScript وأطر العمل الحديثة.
+                </p>
+                <div class="team-social">
+                    <a href="https://www.facebook.com/share/18FqDAL7jW/" target="_blank" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/201014970116" target="_blank" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+            <!--Most Mistack-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('touchstart', function(e) {
+                if (e.touches.length > 1) e.preventDefault();
+            }, { passive: false });
+
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'floating-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.animationDuration = (3 + Math.random() * 4) + 's';
+                document.querySelector('.slide-container').appendChild(particle);
+            }
+
+            document.querySelectorAll('.team-image img').forEach(img => {
+                if (img.src.startsWith(window.location.origin + '/')) {
+                }
+            });
+        });
+    </script>
+</body>
+</html>

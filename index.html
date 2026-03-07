@@ -3,71 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مصر 2030 - المسابقة التكنولوجية</title>
+    <title>مصر 2030 - المستقبل ينتظر</title>
     
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- CSS Local Files -->
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="libs/all.min.css">
+    <link rel="stylesheet" href="libs/aos.css">
+    <link rel="stylesheet" href="libs/swiper-bundle.min.css">
     
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- CSS -->
+    <!-- CSS الرئيسي -->
     <link rel="stylesheet" href="css/style.css">
-    
-    <!-- AOS CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     
     <meta name="language" content="ar">
 </head>
 <body>
-    <!-- شاشة التحميل الجديدة - Preloader with Progress Bar (بدون الإحصائيات) -->
+    <!-- شاشة التحميل
     <div id="loading-screen">
         <div class="preloader-container">
-            <!-- الخلفية المتحركة -->
             <div class="preloader-bg">
                 <div class="gradient-sphere"></div>
                 <div class="grid-lines"></div>
             </div>
             
-            <!-- المحتوى الرئيسي -->
             <div class="preloader-content">
-                <!-- النص الرئيسي مع تأثير Glitch -->
                 <div class="glitch-wrapper">
                     <h1 class="glitch-title" data-text="مصر 2030">مصر 2030</h1>
                 </div>
                 
-                <!-- الكلمة فوق شريط التقدم -->
                 <div class="progress-label">مصر 2023</div>
                 
-                <!-- شريط التقدم المتطور -->
                 <div class="neo-progress-container">
                     <div class="neo-progress-bar" id="loading-progress-bar" style="width: 0%">
                         <div class="progress-glow"></div>
                     </div>
                 </div>
                 
-                <!-- النسبة المئوية -->
                 <div class="progress-percentage-neon" id="loading-percentage-neon">0%</div>
                 
-                <!-- رسالة التحميل الديناميكية (بدون النقاط) -->
                 <div class="loading-message-neon" id="loading-message-neon">
                     جاري تجهيز رؤية مصر 2030
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- شريط التنقل - مدمج مع الخلفية -->
+    <!-- شريط التنقل -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo">مصر<span>2030</span></div>
@@ -81,8 +61,8 @@
                 <li><a href="#vision">الرؤية</a></li>
                 <li><a href="#projects">المشاريع</a></li>
                 <li><a href="#ai">الذكاء الاصطناعي</a></li>
-                <li><a href="#stats">الإحصائيات</a></li>
-                <li><a href="#contact">تواصل</a></li>
+                <li><a href="#stats">الإحصاءات</a></li>
+                <li><a href="#about">من نحن</a></li>
             </ul>
         </div>
     </nav>
@@ -94,7 +74,7 @@
                 <span class="egypt">مصر</span>
                 <span class="year">2030</span>
             </h1>
-            <p class="hero-subtitle">تقنيات المستقبل لخدمة المواطن المصري</p>
+            <p class="hero-subtitle">التحول الرقمي والتنمية المستدامة</p>
             
             <div class="hero-stats">
                 <div class="hero-stat">
@@ -132,17 +112,18 @@
         </div>
     </section>
 
-    <!-- قسم الرؤية - محدث بمحتوى كامل -->
+    <!-- قسم الرؤية -->
     <section id="vision" class="vision">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">الرؤية</h2>
             <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">التنمية المستدامة.. نحو جمهورية جديدة</p>
             
-            <!-- محتوى الرؤية الكامل -->
             <div class="vision-full-content">
                 <div class="vision-intro glass" data-aos="fade-up">
                     <h3>رؤية مصر 2030</h3>
-                    <p>رؤية مصر 2030 هي أجندة وطنية أطلقت في فبراير 2016، وتعكس الخطة الاستراتيجية طويلة المدى للدولة لتحقيق مبادئ وأهداف التنمية المستدامة في كل المجالات، والعمل على توطينها بأجهزة الدولة المصرية المختلفة. تستند الرؤية إلى محاور التنمية المستدامة الثلاثة: الاقتصادي، الاجتماعي، البيئي، بالإضافة إلى البعد الرابع وهو البعد الحضري.</p>
+                    <p>رؤية مصر 2030 هي أجندة وطنية مَطوّرة لتحقيق التنمية المستدامة وتوطينها شاملةً
+                        أربعة أبعاد رئيسية: الاقتصادي، الاجتماعي، البيئي، والحضري؛ 
+                        لتكون بمثابة وثيقة حية مرنة تواكب المتغيرات العالمية والمحلية</p>
                 </div>
                 
                 <div class="vision-highlights">
@@ -201,25 +182,25 @@
                     <div class="goals-grid">
                         <div class="goal-item">
                             <span class="goal-number">1</span>
-                            <span class="goal-text">نمو الناتج المحلي 8% سنوياً</span>
+                            <span class="goal-text"><b>النمو الاقتصادي:</b> معدل نمو يتراوح بين 7% إلى 8% سنوياً</span>
                         </div>
                         <div class="goal-item">
                             <span class="goal-number">2</span>
-                            <span class="goal-text">خفض البطالة إلى 5%</span>
+                            <span class="goal-text"><b>سوق العمل:</b>خفض معدل البطالة للوصول إلى المستهدف 5%</span>
                         </div>
                         <div class="goal-item">
                             <span class="goal-number">3</span>
-                            <span class="goal-text">20% طاقة متجددة</span>
+                            <span class="goal-text"><b>الطاقة المستدامة:</b> رفع طموح المساهمة إلى 42% من الطاقة المتجددة </span>
                         </div>
                         <div class="goal-item">
                             <span class="goal-number">4</span>
-                            <span class="goal-text">100% خدمات رقمية</span>
+                            <span class="goal-text"><b>التحول الرقمي:</b> تحقيق رقمنة شاملة بنسبة 100% لجميع الخدمات الحكومية الأساسية</span>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- خريطة الطريق الرقمية (كانت موجودة) -->
+            <!-- خريطة الطريق الرقمية -->
             <div class="roadmap-preview" data-aos="fade-up" data-aos-delay="500">
                 <h3>خريطة الطريق الرقمية</h3>
                 <div class="roadmap-steps">
@@ -252,7 +233,7 @@
             
             <div class="projects-showcase">
                 <div class="project-highlight glass" data-aos="fade-left">
-                    <div class="project-number">15</div>
+                    <div class="project-number">31</div>
                     <div class="project-info">
                         <h3>مدن الجيل الرابع</h3>
                         <p>مدن ذكية متكاملة في مختلف أنحاء الجمهورية</p>
@@ -270,11 +251,13 @@
             
             <div class="swiper projects-swiper" data-aos="fade-up">
                 <div class="swiper-wrapper">
+                    <!-- المشروع الأول: العاصمة الإدارية -->
                     <div class="swiper-slide">
-                        <div class="project-card glass">
+                        <div class="project-card glass" data-project-id="0">
                             <div class="project-image">
+                                <img src="images/Projects/Administratibe capital.jpg" alt="العاصمة الإدارية الجديدة" loading="lazy">
                                 <div class="image-overlay"></div>
-                                <i class="fas fa-city"></i>
+                                <div class="view-details">اضغط للمزيد</div>
                             </div>
                             <div class="project-content">
                                 <h3>العاصمة الإدارية</h3>
@@ -287,11 +270,13 @@
                         </div>
                     </div>
                     
+                    <!-- المشروع الثاني: محطة بنبان -->
                     <div class="swiper-slide">
-                        <div class="project-card glass">
+                        <div class="project-card glass" data-project-id="1">
                             <div class="project-image">
+                                <img src="images/Projects/Bnban.jpg" alt="محطة بنبان للطاقة الشمسية" loading="lazy">
                                 <div class="image-overlay"></div>
-                                <i class="fas fa-solar-panel"></i>
+                                <div class="view-details">اضغط للمزيد</div>
                             </div>
                             <div class="project-content">
                                 <h3>محطة بنبان</h3>
@@ -304,11 +289,13 @@
                         </div>
                     </div>
                     
+                    <!-- المشروع الثالث: التحول الرقمي -->
                     <div class="swiper-slide">
-                        <div class="project-card glass">
+                        <div class="project-card glass" data-project-id="2">
                             <div class="project-image">
+                                <img src="images/Projects/Digital transformation.png" alt="التحول الرقمي" loading="lazy">
                                 <div class="image-overlay"></div>
-                                <i class="fas fa-network-wired"></i>
+                                <div class="view-details">اضغط للمزيد</div>
                             </div>
                             <div class="project-content">
                                 <h3>التحول الرقمي</h3>
@@ -321,11 +308,13 @@
                         </div>
                     </div>
                     
+                    <!-- المشروع الرابع: القطار الكهربائي -->
                     <div class="swiper-slide">
-                        <div class="project-card glass">
+                        <div class="project-card glass" data-project-id="3">
                             <div class="project-image">
+                                <img src="images/Projects/Fast tarin.jpg" alt="شبكة القطار الكهربائي" loading="lazy">
                                 <div class="image-overlay"></div>
-                                <i class="fas fa-train"></i>
+                                <div class="view-details">اضغط للمزيد</div>
                             </div>
                             <div class="project-content">
                                 <h3>شبكة القطار الكهربائي</h3>
@@ -345,7 +334,7 @@
         </div>
     </section>
 
-    <!-- قسم الذكاء الاصطناعي - محدث بمحتوى كامل -->
+    <!-- قسم الذكاء الاصطناعي -->
     <section id="ai" class="ai">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">الذكاء الاصطناعي</h2>
@@ -438,13 +427,83 @@
                 </div>
                 
                 <!-- إحصائيات الذكاء الاصطناعي -->
+                <div class="ai-features-section">
+                    <div class="container">
+                        <div class="ai-showcase-grid">
+                            <div class="ai-showcase-card glass" data-aos="fade-up" data-aos-delay="100">
+                                <div class="ai-showcase-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h3>روبوتات المحادثة الذكية</h3>
+                                <p>تطوير مساعدين ذكيين للرد على استفسارات المواطنين في مختلف القطاعات الحكومية على مدار الساعة.</p>
+                                <div class="ai-showcase-stats">
+                                    <span>+5 مليون</span>
+                                    <span>مستخدم</span>
+                                </div>
+                            </div>
+                            
+                            <div class="ai-showcase-card glass" data-aos="fade-up" data-aos-delay="200">
+                                <div class="ai-showcase-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h3>تحليل البيانات الضخمة</h3>
+                                <p>استخدام تقنيات التعلم العميق لتحليل البيانات الحكومية وتقديم توصيات لتحسين الخدمات.</p>
+                                <div class="ai-showcase-stats">
+                                    <span>+2 Petabyte</span>
+                                    <span>بيانات محللة</span>
+                                </div>
+                            </div>
+                            
+                            <div class="ai-showcase-card glass" data-aos="fade-up" data-aos-delay="300">
+                                <div class="ai-showcase-icon">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <h3>الرؤية الحاسوبية</h3>
+                                <p>أنظمة ذكية لمراقبة المرور وتحليل الصور الطبية والتعرف على الوجوه في المنشآت الحيوية.</p>
+                                <div class="ai-showcase-stats">
+                                    <span>+1000</span>
+                                    <span>كاميرا ذكية</span>
+                                </div>
+                            </div>
+                            
+                            <div class="ai-showcase-card glass" data-aos="fade-up" data-aos-delay="400">
+                                <div class="ai-showcase-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>النمذجة التنبؤية</h3>
+                                <p>توقع احتياجات المواطنين وتحسين توزيع الموارد والخدمات بناءً على تحليل السلوكيات.</p>
+                                <div class="ai-showcase-stats">
+                                    <span>92%</span>
+                                    <span>دقة التوقع</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ai-cta-section glass" data-aos="fade-up">
+                            <div class="ai-cta-content">
+                                <h3>المركز المصري للذكاء الاصطناعي</h3>
+                                <p>تم افتتاح المركز المصري للذكاء الاصطناعي في مدينة المعرفة بالعاصمة الإدارية الجديدة ليكون منارة للبحث والتطوير في تقنيات المستقبل.</p>
+                                <a href="https://ai.gov.eg/" target="_blank" class="ai-cta-button">
+                                    <span>اكتشف المزيد</span>
+                                    <i class="fas fa-arrow-left"></i>
+                                </a>
+                            </div>
+                            <div class="ai-cta-image">
+                                <i class="fas fa-microchip"></i>
+                                <div class="ai-particles">
+                                    <span></span><span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="ai-stats-grid" data-aos="fade-up">
                     <div class="ai-stat-item glass">
-                        <div class="ai-stat-number">+25</div>
+                        <div class="ai-stat-number">+32</div>
                         <div class="ai-stat-label">مليون طالب</div>
                     </div>
                     <div class="ai-stat-item glass">
-                        <div class="ai-stat-number">+60</div>
+                        <div class="ai-stat-number">+107</div>
                         <div class="ai-stat-label">مليون مواطن</div>
                     </div>
                     <div class="ai-stat-item glass">
@@ -452,7 +511,7 @@
                         <div class="ai-stat-label">خفض الازدحام</div>
                     </div>
                     <div class="ai-stat-item glass">
-                        <div class="ai-stat-number">92%</div>
+                        <div class="ai-stat-number">95%</div>
                         <div class="ai-stat-label">أمان سيبراني</div>
                     </div>
                 </div>
@@ -460,41 +519,40 @@
         </div>
     </section>
 
-    <!-- قسم الإحصائيات المتطور -->
+    <!-- قسم الإحصاءات -->
     <section id="stats" class="stats">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">الإحصائيات</h2>
+            <h2 class="section-title" data-aos="fade-up">الإحصاءات</h2>
             <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">مؤشرات الأداء الرئيسية للمشروعات القومية</p>
             
             <div class="stats-grid">
                 <div class="stat-card glass" data-aos="flip-up" data-aos-delay="100">
                     <i class="fas fa-city"></i>
-                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-number" data-target="30">0</div>
                     <div class="stat-label">مدينة ذكية</div>
                 </div>
                 
                 <div class="stat-card glass" data-aos="flip-up" data-aos-delay="200">
                     <i class="fas fa-database"></i>
-                    <div class="stat-number" data-target="42">0</div>
-                    <div class="stat-label">مشروع قومي</div>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">ألف مشروع قومي</div>
                 </div>
                 
                 <div class="stat-card glass" data-aos="flip-up" data-aos-delay="300">
                     <i class="fas fa-wifi"></i>
-                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-number" data-target="210">0</div>
                     <div class="stat-label">خدمة رقمية</div>
                 </div>
                 
                 <div class="stat-card glass" data-aos="flip-up" data-aos-delay="400">
                     <i class="fas fa-users"></i>
-                    <div class="stat-number" data-target="60">0</div>
+                    <div class="stat-number" data-target="98">0</div>
                     <div class="stat-label">مليون مستخدم</div>
                 </div>
             </div>
             
             <!-- قسم الجرافات والرسوم البيانية -->
             <div class="charts-container" data-aos="fade-up" data-aos-delay="200">
-                <!-- الرسم البياني الدائري -->
                 <div class="chart-card glass">
                     <h3><i class="fas fa-chart-pie"></i> توزيع المشروعات القومية</h3>
                     <div class="chart-wrapper">
@@ -503,7 +561,6 @@
                     <div class="chart-legend" id="pieLegend"></div>
                 </div>
                 
-                <!-- الرسم البياني الخطي -->
                 <div class="chart-card glass">
                     <h3><i class="fas fa-chart-line"></i> نمو الخدمات الرقمية</h3>
                     <div class="chart-wrapper">
@@ -511,7 +568,6 @@
                     </div>
                 </div>
                 
-                <!-- الرسم البياني الشريطي -->
                 <div class="chart-card glass">
                     <h3><i class="fas fa-chart-bar"></i> مؤشرات الذكاء الاصطناعي</h3>
                     <div class="chart-wrapper">
@@ -519,7 +575,6 @@
                     </div>
                 </div>
                 
-                <!-- جراف دائري متعدد -->
                 <div class="chart-card glass">
                     <h3><i class="fas fa-chart-simple"></i> توزيع المدن الذكية</h3>
                     <div class="chart-wrapper">
@@ -573,64 +628,62 @@
         </div>
     </section>
 
-    <!-- قسم تواصل معنا -->
-    <section id="contact" class="contact">
+    <!-- قسم من نحن (المطورين) -->
+    <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">تواصل</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">كن جزءاً من مستقبل مصر الرقمية</p>
+            <h2 class="section-title" data-aos="fade-up">من نحن</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">فريق العمل الذي يقود التحول الرقمي نحو مستقبل مصر 2030</p>
             
-            <div class="contact-grid">
-                <div class="contact-info glass" data-aos="fade-left">
-                    <h3>معلومات الاتصال</h3>
-                    <div class="info-items">
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>القاهرة، جمهورية مصر العربية</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>info@egypt2030.gov.eg</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <span>+20 123 456 7890</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-clock"></i>
-                            <span>السبت - الخميس: 9ص - 5م</span>
-                        </div>
+            <div class="about-grid">
+                <!-- الكرت الأول - أحمد  -->
+                <div class="team-card glass" data-aos="flip-up" data-aos-delay="100">
+                    <div class="team-badge">مدير المشروع</div>
+                    <div class="team-image">
+                        <img src="images/Team/Ahmed-Al-Saudi.jpg" alt="أحمد محمد السعودي" class="team-photo">
                     </div>
-                    
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <h3 class="team-name">أحمد محمد السعودي</h3>
+                    <div class="team-role">قائد فريق</div>
+                    <p class="team-description">قائد استراتيجي متخصص في تخطيط وتنفيذ المشاريع المعقدة، يمتلك مهارة فائقة في إدارة الموارد والجداول الزمنية وضمان تحقيق أعلى معايير الجودة والكفاءة التشغيلية.</p>
+                    <div class="team-social">
+                        <a href="https://www.facebook.com/share/18Fm4AXJ1v/" target="_blank" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/201140334323" target="_blank" title="واتساب"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 
-                <form class="contact-form glass" data-aos="fade-right" id="contact-form">
-                    <div class="form-group">
-                        <input type="text" placeholder="الاسم الكامل" required>
-                        <i class="fas fa-user"></i>
+                <!-- الكرت الثاني - حسن عادل -->
+                <div class="team-card glass" data-aos="flip-up" data-aos-delay="200">
+                    <div class="team-badge">خبير معلومات</div>
+                    <div class="team-image">
+                        <img src="images/Team/Hassan-Adel.jpg" alt="حسن عادل" class="team-photo">
                     </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="البريد الإلكتروني" required>
-                        <i class="fas fa-envelope"></i>
+                    <h3 class="team-name">الحسن عادل سيف</h3>
+                    <div class="team-role">الباحث الرقمي</div>
+                    <p class="team-description">متخصص في التنقيب عن البيانات واستخلاص الرؤى من المصادر المفتوحة، يمتلك مهارة فائقة في تحليل التوجهات الرقمية وتتبع المعلومات الدقيقة لدعم صناعة القرار المبني على الحقائق.</p>
+                    <div class="team-social">
+                        <a href="https://www.facebook.com/share/18DPtbjnbi/" target="_blank" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/201099702094" target="_blank" title="واتساب"><i class="fab fa-whatsapp"></i></a>
                     </div>
-                    <div class="form-group">
-                        <input type="text" placeholder="الموضوع" required>
-                        <i class="fas fa-tag"></i>
+                </div>
+                
+                <!-- الكرت الثالث - عمر عبدالرحمن -->
+                <div class="team-card glass" data-aos="flip-up" data-aos-delay="300">
+                    <div class="team-badge">مطور واجهات</div>
+                    <div class="team-image">
+                        <img src="images/Team/Omar-Abdelrahman.jpg" alt="عمر عبدالرحمن" class="team-photo">
                     </div>
-                    <div class="form-group">
-                        <textarea placeholder="رسالتك" rows="5" required></textarea>
-                        <i class="fas fa-comment"></i>
+                    <h3 class="team-name">عمر عبدالرحمن فتحي</h3>
+                    <div class="team-role">مطور واجهات أمامية (Frontend)</div>
+                    <p class="team-description">متخصص في تحويل التصاميم الإبداعية إلى واجهات رقمية تفاعلية، يركز على كتابة أكواد نظيفة تضمن سرعة الأداء وتوافق الموقع مع كافة الشاشات والأجهزة.</p>
+                    <div class="team-social">
+                        <a href="https://www.facebook.com/share/18FqDAL7jW/" target="_blank" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/201014970116" target="_blank" title="واتساب"><i class="fab fa-whatsapp"></i></a>
                     </div>
-                    <button type="submit" class="btn-submit">
-                        <i class="fas fa-paper-plane"></i>
-                        إرسال الرسالة
-                    </button>
-                </form>
+                </div>
+            </div>
+            
+            <!-- نص إضافي عن الفريق -->
+            <div class="about-message glass" data-aos="fade-up" data-aos-delay="400">
+                <p>نحن فريق من الشباب المصري الطموح، نعمل معًا من أجل تحقيق رؤية مصر 2030 من خلال توظيف أحدث التقنيات الرقمية وتقنيات الذكاء الاصطناعي في خدمة المواطن المصري. نؤمن بأن التكنولوجيا هي مفتاح المستقبل، وأن مصر تستحق الأفضل.</p>
             </div>
         </div>
     </section>
@@ -662,7 +715,7 @@
                         <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
                         <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
                         <li><a href="#"><i class="fas fa-chevron-left"></i> شروط الاستخدام</a></li>
-                        <li><a href="#contact"><i class="fas fa-chevron-left"></i> تواصل معنا</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-left"></i> من نحن</a></li>
                     </ul>
                 </div>
                 
@@ -677,7 +730,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>© 2024 مصر 2030 - جميع الحقوق محفوظة. تصميم وتنفيذ: المسابقة التكنولوجية</p>
+                <p>مصر 2030 - جميع الحقوق محفوظة. تصميم وتنفيذ: Freedom522</p>
             </div>
         </div>
     </footer>
@@ -706,26 +759,70 @@
             </div>
         </div>
     </div>
-
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     
+    <!-- نافذة منبثقة للمشروعات (Popup) -->
+    <div id="project-popup" class="popup">
+        <div class="popup-content glass">
+            <span class="close-popup">&times;</span>
+            <div class="popup-header">
+                <h2 id="popup-title">عنوان المشروع</h2>
+            </div>
+            <div class="popup-body">
+                <img id="popup-image" src="" alt="صورة المشروع" class="popup-project-image">
+                <p id="popup-description">تفاصيل المشروع هنا...</p>
+                
+                <div class="popup-stats">
+                    <div class="popup-stat-item">
+                        <span class="popup-stat-label">نسبة الإنجاز</span>
+                        <span class="popup-stat-value" id="popup-progress">85%</span>
+                    </div>
+                    <div class="popup-stat-item">
+                        <span class="popup-stat-label">تاريخ البدء</span>
+                        <span class="popup-stat-value" id="popup-start-date">2020</span>
+                    </div>
+                    <div class="popup-stat-item">
+                        <span class="popup-stat-label">التكلفة التقديرية</span>
+                        <span class="popup-stat-value" id="popup-cost">غير محدد</span>
+                    </div>
+                </div>
+                
+                <div class="popup-features">
+                    <h3>المميزات:</h3>
+                    <ul id="popup-features-list">
+                        <li>مميز 1</li>
+                        <li>مميز 2</li>
+                        <li>مميز 3</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="popup-footer">
+                <button class="btn-primary" id="popup-close-btn">إغلاق</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts Local Files -->
+    <script src="libs/gsap.min.js"></script>
+    <script src="libs/ScrollTrigger.min.js"></script>
+    <script src="libs/aos.js"></script>
+    <script src="libs/swiper-bundle.min.js"></script>
+    <script src="libs/chart.umd.min.js"></script>
+    <script src="libs/lottie.min.js"></script>
+    
+    <!-- Three.js - استيراد مباشر -->
     <script type="importmap">
         {
             "imports": {
-                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+                "three": "./libs/three.module.js",
+                "three/addons/": "./libs/"
             }
         }
     </script>
     
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-    
-    <script type="module" src="js/main.js"></script>
+    <!-- ملفات المشروع -->
+    <script src="js/three-scene.js" type="module"></script>
     <script src="js/animations.js"></script>
     <script src="js/chatbot.js"></script>
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>

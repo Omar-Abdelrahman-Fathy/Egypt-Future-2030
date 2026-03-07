@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مصر 2030 - معاً نحو المستقبل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/libs/all.min.css" rel="stylesheet">
+    <link href="/css/fonts.css" rel="stylesheet">
+    <script defer src="/libs/all.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInBody 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+        
+        .quick-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00eaff, #6a5cff);
+            z-index: 10000;
+            opacity: 1;
+            animation: flashDisappear 0.8s ease forwards;
+        }
+        
+        @keyframes flashDisappear {
+            0% { opacity: 1; transform: scale(1); }
+            70% { opacity: 0.3; transform: scale(1.05); }
+            100% { opacity: 0; transform: scale(1.1); visibility: hidden; }
+        }
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #0a0f1c;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+        
+        .glow-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .glow-center {
+            width: 40vmax;
+            height: 40vmax;
+            background: linear-gradient(135deg, #00eaff, #6a5cff);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: fadeInBlob 1.5s 0.5s ease forwards, pulse-center 6s 1.5s infinite alternate;
+        }
+        
+        @keyframes fadeInBlob {
+            to { opacity: 0.3; }
+        }
+        
+        @keyframes pulse-center {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.25; }
+        }
+        
+        .ring {
+            position: absolute;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0;
+            animation: fadeInRing 1.2s 1s ease forwards;
+        }
+        
+        @keyframes fadeInRing {
+            to { opacity: 1; }
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 1s 0.6s ease forwards;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle var(--duration) ease-in-out infinite, fadeIn 1s 1.2s ease forwards;
+            animation-delay: var(--delay);
+        }
+        
+        @keyframes twinkle {
+            0%,100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.8; transform: scale(1); }
+        }
+        
+        .content-wrapper {
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 1200px;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            background: rgba(0, 234, 255, 0.1);
+            color: #00eaff;
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 234, 255, 0.3);
+            opacity: 0;
+            animation: slide-up 0.8s 0.6s ease-out forwards;
+        }
+        
+        .main-title {
+            font-size: clamp(2.5rem, 8vmin, 5rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            animation: slide-up 0.8s 0.8s ease-out forwards;
+        }
+        
+        .main-title span {
+            color: #00eaff;
+            text-shadow: 0 0 30px rgba(0, 234, 255, 0.5);
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 3vmin, 1.8rem);
+            color: #cbd5e1;
+            font-weight: 400;
+            margin-bottom: clamp(30px, 5vmin, 60px);
+            opacity: 0;
+            animation: slide-up 0.8s 1s ease-out forwards;
+        }
+        
+        @keyframes slide-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .cards-container {
+            display: flex;
+            gap: clamp(15px, 3vmin, 30px);
+            margin-bottom: clamp(30px, 5vmin, 60px);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .glass-card {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: clamp(20px, 3vmin, 30px);
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .glass-card:nth-child(1) { animation: card-slide 0.6s 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .glass-card:nth-child(2) { animation: card-slide 0.6s 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .glass-card:nth-child(3) { animation: card-slide 0.6s 1.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        
+        @keyframes card-slide {
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            70% { transform: translateY(-10px) scale(1.05); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(30, 41, 59, 0.6);
+            border-color: rgba(0, 234, 255, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .glass-card i {
+            font-size: 3rem;
+            color: #00eaff;
+            margin-bottom: 1rem;
+        }
+        
+        .glass-card h3 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .glass-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #00eaff, #6a5cff);
+            color: #0a0f1c;
+            font-size: clamp(1.2rem, 3vmin, 1.8rem);
+            font-weight: 800;
+            padding: clamp(12px, 2vmin, 18px) clamp(30px, 5vmin, 60px);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 234, 255, 0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slide-up 0.8s 1.8s ease-out forwards;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 234, 255, 0.5);
+        }
+        
+        .footer-info {
+            display: flex;
+            gap: clamp(15px, 3vmin, 40px);
+            color: #94a3b8;
+            font-size: clamp(0.8rem, 1.5vmin, 1rem);
+            opacity: 0;
+            animation: slide-up 0.8s 2s ease-out forwards;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .info-item:hover {
+            color: #00eaff;
+            background: rgba(0, 234, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .info-item i {
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .glass-card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quick-flash"></div>
+
+    <div class="slide-container">
+        <div class="grid-overlay"></div>
+        <div class="glow-blob glow-center"></div>
+        <div class="ring" style="width: 60vmin; height: 60vmin;"></div>
+        <div class="ring" style="width: 90vmin; height: 90vmin;"></div>
+        
+        <div class="star" style="top: 10%; left: 10%; width: 3px; height: 3px; --duration: 3s; --delay: 0s;"></div>
+        <div class="star" style="top: 20%; left: 80%; width: 2px; height: 2px; --duration: 4s; --delay: 1s;"></div>
+        <div class="star" style="top: 80%; left: 15%; width: 4px; height: 4px; --duration: 5s; --delay: 2s;"></div>
+        <div class="star" style="top: 70%; left: 90%; width: 2px; height: 2px; --duration: 3.5s; --delay: 0.5s;"></div>
+
+        <div class="content-wrapper">
+            <div class="section-tag">
+                <i class="fas fa-star"></i> خاتمة الرحلة
+            </div>
+
+            <h1 class="main-title">
+                معاً نبني <span>مستقبل مصر</span>
+            </h1>
+            <p class="subtitle">رؤية 2030 تتحقق.. والمستقبل في انتظارنا</p>
+
+            <div class="cards-container">
+                <div class="glass-card">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>كن جزءاً من التغيير</h3>
+                    <p>ساهم في نشر الوعي الرقمي والتكنولوجي في مجتمعك</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>دعم الابتكار</h3>
+                    <p>شجع الأفكار الجديدة وريادة الأعمال الرقمية</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-users"></i>
+                    <h3>شارك وتطوع</h3>
+                    <p>انضم لآلاف الشباب في مبادرات التحول الرقمي</p>
+                </div>
+            </div>
+
+            <button class="cta-button" onclick="parent.restartPresentation ? parent.restartPresentation() : parent.setSlide(0)">
+                <i class="fas fa-arrow-left"></i>
+                <span>عرض الرحلة مرة أخرى</span>
+            </button>
+
+            <div class="footer-info">
+                <div class="info-item"><i class="fas fa-globe"></i> www.egypt2030.eg</div>
+                <div class="info-item"><i class="fab fa-facebook"></i> /Egypt2030</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> info@egypt2030.eg</div>
+                <div class="info-item"><i class="fas fa-hashtag"></i> #مستقبلنا_مشرق</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('touchstart', function(e) {
+                if (e.touches.length > 1) e.preventDefault();
+            }, { passive: false });
+
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+
+            document.querySelector('.cta-button').addEventListener('click', function(e) {
+                e.preventDefault();
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التوجيه...';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+
+</html>

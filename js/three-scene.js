@@ -1,8 +1,10 @@
 // ================================================
-// مشهد Three.js - النموذج ثلاثي الأبعاد (محسن للأداء والحجم)
+// مشهد Three.js - كرة متوهجة (محدث)
 // ================================================
+
+// استيراد المكتبات باستخدام import map
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { OrbitControls } from 'three/addons/OrbitControls.js';
 
 export function initThreeScene() {
     const canvas = document.getElementById('three-canvas');
@@ -14,14 +16,14 @@ export function initThreeScene() {
     }
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0a0f1c);
+    scene.background = new THREE.Color(0x030614);
 
-    // حساب الحجم المناسب بناءً على viewport
+    // حساب الحجم المناسب
     const aspectRatio = window.innerWidth / window.innerHeight;
-    const cameraDistance = aspectRatio < 1 ? 9 : 7; // مسافة أكبر على الموبايل
+    const cameraDistance = aspectRatio < 1 ? 10 : 8;
 
     const camera = new THREE.PerspectiveCamera(45, aspectRatio, 0.1, 1000);
-    camera.position.set(0, 1.5, cameraDistance);
+    camera.position.set(0, 1, cameraDistance);
 
     const renderer = new THREE.WebGLRenderer({ 
         antialias: true, 
@@ -29,212 +31,229 @@ export function initThreeScene() {
         powerPreference: "high-performance"
     });
     
-    // تعيين الحجم مع مراعاة DPI
     const pixelRatio = Math.min(window.devicePixelRatio, 2);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(pixelRatio);
-    renderer.shadowMap.enabled = false;
     
-    // التأكد من أن canvas لا يسبب overflow
     renderer.domElement.style.position = 'absolute';
     renderer.domElement.style.top = '0';
     renderer.domElement.style.left = '0';
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
-    renderer.domElement.style.pointerEvents = 'none'; // منع التفاعل مع الـ canvas
+    renderer.domElement.style.pointerEvents = 'none';
+    renderer.domElement.style.opacity = '0.85';
     
     canvas.appendChild(renderer.domElement);
 
-    // الإضاءة
-    const ambientLight = new THREE.AmbientLight(0x404060);
+    // ========== الإضاءة ==========
+    const ambientLight = new THREE.AmbientLight(0x404060, 0.6);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
     directionalLight.position.set(2, 3, 4);
     scene.add(directionalLight);
 
-    const neonLight = new THREE.PointLight(0x00eaff, 1.5, 12);
-    neonLight.position.set(2, 1, 3);
-    scene.add(neonLight);
+    // إضاءة نيون متحركة
+    const cyanLight = new THREE.PointLight(0x00eaff, 1.5, 12);
+    cyanLight.position.set(2, 1, 3);
+    scene.add(cyanLight);
 
-    // الكرة الأرضية الرئيسية - تحسين الأداء بتقليل الـ segments للموبايل
-    const sphereSegments = window.innerWidth < 768 ? 32 : 48;
-    const sphereGeometry = new THREE.SphereGeometry(1.4, sphereSegments, sphereSegments);
-    const sphereMaterial = new THREE.MeshPhongMaterial({
-        color: 0x00eaff,
-        emissive: 0x004466,
-        wireframe: true,
+    const purpleLight = new THREE.PointLight(0x6a5cff, 1.2, 12);
+    purpleLight.position.set(-2, -1, 3);
+    scene.add(purpleLight);
+
+    // ========== إنشاء النجوم في الخلفية ==========
+    function createStarField() {
+        const starsCount = 800;
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsPositions = new Float32Array(starsCount * 3);
+        const starsColors = new Float32Array(starsCount * 3);
+
+        for (let i = 0; i < starsCount; i++) {
+            const radius = 40 + Math.random() * 80;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos((Math.random() * 2) - 1);
+            
+            const x = radius * Math.sin(phi) * Math.cos(theta);
+            const y = radius * Math.sin(phi) * Math.sin(theta);
+            const z = radius * Math.cos(phi);
+            
+            starsPositions[i * 3] = x;
+            starsPositions[i * 3 + 1] = y;
+            starsPositions[i * 3 + 2] = z;
+            
+            const colorVal = 0.5 + Math.random() * 0.5;
+            starsColors[i * 3] = colorVal;
+            starsColors[i * 3 + 1] = colorVal * (0.7 + Math.random() * 0.3);
+            starsColors[i * 3 + 2] = 1.0;
+        }
+
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
+        starsGeometry.setAttribute('color', new THREE.BufferAttribute(starsColors, 3));
+
+        const starsMaterial = new THREE.PointsMaterial({
+            size: 0.1,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending
+        });
+
+        return new THREE.Points(starsGeometry, starsMaterial);
+    }
+
+    const stars = createStarField();
+    scene.add(stars);
+
+    // ========== إنشاء الكرة المتوهجة ==========
+    const sphereGeometry = new THREE.SphereGeometry(1.4, 64, 64);
+    
+    const sphereMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            time: { value: 0 },
+            glowColor: { value: new THREE.Color(0x00eaff) },
+            pulseSpeed: { value: 0.5 }
+        },
+        vertexShader: `
+            varying vec3 vNormal;
+            varying vec3 vViewPosition;
+            
+            void main() {
+                vNormal = normalize(normalMatrix * normal);
+                vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                vViewPosition = -mvPosition.xyz;
+                gl_Position = projectionMatrix * mvPosition;
+            }
+        `,
+        fragmentShader: `
+            uniform float time;
+            uniform vec3 glowColor;
+            uniform float pulseSpeed;
+            
+            varying vec3 vNormal;
+            varying vec3 vViewPosition;
+            
+            void main() {
+                vec3 normal = normalize(vNormal);
+                vec3 viewDir = normalize(vViewPosition);
+                
+                float pulse = sin(time * pulseSpeed) * 0.15 + 0.85;
+                float fresnel = dot(viewDir, normal);
+                fresnel = pow(1.0 - fresnel, 2.0);
+                
+                vec3 baseColor = vec3(0.15, 0.2, 0.3);
+                vec3 glow = glowColor * pulse * (fresnel * 1.2 + 0.4);
+                vec3 finalColor = baseColor + glow;
+                
+                float alpha = 0.65 + fresnel * 0.35;
+                
+                gl_FragColor = vec4(finalColor, alpha);
+            }
+        `,
         transparent: true,
-        opacity: 0.5
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending
     });
+
     const earth = new THREE.Mesh(sphereGeometry, sphereMaterial);
     scene.add(earth);
 
-    // الكرة الداخلية
-    const innerSphereGeometry = new THREE.SphereGeometry(1.1, 24, 24);
-    const innerSphereMaterial = new THREE.MeshBasicMaterial({
-        color: 0x226688,
-        transparent: true,
-        opacity: 0.15
-    });
-    const innerSphere = new THREE.Mesh(innerSphereGeometry, innerSphereMaterial);
-    scene.add(innerSphere);
-
-    // النقاط المحيطة - تقليل العدد للموبايل
-    const pointsCount = window.innerWidth < 768 ? 100 : 200;
-    const pointsGeometry = new THREE.BufferGeometry();
-    const pointsPositions = new Float32Array(pointsCount * 3);
-
-    for(let i = 0; i < pointsCount; i++) {
-        const radius = 1.7;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(2 * Math.random() - 1);
-        
-        const x = radius * Math.sin(phi) * Math.cos(theta);
-        const y = radius * Math.sin(phi) * Math.sin(theta);
-        const z = radius * Math.cos(phi);
-        
-        pointsPositions[i * 3] = x;
-        pointsPositions[i * 3 + 1] = y;
-        pointsPositions[i * 3 + 2] = z;
-    }
-
-    pointsGeometry.setAttribute('position', new THREE.BufferAttribute(pointsPositions, 3));
-    
-    const pointsMaterial = new THREE.PointsMaterial({
-        size: 0.04,
+    // طبقة Wireframe
+    const wireframeMaterial = new THREE.MeshBasicMaterial({
         color: 0x00eaff,
+        wireframe: true,
         transparent: true,
-        blending: THREE.AdditiveBlending
+        opacity: 0.1
     });
+    const wireframeSphere = new THREE.Mesh(sphereGeometry, wireframeMaterial);
+    wireframeSphere.scale.set(1.02, 1.02, 1.02);
+    scene.add(wireframeSphere);
 
-    const points = new THREE.Points(pointsGeometry, pointsMaterial);
-    scene.add(points);
-
-    // الحلقة
-    const ringGeometry = new THREE.TorusGeometry(1.8, 0.02, 12, 80);
-    const ringMaterial = new THREE.MeshStandardMaterial({
-        color: 0x6a5cff,
-        emissive: 0x331166,
-        transparent: true,
-        opacity: 0.3
-    });
-    
-    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-    ring.rotation.x = Math.PI / 2;
-    ring.rotation.z = 0.5;
-    scene.add(ring);
-
-    // خطوط المدار - تقليل التعقيد للموبايل
-    const orbitSegments = window.innerWidth < 768 ? 30 : 60;
-    const orbitLinesGeometry = new THREE.BufferGeometry();
-    const orbitPoints = [];
-    
-    for (let i = 0; i <= orbitSegments; i++) {
-        const angle = (i / orbitSegments) * Math.PI * 2;
-        const radius = 2.1;
-        orbitPoints.push(
-            Math.cos(angle) * radius,
-            Math.sin(angle) * radius * 0.3,
-            0
-        );
-    }
-    
-    orbitLinesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(orbitPoints, 3));
-    const orbitLinesMaterial = new THREE.LineBasicMaterial({ color: 0x00eaff, opacity: 0.15, transparent: true });
-    const orbitLines = new THREE.LineLoop(orbitLinesGeometry, orbitLinesMaterial);
-    orbitLines.rotation.x = 0.5;
-    orbitLines.rotation.z = 0.3;
-    scene.add(orbitLines);
-
-    // الجسيمات البعيدة - تقليل العدد للموبايل
-    const particlesCount = window.innerWidth < 768 ? 200 : 400;
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesPositions = new Float32Array(particlesCount * 3);
-
-    for(let i = 0; i < particlesCount * 3; i += 3) {
-        const r = 3 + Math.random() * 2;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(2 * Math.random() - 1);
-        
-        particlesPositions[i] = r * Math.sin(phi) * Math.cos(theta);
-        particlesPositions[i + 1] = r * Math.sin(phi) * Math.sin(theta);
-        particlesPositions[i + 2] = r * Math.cos(phi);
+    // ========== الحلقات المحيطة ==========
+    function createGlowingRing(radius, color) {
+        const ringGeometry = new THREE.TorusGeometry(radius, 0.015, 16, 100);
+        const ringMaterial = new THREE.MeshBasicMaterial({ 
+            color: color, 
+            transparent: true, 
+            opacity: 0.2 
+        });
+        return new THREE.Mesh(ringGeometry, ringMaterial);
     }
 
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlesPositions, 3));
-    
-    const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.02,
-        color: 0x88aaff,
-        transparent: true,
-        opacity: 0.3,
-        blending: THREE.AdditiveBlending
-    });
+    const ring1 = createGlowingRing(1.9, 0x00eaff);
+    ring1.rotation.x = Math.PI / 2;
+    ring1.rotation.z = 0.3;
+    scene.add(ring1);
 
-    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particles);
+    const ring2 = createGlowingRing(2.2, 0x6a5cff);
+    ring2.rotation.x = Math.PI / 2;
+    ring2.rotation.z = -0.2;
+    scene.add(ring2);
 
-    // النجوم - تقليل العدد للموبايل
-    const starsCount = window.innerWidth < 768 ? 500 : 1000;
-    const starsGeometry = new THREE.BufferGeometry();
-    const starsPositions = new Float32Array(starsCount * 3);
+    // ========== نقاط البيانات ==========
+    function createDataPoints() {
+        const count = 150;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(count * 3);
 
-    for(let i = 0; i < starsCount * 3; i += 3) {
-        starsPositions[i] = (Math.random() - 0.5) * 150;
-        starsPositions[i + 1] = (Math.random() - 0.5) * 150;
-        starsPositions[i + 2] = (Math.random() - 0.5) * 150;
+        for (let i = 0; i < count; i++) {
+            const radius = 1.7 + Math.random() * 1.1;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos((Math.random() * 2) - 1);
+            
+            const x = radius * Math.sin(phi) * Math.cos(theta);
+            const y = radius * Math.sin(phi) * Math.sin(theta);
+            const z = radius * Math.cos(phi);
+            
+            positions[i * 3] = x;
+            positions[i * 3 + 1] = y;
+            positions[i * 3 + 2] = z;
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.04,
+            color: 0x00eaff,
+            transparent: true,
+            opacity: 0.2,
+            blending: THREE.AdditiveBlending
+        });
+
+        return new THREE.Points(geometry, material);
     }
 
-    starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
-    
-    const starsMaterial = new THREE.PointsMaterial({
-        size: 0.08,
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.6
-    });
+    const dataPoints = createDataPoints();
+    scene.add(dataPoints);
 
-    const stars = new THREE.Points(starsGeometry, starsMaterial);
-    scene.add(stars);
-
-    // التحكم - تعطيل كل التفاعل
+    // ========== التحكم ==========
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = false;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 1.0;
+    controls.autoRotateSpeed = 0.3;
     controls.enableZoom = false;
     controls.enablePan = false;
     controls.enableRotate = false;
 
-    let clock = new THREE.Clock();
-
+    // ========== حلقة التحريك ==========
     function animate() {
         requestAnimationFrame(animate);
 
-        const delta = clock.getDelta();
-        const elapsedTime = performance.now() * 0.001;
-
         controls.update();
 
-        // دوران بطيء للعناصر
-        earth.rotation.y += 0.0005;
-        innerSphere.rotation.y += 0.0003;
-        points.rotation.y += 0.0008;
-        ring.rotation.z += 0.0001;
-        orbitLines.rotation.y += 0.00005;
-        stars.rotation.y += 0.00002;
-        particles.rotation.y += 0.0001;
-
-        // نبض خفيف للكرة الداخلية
-        const pulseScale = 1 + Math.sin(elapsedTime * 2) * 0.005;
-        innerSphere.scale.set(pulseScale, pulseScale, pulseScale);
+        earth.rotation.y += 0.0003;
+        wireframeSphere.rotation.y += 0.0002;
+        dataPoints.rotation.y += 0.0002;
+        stars.rotation.y += 0.00005;
+        ring1.rotation.z += 0.0001;
+        ring2.rotation.z -= 0.0001;
 
         renderer.render(scene, camera);
     }
 
     animate();
 
+    // ========== معالجة تغيير حجم النافذة ==========
     window.addEventListener('resize', onWindowResize, false);
 
     function onWindowResize() {
@@ -244,9 +263,6 @@ export function initThreeScene() {
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
-        
-        // تعديل مسافة الكاميرا حسب نسبة العرض
-        camera.position.z = width < 768 ? 9 : 7;
     }
 
     return { scene, camera, renderer, controls };

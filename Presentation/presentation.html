@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>مصر 2030 - العرض الموحد (نسخة Offline)</title>
+    
+    <!-- ========== الخطوط المحلية ========== -->
+    <link href="css/fonts.css" rel="stylesheet">
+    
+    <!-- ========== Tailwind المحلي ========== -->
+    <link href="css/tailwind.min.css" rel="stylesheet">
+    
+    <!-- ========== Font Awesome المحلي ========== -->
+    <link href="/libs/all.min.css" rel="stylesheet">
+    
+    <!-- ========== AOS المحلي للتأثيرات ========== -->
+    <link href="/libs/aos.css" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .app {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: #0a0f1c;
+        }
+        
+        /* Fullscreen slide viewport */
+        .viewport {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        
+        .frame-wrap {
+            position: absolute;
+            inset: 0;
+        }
+        
+        .frame-layer {
+            position: absolute;
+            inset: 0 0 0 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #0a0f1c;
+            transform: translateZ(0);
+            transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1), transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+        
+        .frame-layer.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Smooth fade/zoom effects */
+        .incoming {
+            opacity: 0;
+            transform: scale(0.985);
+        }
+        
+        .outgoing {
+            opacity: 0;
+            transform: scale(1.015);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .frame-layer {
+                transition: none;
+            }
+        }
+        
+        /* Bottom navigation */
+        .nav-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 0 10px;
+            pointer-events: none;
+            background: linear-gradient(to top, rgba(10, 15, 28, 0.95), rgba(10, 15, 28, 0.6), rgba(10, 15, 28, 0));
+            z-index: 100;
+        }
+        
+        .nav-inner {
+            width: min(920px, 96vw);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            pointer-events: none;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            pointer-events: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            min-width: 56px;
+            height: 56px;
+            padding: 0 20px;
+            background: radial-gradient(120% 120% at 50% 0%, rgba(0, 234, 255, 0.25), rgba(106, 92, 255, 0.12));
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: #e6faff;
+            border-radius: 9999px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            backdrop-filter: blur(10px) saturate(130%);
+            -webkit-backdrop-filter: blur(10px) saturate(130%);
+            transition: transform 0.12s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.25s ease;
+            user-select: none;
+            box-shadow: 0 10px 28px rgba(2, 8, 23, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .btn:hover {
+            box-shadow: 0 12px 32px rgba(2, 8, 23, 0.8), 0 0 16px rgba(0, 234, 255, 0.35);
+            border-color: rgba(0, 234, 255, 0.6);
+        }
+        
+        .btn:active {
+            transform: translateY(1px) scale(0.98);
+        }
+        
+        .btn .icon {
+            font-size: 22px;
+        }
+        
+        /* Fullscreen button special style */
+        #fullscreenBtn {
+            background: radial-gradient(120% 120% at 50% 0%, rgba(106, 92, 255, 0.3), rgba(0, 234, 255, 0.15));
+        }
+        
+        #fullscreenBtn.fullscreen-active {
+            background: radial-gradient(120% 120% at 50% 0%, rgba(0, 234, 255, 0.4), rgba(106, 92, 255, 0.25));
+            border-color: #00eaff;
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+        }
+        
+        .indicator {
+            pointer-events: auto;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: #e2e8f0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.35));
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 16px 14px;
+            border-radius: 16px;
+            font-size: 14px;
+            backdrop-filter: blur(12px) saturate(140%);
+            -webkit-backdrop-filter: blur(12px) saturate(140%);
+            box-shadow: 0 10px 28px rgba(2, 8, 23, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            direction: ltr;
+            text-align: left;
+            margin: 0 5px;
+        }
+        
+        .indicator-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .progress {
+            position: relative;
+            width: 180px;
+            height: 4px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            overflow: hidden;
+            direction: ltr;
+        }
+        
+        .progress .bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0%;
+            background: linear-gradient(90deg, #00eaff, #6a5cff);
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.45);
+            transition: width 0.3s ease;
+        }
+        
+        .dots {
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .dot:hover {
+            transform: scale(1.2);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .dot.active {
+            border-color: #00eaff;
+            box-shadow: 0 0 8px #00eaff;
+            background: radial-gradient(circle at center, rgba(0, 234, 255, 0.6) 0%, rgba(0, 234, 255, 0.0) 70%);
+            transform: scale(1.25);
+        }
+        
+        /* Fullscreen message */
+        .fullscreen-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 234, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid #00eaff;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            z-index: 10000;
+            animation: messageFadeIn 0.3s ease;
+            white-space: nowrap;
+            direction: rtl;
+        }
+        
+        .exit-fullscreen-hint {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e0faff;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            z-index: 9999;
+            animation: hintFadeIn 0.5s ease;
+            direction: rtl;
+        }
+        
+        @keyframes messageFadeIn {
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        
+        @keyframes hintFadeIn {
+            from { opacity: 0; transform: translate(-50%, 20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        
+        @media (max-width: 640px) {
+            .btn {
+                min-width: 48px;
+                height: 48px;
+                padding: 0 12px;
+                font-size: 16px;
+            }
+            .btn .icon {
+                font-size: 18px;
+            }
+            .indicator {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .progress {
+                width: 120px;
+            }
+            .dot {
+                width: 8px;
+                height: 8px;
+            }
+            .fullscreen-message {
+                font-size: 12px;
+                padding: 8px 16px;
+                white-space: normal;
+                width: 90%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app" id="app">
+        <div class="viewport">
+            <div class="frame-wrap">
+                <iframe class="frame-layer" id="frameA" title="مصر 2030" allow="fullscreen; clipboard-read; clipboard-write; autoplay" allowfullscreen></iframe>
+                <iframe class="frame-layer hidden" id="frameB" title="مصر 2030" allow="fullscreen; clipboard-read; clipboard-write; autoplay" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-inner">
+                <button class="btn" id="prevBtn" aria-label="السابق">
+                    <span class="icon">⟵</span>
+                    <span class="label hidden sm:inline">السابق</span>
+                </button>
+                
+                <button class="btn" id="fullscreenBtn" aria-label="ملء الشاشة">
+                    <span class="icon fullscreen-icon">⛶</span>
+                    <span class="label hidden sm:inline">ملء الشاشة</span>
+                </button>
+                
+                <div class="indicator" title="استخدم أسهم لوحة المفاتيح للتنقل">
+                    <div class="indicator-row">
+                        <span id="counter">1 / 10</span>
+                        <span class="dots" id="dots"></span>
+                    </div>
+                    <div class="progress" aria-hidden="true">
+                        <div class="bar" id="progressBar"></div>
+                    </div>
+                </div>
+                
+                <button class="btn" id="nextBtn" aria-label="التالي">
+                    <span class="label hidden sm:inline">التالي</span>
+                    <span class="icon">⟶</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================================================
+        // قائمة الشرائح - 10 شرائح (يجب أن تكون في نفس المجلد)
+        // ================================================
+        const pages = [
+            'index1.html', // المقدمة - رؤية مصر 2030
+            'index2.html', // الرؤية التفصيلية
+            'index3.html', // المشاريع القومية
+            'index4.html', // الذكاء الاصطناعي - الاستراتيجية
+            'index5.html', // تطبيقات الذكاء الاصطناعي
+            'index6.html', // الإحصاءات والرسوم البيانية
+            'index7.html', // التحول الرقمي
+            'index8.html', // المدن الذكية
+            'index9.html', // فريق العمل
+            'index10.html' // الخاتمة
+        ];
+
+        // عناصر الصفحة
+        const frameA = document.getElementById('frameA');
+        const frameB = document.getElementById('frameB');
+        let activeFrame = frameA;
+        let idleFrame = frameB;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const counter = document.getElementById('counter');
+        const dots = document.getElementById('dots');
+        const progressBar = document.getElementById('progressBar');
+
+        let currentIndex = 0;
+        let isBusy = false;
+
+        // ================================================
+        // دالة إزالة التعليقات من المستند (لتحسين الأداء)
+        // ================================================
+        function removeCommentsFromDocument(doc) {
+            try {
+                if (!doc) return;
+                const walker = doc.createTreeWalker(doc, NodeFilter.SHOW_COMMENT, null, false);
+                const toRemove = [];
+                while (walker.nextNode()) toRemove.push(walker.currentNode);
+                toRemove.forEach(node => {
+                    if (node && node.parentNode) node.parentNode.removeChild(node);
+                });
+                
+                // إزالة التعليقات من داخل الـ style tags
+                doc.querySelectorAll('style').forEach(styleEl => {
+                    try {
+                        styleEl.textContent = styleEl.textContent.replace(/\/\*[\s\S]*?\*\//g, '');
+                    } catch (e) {}
+                });
+            } catch (e) { /* تجاهل الأخطاء */ }
+        }
+
+        // ================================================
+        // بناء النقاط (dots) للتنقل السريع
+        // ================================================
+        function buildNavigationDots() {
+            dots.innerHTML = '';
+            for (let i = 0; i < pages.length; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'dot' + (i === currentIndex ? ' active' : '');
+                dot.title = `اذهب إلى الشريحة ${i + 1}`;
+                dot.addEventListener('click', () => goToSlide(i));
+                dots.appendChild(dot);
+            }
+        }
+
+        // ================================================
+        // تحديث مؤشرات التنقل (counter, progress bar, dots)
+        // ================================================
+        function updateNavigationIndicators() {
+            counter.textContent = `${currentIndex + 1} / ${pages.length}`;
+            
+            const dotElements = dots.querySelectorAll('.dot');
+            dotElements.forEach((el, i) => {
+                el.classList.toggle('active', i === currentIndex);
+            });
+            
+            if (progressBar) {
+                const percentage = ((currentIndex + 1) / pages.length) * 100;
+                progressBar.style.width = percentage + '%';
+            }
+        }
+
+        // ================================================
+        // تبديل الإطارات النشطة
+        // ================================================
+        function swapFrames() {
+            const temp = activeFrame;
+            activeFrame = idleFrame;
+            idleFrame = temp;
+        }
+
+        // ================================================
+        // دالة التنقل بين الشرائح
+        // ================================================
+        function navigateToSlide(targetIndex) {
+            if (isBusy) return;
+            
+            // التأكد من أن المؤشر ضمن النطاق الصحيح
+            targetIndex = (targetIndex + pages.length) % pages.length;
+            if (targetIndex === currentIndex) return;
+            
+            isBusy = true;
+
+            // تجهيز الإطار الخامل
+            idleFrame.classList.add('hidden');
+            idleFrame.classList.add('incoming');
+            idleFrame.src = pages[targetIndex];
+
+            // عند تحميل الإطار الخامل
+            const onLoadHandler = () => {
+                idleFrame.removeEventListener('load', onLoadHandler);
+                
+                try {
+                    removeCommentsFromDocument(idleFrame.contentDocument || idleFrame.contentWindow.document);
+                } catch (e) {}
+                
+                requestAnimationFrame(() => {
+                    activeFrame.classList.add('outgoing');
+                    idleFrame.classList.remove('hidden');
+                    
+                    requestAnimationFrame(() => {
+                        idleFrame.classList.remove('incoming');
+                    });
+                });
+            };
+            
+            idleFrame.addEventListener('load', onLoadHandler);
+
+            // عند انتهاء الانتقال
+            const onTransitionEnd = () => {
+                activeFrame.classList.remove('outgoing');
+                idleFrame.classList.remove('incoming');
+                
+                swapFrames();
+                currentIndex = targetIndex;
+                updateNavigationIndicators();
+                
+                // تحميل الشريحة التالية مسبقاً في الإطار الخامل
+                const nextIndex = (currentIndex + 1) % pages.length;
+                idleFrame.classList.add('hidden', 'incoming');
+                idleFrame.src = pages[nextIndex];
+                
+                isBusy = false;
+            };
+
+            activeFrame.addEventListener('transitionend', onTransitionEnd, { once: true });
+            idleFrame.addEventListener('transitionend', () => {}, { once: true });
+        }
+
+        // ================================================
+        // دوال التنقل المساعدة
+        // ================================================
+        function goToNextSlide() {
+            navigateToSlide(currentIndex + 1);
+        }
+
+        function goToPrevSlide() {
+            navigateToSlide(currentIndex - 1);
+        }
+
+        function goToSlide(index) {
+            navigateToSlide(index);
+        }
+
+        // ربط الأزرار
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            goToNextSlide();
+        });
+        
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            goToPrevSlide();
+        });
+
+        // منع النقر أثناء الانتقال
+        document.addEventListener('click', (e) => {
+            if (isBusy) e.stopPropagation();
+        }, true);
+
+        // ================================================
+        // التنقل بلوحة المفاتيح
+        // ================================================
+        window.addEventListener('keydown', (e) => {
+            const key = e.key;
+            
+            if (key === 'ArrowRight' || key === 'PageDown') {
+                e.preventDefault();
+                goToNextSlide();
+                return;
+            }
+            
+            if (key === 'ArrowLeft' || key === 'PageUp') {
+                e.preventDefault();
+                goToPrevSlide();
+                return;
+            }
+            
+            if (key === 'Home') {
+                e.preventDefault();
+                goToSlide(0);
+                return;
+            }
+            
+            if (key === 'End') {
+                e.preventDefault();
+                goToSlide(pages.length - 1);
+                return;
+            }
+            
+            // الأرقام من 1 إلى 9
+            if (key >= '1' && key <= '9') {
+                const slideNum = parseInt(key) - 1;
+                if (slideNum < pages.length) {
+                    e.preventDefault();
+                    goToSlide(slideNum);
+                }
+            }
+            
+            // الرقم 0 للشريحة 10
+            if (key === '0' && pages.length >= 10) {
+                e.preventDefault();
+                goToSlide(9);
+            }
+        });
+
+        // ================================================
+        // التنقل باللمس (سحب)
+        // ================================================
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const swipeArea = document.getElementById('app');
+
+        swipeArea.addEventListener('touchstart', (e) => {
+            if (e.changedTouches && e.changedTouches.length) {
+                touchStartX = e.changedTouches[0].screenX;
+            }
+        }, { passive: true });
+
+        swipeArea.addEventListener('touchend', (e) => {
+            if (e.changedTouches && e.changedTouches.length) {
+                touchEndX = e.changedTouches[0].screenX;
+                const deltaX = touchEndX - touchStartX;
+                const threshold = 40;
+                
+                if (Math.abs(deltaX) > threshold) {
+                    if (deltaX > 0) {
+                        goToPrevSlide(); // سحب لليمين (السابق)
+                    } else {
+                        goToNextSlide(); // سحب لليسار (التالي)
+                    }
+                }
+            }
+        }, { passive: true });
+
+        // ================================================
+        // منع القوائم المنبثقة والنقر المزدوج للتكبير
+        // ================================================
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) e.preventDefault();
+        }, { passive: false });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) e.preventDefault();
+            lastTouchEnd = now;
+        }, false);
+
+        // ================================================
+        // نظام ملء الشاشة (Fullscreen)
+        // ================================================
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                // الدخول في وضع ملء الشاشة
+                document.documentElement.requestFullscreen().then(() => {
+                    fullscreenBtn.classList.add('fullscreen-active');
+                    fullscreenBtn.querySelector('.fullscreen-icon').textContent = '✕';
+                    
+                    showFullscreenMessage('✓ وضع ملء الشاشة نشط - اضغط ESC للخروج');
+                    showExitHint();
+                }).catch(err => {
+                    console.log('خطأ في تفعيل ملء الشاشة:', err);
+                    showFullscreenMessage('⚠️ متصفحك لا يدعم ملء الشاشة', 2000);
+                });
+            } else {
+                // الخروج من وضع ملء الشاشة
+                document.exitFullscreen().then(() => {
+                    fullscreenBtn.classList.remove('fullscreen-active');
+                    fullscreenBtn.querySelector('.fullscreen-icon').textContent = '⛶';
+                    showFullscreenMessage('✓ تم الخروج من وضع ملء الشاشة');
+                    removeExitHint();
+                }).catch(err => {
+                    console.log('خطأ في الخروج من ملء الشاشة:', err);
+                });
+            }
+        }
+
+        // دالة عرض الرسائل
+        function showFullscreenMessage(text, duration = 3000) {
+            const oldMessage = document.querySelector('.fullscreen-message');
+            if (oldMessage) oldMessage.remove();
+            
+            const message = document.createElement('div');
+            message.className = 'fullscreen-message';
+            message.textContent = text;
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                if (message.parentNode) message.remove();
+            }, duration);
+        }
+
+        // دالة عرض تلميح الخروج
+        function showExitHint() {
+            removeExitHint();
+            
+            const hint = document.createElement('div');
+            hint.className = 'exit-fullscreen-hint';
+            hint.innerHTML = '␛ اضغط ESC للخروج من ملء الشاشة';
+            document.body.appendChild(hint);
+        }
+
+        // دالة إزالة تلميح الخروج
+        function removeExitHint() {
+            const hint = document.querySelector('.exit-fullscreen-hint');
+            if (hint) hint.remove();
+        }
+
+        // ربط حدث النقر بزر ملء الشاشة
+        fullscreenBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleFullscreen();
+        });
+
+        // مراقبة تغيير حالة ملء الشاشة
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fullscreenBtn.classList.remove('fullscreen-active');
+                fullscreenBtn.querySelector('.fullscreen-icon').textContent = '⛶';
+                removeExitHint();
+            }
+        });
+
+        // دعم مفتاح F11
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'F11') {
+                e.preventDefault();
+                toggleFullscreen();
+            }
+        });
+
+        // ================================================
+        // التهيئة
+        // ================================================
+        function initializePresentation() {
+            buildNavigationDots();
+            
+            // تحميل الشريحة الأولى
+            activeFrame.src = pages[currentIndex];
+            activeFrame.addEventListener('load', () => {
+                try {
+                    removeCommentsFromDocument(activeFrame.contentDocument || activeFrame.contentWindow.document);
+                } catch (e) {}
+            }, { once: true });
+            
+            updateNavigationIndicators();
+            
+            // تحميل الشريحة الثانية مسبقاً
+            idleFrame.classList.add('hidden', 'incoming');
+            idleFrame.src = pages[1];
+        }
+
+        // دوال مساعدة للشرائح (الشرائح تستدعي parent.next مثلاً)
+        window.next = goToNextSlide;
+        window.prev = goToPrevSlide;
+        window.setSlide = goToSlide;
+        window.restartPresentation = () => goToSlide(0);
+
+        // بدء التشغيل بعد تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', initializePresentation);
+    </script>
+</body>
+
+</html>
