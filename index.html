@@ -11,14 +11,14 @@
     <link rel="stylesheet" href="libs/aos.css">
     <link rel="stylesheet" href="libs/swiper-bundle.min.css">
     
-    <!-- CSS الرئيسي -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
     
     <meta name="language" content="ar">
 </head>
 <body>
-    <!-- شاشة التحميل -->
-    <div id="loading-screen">
+    <!-- Loading Screen -->
+    <!-- <div id="loading-screen">
         <div class="preloader-container">
             <div class="preloader-bg">
                 <div class="gradient-sphere"></div>
@@ -45,9 +45,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- شريط التنقل -->
+    <!-- Navigation Bar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo">مصر<span>2030</span></div>
@@ -67,8 +67,15 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Video Background -->
     <section id="home" class="hero">
+        <!-- Background Video -->
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="video/From Main Klickpin CF- Pinterest Video - 4H1aSaDv0.mp4" type="video/mp4">
+          </video>
+        
+        <div class="hero-overlay"></div>
+        
         <div class="hero-content" data-aos="fade-up">
             <h1 class="main-title">
                 <span class="egypt">مصر</span>
@@ -78,15 +85,15 @@
             
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span class="number">15</span>
+                    <span class="number">31</span>
                     <span class="label">مدينة ذكية</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="number">42</span>
+                    <span class="number">43</span>
                     <span class="label">مشروع قومي</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="number">100+</span>
+                    <span class="number">210+</span>
                     <span class="label">خدمة رقمية</span>
                 </div>
             </div>
@@ -96,14 +103,8 @@
                     <i class="fas fa-rocket"></i>
                     ابدأ الرحلة
                 </button>
-                <button class="btn-secondary" id="video-btn">
-                    <i class="fas fa-play"></i>
-                    عرض الفيديو
-                </button>
             </div>
         </div>
-        
-        <div id="three-canvas"></div>
         
         <div class="scroll-indicator">
             <span></span>
@@ -112,7 +113,7 @@
         </div>
     </section>
 
-    <!-- قسم الرؤية -->
+    <!-- Vision Section -->
     <section id="vision" class="vision">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">الرؤية</h2>
@@ -176,13 +177,13 @@
                     </div>
                 </div>
                 
-                <!-- الأهداف الاستراتيجية -->
+                <!-- Strategic Goals -->
                 <div class="vision-goals" data-aos="fade-up">
                     <h3>الأهداف الاستراتيجية 2030</h3>
                     <div class="goals-grid">
                         <div class="goal-item">
                             <span class="goal-number">1</span>
-                            <span class="goal-text"><b>النمو الاقتصادي:</b> معدل نمو يتراوح بين 7% إلى 8% سنوياً</span>
+                            <span class="goal-text"><b> <br>النمو الاقتصادي:</b>br</b> معدل نمو يتراوح بين 7% إلى 8% سنوياً</span>
                         </div>
                         <div class="goal-item">
                             <span class="goal-number">2</span>
@@ -200,7 +201,7 @@
                 </div>
             </div>
             
-            <!-- خريطة الطريق الرقمية -->
+            <!-- Digital Roadmap -->
             <div class="roadmap-preview" data-aos="fade-up" data-aos-delay="500">
                 <h3>خريطة الطريق الرقمية</h3>
                 <div class="roadmap-steps">
@@ -225,7 +226,7 @@
         </div>
     </section>
 
-    <!-- قسم المشاريع القومية -->
+    <!-- National Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">المشاريع</h2>
@@ -241,7 +242,7 @@
                 </div>
                 
                 <div class="project-highlight glass" data-aos="fade-right">
-                    <div class="project-number">42</div>
+                    <div class="project-number">43</div>
                     <div class="project-info">
                         <h3>مشروع قومي</h3>
                         <p>عملاق في مجالات الطاقة والإسكان والنقل</p>
@@ -251,7 +252,7 @@
             
             <div class="swiper projects-swiper" data-aos="fade-up">
                 <div class="swiper-wrapper">
-                    <!-- المشروع الأول: العاصمة الإدارية -->
+                    <!-- Project 1: Administrative Capital -->
                     <div class="swiper-slide">
                         <div class="project-card glass" data-project-id="0">
                             <div class="project-image">
@@ -270,7 +271,7 @@
                         </div>
                     </div>
                     
-                    <!-- المشروع الثاني: محطة بنبان -->
+                    <!-- Project 2: Benban Solar Plant -->
                     <div class="swiper-slide">
                         <div class="project-card glass" data-project-id="1">
                             <div class="project-image">
@@ -289,7 +290,7 @@
                         </div>
                     </div>
                     
-                    <!-- المشروع الثالث: التحول الرقمي -->
+                    <!-- Project 3: Digital Transformation -->
                     <div class="swiper-slide">
                         <div class="project-card glass" data-project-id="2">
                             <div class="project-image">
@@ -308,7 +309,7 @@
                         </div>
                     </div>
                     
-                    <!-- المشروع الرابع: القطار الكهربائي -->
+                    <!-- Project 4: Electric Train -->
                     <div class="swiper-slide">
                         <div class="project-card glass" data-project-id="3">
                             <div class="project-image">
@@ -334,20 +335,114 @@
         </div>
     </section>
 
-    <!-- قسم الذكاء الاصطناعي -->
+            <!-- Before & After Section - Development Projects -->
+    <section id="before-after" class="before-after">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">قبل وبعد</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">شاهد التطور المذهل في المشاريع القومية</p>
+            
+            <div class="ba-grid">
+                <!-- Card 1 - Administrative Capital -->
+                <div class="ba-card glass">
+                    <div class="ba-header">
+                        <h3>العاصمة الإدارية الجديدة</h3>
+                        <span class="ba-location"><i class="fas fa-map-marker-alt"></i> القاهرة</span>
+                    </div>
+                    
+                    <div class="ba-slider-container">
+                        <div class="ba-slider" id="slider1">
+                            <div class="ba-img ba-before">
+                                <img src="images/Projects/befor-new-capital-.jpg" alt="العاصمة الإدارية قبل">
+                                <span class="ba-label before-label">قبل 2015</span>
+                            </div>
+                            <div class="ba-img ba-after">
+                                <img src="images/Projects/Administratibe capital.jpg" alt="العاصمة الإدارية بعد">
+                                <span class="ba-label after-label">بعد 2024</span>
+                            </div>
+                            <div class="ba-handle">
+                                <span class="ba-handle-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ba-description">
+                        <p>تحولت من أرض صحراوية إلى أحدث مدينة ذكية في الشرق الأوسط، تضم أطول برج في إفريقيا.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 2 - Benban Solar Plant -->
+                <div class="ba-card glass">
+                    <div class="ba-header">
+                        <h3>محطة بنبان للطاقة الشمسية</h3>
+                        <span class="ba-location"><i class="fas fa-map-marker-alt"></i> أسوان</span>
+                    </div>
+                    
+                    <div class="ba-slider-container">
+                        <div class="ba-slider" id="slider2">
+                            <div class="ba-img ba-before">
+                                <img src="images/Projects/before-Bnban.jpg" alt="بنبان قبل">
+                                <span class="ba-label before-label">قبل 2017</span>
+                            </div>
+                            <div class="ba-img ba-after">
+                                <img src="images/Projects/after-Baban.jpg" alt="بنبان بعد">
+                                <span class="ba-label after-label">بعد 2024</span>
+                            </div>
+                            <div class="ba-handle">
+                                <span class="ba-handle-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ba-description">
+                        <p>أكبر مجمع للطاقة الشمسية في العالم، يحول صحراء أسوان إلى مصدر للطاقة النظيفة.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 3 - New Alamein -->
+                <div class="ba-card glass">
+                    <div class="ba-header">
+                        <h3>العلمين الجديدة</h3>
+                        <span class="ba-location"><i class="fas fa-map-marker-alt"></i> مطروح</span>
+                    </div>
+                    
+                    <div class="ba-slider-container">
+                        <div class="ba-slider" id="slider3">
+                            <div class="ba-img ba-before">
+                                <img src="images/Projects/El Alamein City-before.jpg" alt="العلمين قبل">
+                                <span class="ba-label before-label">قبل 2018</span>
+                            </div>
+                            <div class="ba-img ba-after">
+                                <img src="images/Projects/El Alamein City.jpg" alt="العلمين بعد">
+                                <span class="ba-label after-label">بعد 2024</span>
+                            </div>
+                            <div class="ba-handle">
+                                <span class="ba-handle-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ba-description">
+                        <p>مدينة ساحلية عالمية تحولت من منطقة نائية إلى وجهة سياحية واستثمارية عالمية.</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- AI Section -->
     <section id="ai" class="ai">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">الذكاء الاصطناعي</h2>
             <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">تقنيات المستقبل لخدمة المواطن المصري</p>
             
             <div class="ai-full-content">
-                <!-- مقدمة عن الذكاء الاصطناعي في مصر -->
+                <!-- Introduction to AI in Egypt -->
                 <div class="ai-intro glass" data-aos="fade-up">
                     <h3>الاستراتيجية الوطنية للذكاء الاصطناعي</h3>
                     <p>أطلقت مصر الاستراتيجية الوطنية للذكاء الاصطناعي في 2021 بهدف توظيف تقنيات الذكاء الاصطناعي لتحقيق أهداف رؤية مصر 2030، وتعزيز مكانة مصر كمركز إقليمي ودولي في مجال الذكاء الاصطناعي.</p>
                 </div>
                 
-                <!-- المجالات الرئيسية -->
+                <!-- Main Sectors -->
                 <div class="ai-categories">
                     <div class="ai-category glass" data-aos="zoom-in" data-aos-delay="100">
                         <div class="category-icon">
@@ -426,7 +521,7 @@
                     </div>
                 </div>
                 
-                <!-- إحصائيات الذكاء الاصطناعي -->
+                <!-- AI Statistics -->
                 <div class="ai-features-section">
                     <div class="container">
                         <div class="ai-showcase-grid">
@@ -519,7 +614,7 @@
         </div>
     </section>
 
-    <!-- قسم الإحصاءات -->
+    <!-- Statistics Section -->
     <section id="stats" class="stats">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">الإحصاءات</h2>
@@ -528,7 +623,7 @@
             <div class="stats-grid">
                 <div class="stat-card glass" data-aos="flip-up" data-aos-delay="100">
                     <i class="fas fa-city"></i>
-                    <div class="stat-number" data-target="30">0</div>
+                    <div class="stat-number" data-target="31">0</div>
                     <div class="stat-label">مدينة ذكية</div>
                 </div>
                 
@@ -551,7 +646,7 @@
                 </div>
             </div>
             
-            <!-- قسم الجرافات والرسوم البيانية -->
+            <!-- Charts and Graphs Section -->
             <div class="charts-container" data-aos="fade-up" data-aos-delay="200">
                 <div class="chart-card glass">
                     <h3><i class="fas fa-chart-pie"></i> توزيع المشروعات القومية</h3>
@@ -583,7 +678,7 @@
                 </div>
             </div>
             
-            <!-- إحصائيات إضافية مع جرافات صغيرة -->
+            <!-- Additional Statistics with Mini Charts -->
             <div class="stats-mini-grid">
                 <div class="mini-stat glass" data-aos="zoom-in" data-aos-delay="100">
                     <div class="mini-chart">
@@ -628,14 +723,16 @@
         </div>
     </section>
 
-    <!-- قسم من نحن (المطورين) -->
+    
+
+    <!-- About Us Section (Developers) -->
     <section id="about" class="about">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">من نحن</h2>
             <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">فريق العمل الذي يقود التحول الرقمي نحو مستقبل مصر 2030</p>
             
             <div class="about-grid">
-                <!-- الكرت الأول - أحمد  -->
+                <!-- Card 1 - Ahmed -->
                 <div class="team-card glass" data-aos="flip-up" data-aos-delay="100">
                     <div class="team-badge">مدير المشروع</div>
                     <div class="team-image">
@@ -650,7 +747,7 @@
                     </div>
                 </div>
                 
-                <!-- الكرت الثاني - حسن عادل -->
+                <!-- Card 2 - Hassan Adel -->
                 <div class="team-card glass" data-aos="flip-up" data-aos-delay="200">
                     <div class="team-badge">خبير معلومات</div>
                     <div class="team-image">
@@ -665,7 +762,7 @@
                     </div>
                 </div>
                 
-                <!-- الكرت الثالث - عمر عبدالرحمن -->
+                <!-- Card 3 - Omar Abdelrahman -->
                 <div class="team-card glass" data-aos="flip-up" data-aos-delay="300">
                     <div class="team-badge">مطور واجهات</div>
                     <div class="team-image">
@@ -681,12 +778,336 @@
                 </div>
             </div>
             
-            <!-- نص إضافي عن الفريق -->
+            <!-- Additional Team Info -->
             <div class="about-message glass" data-aos="fade-up" data-aos-delay="400">
                 <p>نحن فريق من الشباب المصري الطموح، نعمل معًا من أجل تحقيق رؤية مصر 2030 من خلال توظيف أحدث التقنيات الرقمية وتقنيات الذكاء الاصطناعي في خدمة المواطن المصري. نؤمن بأن التكنولوجيا هي مفتاح المستقبل، وأن مصر تستحق الأفضل.</p>
             </div>
         </div>
     </section>
+
+    <!-- ================
+(Reviews) 
+   ================ -->
+<section id="reviews" class="reviews">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">آراء المواطنين</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">ماذا يقول المواطنون والشركاء عن مشروعات مصر 2030</p>
+        
+        <!-- Project Rating -->
+        <div class="rating-badge glass" data-aos="zoom-in">
+            <div class="stars-container">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <span class="rating-text">تقييم المواطنين</span>
+            <span class="rating-company">4.8 من 5 للمشروعات القومية</span>
+        </div>
+        
+        <!-- Reviews Grid -->
+        <div class="reviews-grid">
+            
+            <!-- Review Card 1 - Administrative Capital -->
+            <div class="review-card glass" data-aos="fade-left" data-aos-delay="200">
+                <div class="review-badge-city">🇪🇬 العاصمة الإدارية</div>
+                <div class="review-content">
+                    <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                    <p class="review-text">"منذ انتقالي للعمل بالعاصمة الإدارية، تغير مفهومي تماماً عن المدن الذكية. بنية تحتية عالمية، خدمات رقمية متكاملة، ومساحات خضراء غير مسبوقة. فخور بأن مصر تنتج مدناً بهذا المستوى."</p>
+                    <div class="reviewer-info">
+                        <div class="reviewer-image">
+                            <img src="images/Reviews/citizen1.jpg" alt="مواطن مصري" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'40\' r=\'30\' fill=\'%2300eaff\'/><rect x=\'20\' y=\'70\' width=\'60\' height=\'30\' fill=\'%236a5cff\'/></svg>'">
+                        </div>
+                        <div class="reviewer-details">
+                            <h4>د. محمد عبدالله</h4>
+                            <p class="reviewer-title">موظف حكومي - انتقل للعاصمة 2024</p>
+                            <div class="reviewer-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review Card 2 - Benban Solar Plant -->
+            <div class="review-card glass" data-aos="fade-right" data-aos-delay="300">
+                <div class="review-badge-energy">☀️ الطاقة النظيفة</div>
+                <div class="review-content">
+                    <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                    <p class="review-text">"محطة بنبان للطاقة الشمسية فخر لكل مصري. كنت أحد العاملين في المشروع، وشاهدت بأم عيني كيف تحولت الصحراء إلى أكبر مجمع شمسي في العالم. مصر تستحق الأفضل."</p>
+                    <div class="reviewer-info">
+                        <div class="reviewer-image">
+                            <img src="images/Reviews/engineer1.jpg" alt="مهندس مصري" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'40\' r=\'30\' fill=\'%236a5cff\'/><rect x=\'20\' y=\'70\' width=\'60\' height=\'30\' fill=\'%2300eaff\'/></svg>'">
+                        </div>
+                        <div class="reviewer-details">
+                            <h4>م. أحمد سليمان</h4>
+                            <p class="reviewer-title">مهندس بمشروع بنبان</p>
+                            <div class="reviewer-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review Card 3 - Digital Transformation (Featured) -->
+            <div class="review-card glass featured-review" data-aos="fade-up" data-aos-delay="400">
+                <div class="review-badge">✨ خدمة مميزة</div>
+                <div class="review-content">
+                    <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                    <p class="review-text">"منصة مصر الرقمية غيرت حياتي! استخراج وثائق رسمية، دفع فواتير، وتجديد رخصة السيارة في دقائق من المنزل. كنت قبل كده أقضي أيام في المكاتب الحكومية. شكراً مصر 2030."</p>
+                    <div class="reviewer-info">
+                        <div class="reviewer-image">
+                            <img src="images/Reviews/woman1.jpg" alt="مواطنة مصرية" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'40\' r=\'30\' fill=\'%23ff6b6b\'/><rect x=\'30\' y=\'70\' width=\'40\' height=\'25\' fill=\'%23ffd93d\'/></svg>'">
+                        </div>
+                        <div class="reviewer-details">
+                            <h4>نوال عبدالحميد</h4>
+                            <p class="reviewer-title">ربة منزل - القاهرة</p>
+                            <div class="reviewer-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-footer">
+                    <span class="review-date"><i class="far fa-calendar-alt"></i> فبراير 2026</span>
+                    <span class="review-source"><i class="fas fa-mobile-alt"></i> عبر تطبيق مصر الرقمية</span>
+                </div>
+            </div>
+            
+            <!-- Review Card 4 - New Alamein -->
+            <div class="review-card glass" data-aos="fade-left" data-aos-delay="500">
+                <div class="review-badge-city">🏖️ العلمين الجديدة</div>
+                <div class="review-content">
+                    <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                    <p class="review-text">"العلمين الجديدة مدينة عالمية بكل المقاييس. زرتها الصيف الماضي، والخدمات هناك تنافس أجمل مدن العالم. الأبراج، الكورنيش، المهرجانات - مصر بتتغير للأفضل."</p>
+                    <div class="reviewer-info">
+                        <div class="reviewer-image">
+                            <img src="images/Reviews/tourist1.jpg" alt="سائح عربي" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'40\' r=\'30\' fill=\'%2300eaff\'/><path d=\'M30 70 Q50 85,70 70\' stroke=\'%23ffffff\' fill=\'transparent\' stroke-width=\'5\'/></svg>'">
+                        </div>
+                        <div class="reviewer-details">
+                            <h4>سارة النعيمي</h4>
+                            <p class="reviewer-title">سائحة من الإمارات</p>
+                            <div class="reviewer-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review Card 5 - Electric Train -->
+            <div class="review-card glass" data-aos="fade-right" data-aos-delay="600">
+                <div class="review-badge-transport">🚄 قطار كهربائي</div>
+                <div class="review-content">
+                    <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                    <p class="review-text">"القطار الكهربائي الخفيف وفر عليا ساعتين يومياً في المواصلات. نظيف، مكيف، وسريع. وأسعاره مناسبة جداً مقارنة بالخدمة الممتازة."</p>
+                    <div class="reviewer-info">
+                        <div class="reviewer-image">
+                            <img src="images/Reviews/commuter1.jpg" alt="موظف" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'40\' r=\'30\' fill=\'%236a5cff\'/><rect x=\'35\' y=\'70\' width=\'30\' height=\'25\' fill=\'%23ffd700\'/></svg>'">
+                        </div>
+                        <div class="reviewer-details">
+                            <h4>محمود جمال</h4>
+                            <p class="reviewer-title">موظف - العبور</p>
+                            <div class="reviewer-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review Card 6 - Decent Life Initiative -->
+            <div class="review-card glass" data-aos="fade-up" data-aos-delay="700">
+                <div class="review-badge-rural">🌱 حياة كريمة</div>
+                <div class="review-content">
+                    <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+                    <p class="review-text">"مبادرة حياة كريمة وصلت قريتنا في الصعيد. لأول مرة نحس باهتمام الدولة. صرف صحي، غاز طبيعي، مدرسة مجهزة، ووحدة صحية. ربنا يحمي مصر."</p>
+                    <div class="reviewer-info">
+                        <div class="reviewer-image">
+                            <img src="images/Reviews/farmer1.jpg" alt="مواطن صعيدي" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'40\' r=\'30\' fill=\'%23ffb347\'/><rect x=\'25\' y=\'70\' width=\'50\' height=\'30\' fill=\'%238B4513\'/></svg>'">
+                        </div>
+                        <div class="reviewer-details">
+                            <h4>الحاج كمال عبدربه</h4>
+                            <p class="reviewer-title">من قرية الرواتب - المنيا</p>
+                            <div class="reviewer-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div> <!-- End reviews-grid -->
+        
+        <!-- Reviews Statistics -->
+        <div class="reviews-stats-row glass" data-aos="fade-up" data-aos-delay="800">
+            <div class="stat-item">
+                <span class="stat-number">+2.5م</span>
+                <span class="stat-label">مواطن استفادوا</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">رضاء عن الخدمات</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">31</span>
+                <span class="stat-label">مدينة ذكية</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">4.8★</span>
+                <span class="stat-label">تقييم المواطنين</span>
+            </div>
+        </div>
+        
+        <!-- Social Media Bar -->
+        <div class="reviews-social glass" data-aos="fade-up">
+            <span>شاركنا رأيك عن مشروعات مصر 2030:</span>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<!-- ================
+  <!-- Suggestions Card - Share Your Vision (Disabled and Ready for Testing) -->
+   ================ -->
+<section id="suggestions" class="suggestions-section">
+    <div class="container">
+        <div class="suggestions-card glass" data-aos="fade-up">
+            
+            <!-- Left Side - Text and Statistics -->
+            <div class="suggestions-left" data-aos="fade-left" data-aos-delay="200">
+                <div class="suggestions-badge">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>مصر 2030 تسمعك</span>
+                </div>
+                
+                <h3 class="suggestions-title">شاركنا باقتراحك</h3>
+                <p class="suggestions-desc">رؤيتك مهمة لبناء مستقبل مصر. فريق العمل يدرس جميع المقترحات لتطوير المشروعات القومية والخدمات الرقمية.</p>
+                
+                <div class="suggestions-stats">
+                    <div class="suggestions-stat-item">
+                        <span class="stat-number">+15,000</span>
+                        <span class="stat-label">مقترح تم تنفيذه</span>
+                    </div>
+                    <div class="suggestions-stat-item">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">نسبة الرضا</span>
+                    </div>
+                </div>
+                
+                <div class="suggestions-testimonial">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <p>"اقترحت تطوير منصة مصر الرقمية بإضافة خدمة جديدة، وخلال شهر تمت الإضافة بالفعل!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='15' r='12' fill='%2300eaff'/><rect x='8' y='27' width='24' height='13' fill='%236a5cff'/></svg>" alt="مواطن">
+                        </div>
+                        <div>
+                            <h5>أحمد السيد</h5>
+                            <span>مواطن - الإسكندرية</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="suggestions-response-time">
+                    <i class="fas fa-clock"></i>
+                    <span>متوسط وقت الرد: 24 ساعة</span>
+                </div>
+            </div>
+            
+            <!-- Right Side - Suggestions Form -->
+            <div class="suggestions-right" data-aos="fade-right" data-aos-delay="300">
+                <div class="suggestions-form-header">
+                    <i class="fas fa-edit"></i>
+                    <h4>نموذج الاقتراحات</h4>
+                </div>
+                
+                <form id="suggestionForm" class="suggestions-form">
+                    <!-- Name Field -->
+                    <div class="form-group">
+                        <label for="suggestionName"><i class="fas fa-user"></i> الاسم الكامل</label>
+                        <input type="text" id="suggestionName" placeholder="مثال: محمد عبدالله" required>
+                    </div>
+                    
+                    <!-- Email Field -->
+                    <div class="form-group">
+                        <label for="suggestionEmail"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+                        <input type="email" id="suggestionEmail" placeholder="example@domain.com" required>
+                    </div>
+                    
+                    <!-- Phone Field (Optional) -->
+                    <div class="form-group">
+                        <label for="suggestionPhone"><i class="fas fa-phone"></i> رقم الهاتف (اختياري)</label>
+                        <input type="tel" id="suggestionPhone" placeholder="01234567890">
+                    </div>
+                    
+                    <!-- Suggestion Type Field -->
+                    <div class="form-group">
+                        <label for="suggestionType"><i class="fas fa-tag"></i> نوع الاقتراح</label>
+                        <select id="suggestionType" required>
+                            <option value="" disabled selected>-- اختر نوع الاقتراح --</option>
+                            <option value="project">تطوير مشروع قومي</option>
+                            <option value="digital">خدمة رقمية جديدة</option>
+                            <option value="city">مدن ذكية</option>
+                            <option value="ai">الذكاء الاصطناعي</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Suggestion Field -->
+                    <div class="form-group">
+                        <label for="suggestionMessage"><i class="fas fa-pencil-alt"></i> الاقتراح بالتفصيل</label>
+                        <textarea id="suggestionMessage" rows="4" placeholder="اكتب اقتراحك هنا بوضوح..." required></textarea>
+                    </div>
+                    
+                    <!-- Attach File (Optional) -->
+                    <div class="form-group file-upload-group">
+                        <label for="suggestionAttachment"><i class="fas fa-paperclip"></i> إرفاق ملف (صورة/مستند)</label>
+                        <div class="file-upload">
+                            <input type="file" id="suggestionAttachment" accept=".jpg,.png,.pdf,.docx">
+                            <span class="file-custom">اختر ملفاً...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Terms Agreement -->
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <label for="agreeTerms">أوافق على <a href="#">شروط الاستخدام</a> وسياسة الخصوصية</label>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="suggestions-submit-btn" id="submitSuggestion">
+                        <span>إرسال الاقتراح</span>
+                        <i class="fas fa-paper-plane"></i>
+                        <span class="btn-loader" style="display: none;"><i class="fas fa-spinner fa-spin"></i></span>
+                    </button>
+                    
+                    <!-- Success Message (Will appear on submit) -->
+                    <div class="suggestions-success" id="successMessage" style="display: none;">
+                        <i class="fas fa-check-circle"></i>
+                        <span>✅ تم إرسال اقتراحك بنجاح! شكراً لمشاركتك في بناء مصر 2030.</span>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Decorative Icons -->
+            <div class="suggestions-bg-icons">
+                <i class="fas fa-robot"></i>
+                <i class="fas fa-city"></i>
+                <i class="fas fa-microchip"></i>
+                <i class="fas fa-chart-line"></i>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -712,7 +1133,7 @@
                 <div class="footer-section">
                     <h4>الدعم</h4>
                     <ul>
-                        <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                        <li><a href="QA.html"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
                         <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
                         <li><a href="#"><i class="fas fa-chevron-left"></i> شروط الاستخدام</a></li>
                         <li><a href="#about"><i class="fas fa-chevron-left"></i> من نحن</a></li>
@@ -735,7 +1156,7 @@
         </div>
     </footer>
 
-    <!-- الشات بوت الذكي -->
+    <!-- Smart Chatbot -->
     <div class="chatbot-container" id="chatbot">
         <div class="chatbot-toggle glass">
             <i class="fas fa-robot"></i>
@@ -760,7 +1181,7 @@
         </div>
     </div>
     
-    <!-- نافذة منبثقة للمشروعات (Popup) -->
+    <!-- Project Popup Window -->
     <div id="project-popup" class="popup">
         <div class="popup-content glass">
             <span class="close-popup">&times;</span>
@@ -809,20 +1230,11 @@
     <script src="libs/chart.umd.min.js"></script>
     <script src="libs/lottie.min.js"></script>
     
-    <!-- Three.js - استيراد مباشر -->
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "./libs/three.module.js",
-                "three/addons/": "./libs/"
-            }
-        }
-    </script>
-    
     <!-- ملفات المشروع -->
-    <script src="js/three-scene.js" type="module"></script>
     <script src="js/animations.js"></script>
+    <script src="js/before-after.js"></script>
     <script src="js/chatbot.js"></script>
-    <script src="js/main.js" type="module"></script>
+    <script src="js/main.js"></script>
+    
 </body>
 </html>

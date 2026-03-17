@@ -63,7 +63,16 @@ This project demonstrates modern web technologies including 3D graphics, animati
 - **Responsive Design**: Works on all screen sizes
 - **RTL Support**: Full Arabic language support
 - **Performance Optimized**: Lazy loading and optimized assets
-- **No Dependencies**: Works with local files (no CDN required)
+- **Local Development**: Works with local files (no CDN required)
+- **Before/After Comparisons**: Interactive image comparison functionality
+- **Presentation Ready**: Complete 10-slide presentation deck included
+
+### 📊 Content Features
+- **National Projects**: Administrative Capital, Benban Solar Power, AI initiatives
+- **Smart Cities**: 15+ smart city developments showcased
+- **Digital Services**: 100+ digital government services
+- **AI Applications**: Multiple AI categories and implementations
+- **Team Profiles**: Complete team member information and roles
 
 ---
 
@@ -87,44 +96,60 @@ This project demonstrates modern web technologies including 3D graphics, animati
 Egypt-Future-2030/
 ├── index.html              # Main HTML file
 ├── README.md               # This file
-├── TODO.md                 # Project tasks
+├── TODO.md                 # Project tasks and naming refactor plan
 │
 ├── css/
 │   ├── fonts.css          # Font definitions
-│   └── style.css          # Main styles
+│   └── style.css          # Main styles (updated with Egypt2030-themed naming)
 │
 ├── js/
 │   ├── main.js            # Main JavaScript (charts, stats, popup)
 │   ├── animations.js      # GSAP animations
 │   ├── chatbot.js         # Smart chatbot
-│   └── three-scene.js    # Three.js 3D scene
+│   ├── three-scene.js    # Three.js 3D scene
+│   ├── before-after.js   # Before/after comparison functionality
+│   └── project.js        # Project-specific JavaScript
 │
 ├── libs/                   # External libraries
-│   ├── three.module.js
-│   ├── gsap.min.js
+│   ├── OrbitControls.js
 │   ├── ScrollTrigger.min.js
-│   ├── aos.js & aos.css
-│   ├── swiper-bundle.min.js & .css
-│   ├── chart.umd.min.js
-│   └── all.min.js & .css (Font Awesome)
+│   ├── all.min.css & .js (Font Awesome)
+│   └── Additional animation libraries
 │
 ├── fonts/
-│   ├── Cairo/            # Cairo Arabic font
-│   └── Tajawal/          # Tajawal Arabic font
+│   ├── Cairo/            # Cairo Arabic font family
+│   └── Tajawal/          # Tajawal Arabic font family
 │
 ├── images/
-│   ├── Projects/         # Project images
-│   └── Team/             # Team member photos
+│   ├── Projects/         # National project images (AI, Admin Capital, etc.)
+│   ├── Team/             # Team member photos
+│   └── before.webp       # Before/after comparison image
 │
 ├── webfonts/             # Font Awesome webfonts
 │
-└── Presentation/         # Presentation files
-    └── presentation.html
+├── video/                # Video content
+│
+├── Presentation/         # Presentation slides (10 HTML files)
+│   ├── index1.html through index10.html
+│   └── presentation.html
+│
+├── QA.html & QA copy.html # Quality assurance testing files
 ```
 
 ---
 
-## 🚀 Getting Started
+## � Recent Updates & Current Status
+
+
+### Additional Features Added
+- **Before/After Comparison**: Interactive comparison functionality (`before-after.js`)
+- **Enhanced Project Management**: Dedicated `project.js` for project-specific logic
+- **Quality Assurance**: QA testing files for validation
+- **Presentation Materials**: 10-slide presentation deck
+
+---
+
+## �� Getting Started
 
 ### Prerequisites
 - Any modern web browser (Chrome, Firefox, Edge, Safari)
@@ -197,7 +222,17 @@ Egypt-Future-2030/
 
 ---
 
-## 📄 License
+## �️ Presentation Materials
+
+The project includes a complete 10-slide presentation deck located in the `/Presentation` folder:
+- **Slides 1-10**: Comprehensive overview of Egypt Vision 2030
+- **Interactive Elements**: Embedded demonstrations and examples
+- **Professional Design**: Consistent with the main website theme
+- **Ready for Display**: Standalone HTML files for easy presentation
+
+---
+
+## �📄 License
 
 This project is for educational and demonstration purposes.
 
@@ -211,6 +246,17 @@ This project is for educational and demonstration purposes.
 - [Chart.js](https://www.chartjs.org/) - Charting library
 - [Swiper](https://swiperjs.com/) - Mobile touch slider
 - [AOS](https://michalsnik.github.io/aos/) - Animate On Scroll
+- Font Awesome - Icon library
+- Cairo & Tajawal fonts - Arabic typography
+
+---
+
+## 📞 Contact & Support
+
+For questions about the Egypt Future 2030 project:
+- **Project Repository**: Available on GitHub
+- **Team**: Freedom522 Team
+- **Purpose**: Educational demonstration of Egypt's digital transformation vision
 
 ---
 

@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>مصر 2030 - العرض الموحد (نسخة Offline)</title>
     
-    <!-- ========== الخطوط المحلية ========== -->
+    <!-- ========== Local Fonts ========== -->
     <link href="css/fonts.css" rel="stylesheet">
     
-    <!-- ========== Tailwind المحلي ========== -->
+    <!-- ========== Local Tailwind ========== -->
     <link href="css/tailwind.min.css" rel="stylesheet">
     
-    <!-- ========== Font Awesome المحلي ========== -->
+    <!-- ========== Local Font Awesome ========== -->
     <link href="/libs/all.min.css" rel="stylesheet">
     
-    <!-- ========== AOS المحلي للتأثيرات ========== -->
+    <!-- ========== Local AOS for Effects ========== -->
     <link href="/libs/aos.css" rel="stylesheet">
     
     <style>
@@ -351,7 +351,7 @@
 
     <script>
         // ================================================
-        // قائمة الشرائح - 10 شرائح (يجب أن تكون في نفس المجلد)
+        // Slide list - 10 slides (must be in the same folder)
         // ================================================
         const pages = [
             'index1.html', // المقدمة - رؤية مصر 2030
@@ -366,7 +366,7 @@
             'index10.html' // الخاتمة
         ];
 
-        // عناصر الصفحة
+        // Page elements
         const frameA = document.getElementById('frameA');
         const frameB = document.getElementById('frameB');
         let activeFrame = frameA;
@@ -382,7 +382,7 @@
         let isBusy = false;
 
         // ================================================
-        // دالة إزالة التعليقات من المستند (لتحسين الأداء)
+        // Function to remove comments from document (for performance)
         // ================================================
         function removeCommentsFromDocument(doc) {
             try {
@@ -394,17 +394,17 @@
                     if (node && node.parentNode) node.parentNode.removeChild(node);
                 });
                 
-                // إزالة التعليقات من داخل الـ style tags
+                // Remove comments from inside style tags
                 doc.querySelectorAll('style').forEach(styleEl => {
                     try {
                         styleEl.textContent = styleEl.textContent.replace(/\/\*[\s\S]*?\*\//g, '');
                     } catch (e) {}
                 });
-            } catch (e) { /* تجاهل الأخطاء */ }
+            } catch (e) { /* Ignore errors */ }
         }
 
         // ================================================
-        // بناء النقاط (dots) للتنقل السريع
+        // Build navigation dots
         // ================================================
         function buildNavigationDots() {
             dots.innerHTML = '';
@@ -418,7 +418,7 @@
         }
 
         // ================================================
-        // تحديث مؤشرات التنقل (counter, progress bar, dots)
+        // Update navigation indicators (counter, progress bar, dots)
         // ================================================
         function updateNavigationIndicators() {
             counter.textContent = `${currentIndex + 1} / ${pages.length}`;
@@ -435,7 +435,7 @@
         }
 
         // ================================================
-        // تبديل الإطارات النشطة
+        // Swap active frames
         // ================================================
         function swapFrames() {
             const temp = activeFrame;
@@ -444,7 +444,7 @@
         }
 
         // ================================================
-        // دالة التنقل بين الشرائح
+        // Navigation function between slides
         // ================================================
         function navigateToSlide(targetIndex) {
             if (isBusy) return;
@@ -502,7 +502,7 @@
         }
 
         // ================================================
-        // دوال التنقل المساعدة
+        // Helper navigation functions
         // ================================================
         function goToNextSlide() {
             navigateToSlide(currentIndex + 1);
@@ -527,13 +527,13 @@
             goToPrevSlide();
         });
 
-        // منع النقر أثناء الانتقال
+        // Prevent clicks during transition
         document.addEventListener('click', (e) => {
             if (isBusy) e.stopPropagation();
         }, true);
 
         // ================================================
-        // التنقل بلوحة المفاتيح
+        // Keyboard navigation
         // ================================================
         window.addEventListener('keydown', (e) => {
             const key = e.key;
@@ -579,7 +579,7 @@
         });
 
         // ================================================
-        // التنقل باللمس (سحب)
+        // Touch navigation (swipe)
         // ================================================
         let touchStartX = 0;
         let touchEndX = 0;
@@ -599,16 +599,16 @@
                 
                 if (Math.abs(deltaX) > threshold) {
                     if (deltaX > 0) {
-                        goToPrevSlide(); // سحب لليمين (السابق)
+                        goToPrevSlide(); // Swipe right (previous)
                     } else {
-                        goToNextSlide(); // سحب لليسار (التالي)
+                        goToNextSlide(); // Swipe left (next)
                     }
                 }
             }
         }, { passive: true });
 
         // ================================================
-        // منع القوائم المنبثقة والنقر المزدوج للتكبير
+        // Prevent context menus and double-tap zoom
         // ================================================
         document.addEventListener('contextmenu', (e) => e.preventDefault());
         
@@ -624,11 +624,11 @@
         }, false);
 
         // ================================================
-        // نظام ملء الشاشة (Fullscreen)
+        // Fullscreen system
         // ================================================
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
-                // الدخول في وضع ملء الشاشة
+                // Enter fullscreen mode
                 document.documentElement.requestFullscreen().then(() => {
                     fullscreenBtn.classList.add('fullscreen-active');
                     fullscreenBtn.querySelector('.fullscreen-icon').textContent = '✕';
@@ -640,7 +640,7 @@
                     showFullscreenMessage('⚠️ متصفحك لا يدعم ملء الشاشة', 2000);
                 });
             } else {
-                // الخروج من وضع ملء الشاشة
+                // Exit fullscreen mode
                 document.exitFullscreen().then(() => {
                     fullscreenBtn.classList.remove('fullscreen-active');
                     fullscreenBtn.querySelector('.fullscreen-icon').textContent = '⛶';
@@ -652,7 +652,7 @@
             }
         }
 
-        // دالة عرض الرسائل
+        // Message display function
         function showFullscreenMessage(text, duration = 3000) {
             const oldMessage = document.querySelector('.fullscreen-message');
             if (oldMessage) oldMessage.remove();
@@ -667,7 +667,7 @@
             }, duration);
         }
 
-        // دالة عرض تلميح الخروج
+        // Show exit hint function
         function showExitHint() {
             removeExitHint();
             
@@ -677,19 +677,19 @@
             document.body.appendChild(hint);
         }
 
-        // دالة إزالة تلميح الخروج
+        // Remove exit hint function
         function removeExitHint() {
             const hint = document.querySelector('.exit-fullscreen-hint');
             if (hint) hint.remove();
         }
 
-        // ربط حدث النقر بزر ملء الشاشة
+        // Bind click event to fullscreen button
         fullscreenBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleFullscreen();
         });
 
-        // مراقبة تغيير حالة ملء الشاشة
+        // Monitor fullscreen state change
         document.addEventListener('fullscreenchange', () => {
             if (!document.fullscreenElement) {
                 fullscreenBtn.classList.remove('fullscreen-active');
@@ -698,7 +698,7 @@
             }
         });
 
-        // دعم مفتاح F11
+        // F11 key support
         window.addEventListener('keydown', (e) => {
             if (e.key === 'F11') {
                 e.preventDefault();
@@ -707,12 +707,12 @@
         });
 
         // ================================================
-        // التهيئة
+        // Initialization
         // ================================================
         function initializePresentation() {
             buildNavigationDots();
             
-            // تحميل الشريحة الأولى
+            // Load first slide
             activeFrame.src = pages[currentIndex];
             activeFrame.addEventListener('load', () => {
                 try {
@@ -722,18 +722,18 @@
             
             updateNavigationIndicators();
             
-            // تحميل الشريحة الثانية مسبقاً
+            // Preload second slide
             idleFrame.classList.add('hidden', 'incoming');
             idleFrame.src = pages[1];
         }
 
-        // دوال مساعدة للشرائح (الشرائح تستدعي parent.next مثلاً)
+        // Helper functions for slides (slides call parent.next for example)
         window.next = goToNextSlide;
         window.prev = goToPrevSlide;
         window.setSlide = goToSlide;
         window.restartPresentation = () => goToSlide(0);
 
-        // بدء التشغيل بعد تحميل الصفحة
+        // Start playback after page load
         document.addEventListener('DOMContentLoaded', initializePresentation);
     </script>
 </body>

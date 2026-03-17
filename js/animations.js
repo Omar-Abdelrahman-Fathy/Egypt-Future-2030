@@ -329,33 +329,4 @@ function initProgressTriggers() {
     });
 }
 
-// تهيئة جميع التأثيرات بعد تحميل الصفحة
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        initEntranceAnimations();
-        initScrollAnimations();
-        initHoverAnimations();
-        initParallax();
-        initChartAnimations();
-        initAdvancedEffects();
-        initProgressTriggers();
-        initTypingEffect();
-        
-        // تأثيرات إضافية للفوتر
-        if (typeof gsap !== 'undefined') {
-            gsap.from('.footer-section', {
-                scrollTrigger: {
-                    trigger: '.footer',
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none reverse'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: 'power3.out'
-            });
-        }
-    }, 4000);
-});
+// Note: initEntranceAnimations is now triggered by NewLoadingScreen in main.js

@@ -2,8 +2,7 @@
 // الملف الرئيسي - معدل للعمل مع الملفات المحلية
 // ================================================
 
-// استيراد مشهد Three.js
-import { initThreeScene } from './three-scene.js';
+// ملاحظة: تم إزالة Three.js واستبداله بفيديو خلفية
 
 // ================================================
 // شاشة التحميل
@@ -15,6 +14,8 @@ class NewLoadingScreen {
         this.progressBar = document.getElementById('loading-progress-bar');
         this.percentageElement = document.getElementById('loading-percentage-neon');
         this.messageElement = document.getElementById('loading-message-neon');
+        this.heroSection = document.getElementById('home');
+        this.heroStats = document.querySelector('.hero-stats');
         this.currentProgress = 0;
         this.loadingMessages = [
             'جاري تجهيز رؤية مصر 2030',
@@ -27,6 +28,19 @@ class NewLoadingScreen {
     }
 
     init() {
+        // التأكد من أن الهيرو مرئي من البداية
+        if (this.heroSection) {
+            this.heroSection.style.opacity = '1';
+            this.heroSection.style.visibility = 'visible';
+        }
+        
+        // التأكد من ظهور الإحصائيات
+        if (this.heroStats) {
+            this.heroStats.style.display = 'flex';
+            this.heroStats.style.opacity = '1';
+            this.heroStats.style.visibility = 'visible';
+        }
+        
         this.start();
     }
 
@@ -75,7 +89,17 @@ class NewLoadingScreen {
             setTimeout(() => {
                 this.loadingScreen.style.display = 'none';
                 document.body.style.overflow = 'auto';
-                this.runEntranceEffects();
+                
+                // تحديث العدادات
+                this.startCounters();
+                
+                // تشغيل الرسوم المتحركة
+                if (typeof initEntranceAnimations === 'function') initEntranceAnimations();
+                if (typeof AOS !== 'undefined') {
+                    setTimeout(() => {
+                        AOS.refresh();
+                    }, 100);
+                }
             }, 800);
         }
     }
@@ -91,14 +115,21 @@ class NewLoadingScreen {
         }
     }
 
-    runEntranceEffects() {
-        this.startCounters();
-    }
-
     startCounters() {
-        const counters = document.querySelectorAll('.stat-number[data-target]');
+        const counters = document.querySelectorAll('.hero-stat .number, .stat-number[data-target]');
         counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
+            const targetText = counter.textContent;
+            let target = 0;
+            
+            // استخراج الرقم من النص (مثل "15" أو "100+")
+            if (targetText.includes('+')) {
+                target = parseInt(targetText.replace('+', ''));
+            } else {
+                target = parseInt(targetText);
+            }
+            
+            if (isNaN(target)) return;
+            
             const duration = 2000;
             const step = target / (duration / 16);
             let current = 0;
@@ -106,10 +137,14 @@ class NewLoadingScreen {
             const updateCounter = () => {
                 current += step;
                 if (current < target) {
-                    counter.textContent = Math.floor(current);
+                    if (targetText.includes('+')) {
+                        counter.textContent = Math.floor(current) + '+';
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
                     requestAnimationFrame(updateCounter);
                 } else {
-                    counter.textContent = target;
+                    counter.textContent = targetText; // إعادة النص الأصلي
                 }
             };
 
@@ -158,10 +193,10 @@ class StatsManager {
         const updateCounter = (currentTime) => {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            
+
             const easeOutQuart = 1 - Math.pow(1 - progress, 4);
             const current = Math.floor(target * easeOutQuart);
-            
+
             counter.textContent = current;
 
             if (progress < 1) {
@@ -224,12 +259,12 @@ function initCharts() {
                 }
             }
         });
-        
+
         const pieLegend = document.getElementById('pieLegend');
         if (pieLegend) {
             const labels = ['مدن ذكية (30)', 'مشروعات بنية تحتية (22)', 'مشروعات طاقة الخضراء (36)', 'مشروعات رقمية (210)', 'مشروعات نقل (107)'];
             const colors = ['#00eaff', '#6a5cff', '#ff6b6b', '#ffd93d', '#6bffb8'];
-            
+
             labels.forEach((label, index) => {
                 const item = document.createElement('div');
                 item.className = 'legend-item';
@@ -330,7 +365,7 @@ function initCharts() {
                     },
                     tooltip: {
                         callbacks: {
-                            label: function(context) {
+                            label: function (context) {
                                 return context.raw + '%';
                             }
                         }
@@ -351,7 +386,7 @@ function initCharts() {
                         },
                         ticks: {
                             color: '#fff',
-                            callback: function(value) {
+                            callback: function (value) {
                                 return value + '%';
                             }
                         },
@@ -400,7 +435,7 @@ function initCharts() {
                     },
                     tooltip: {
                         callbacks: {
-                            label: function(context) {
+                            label: function (context) {
                                 return context.label + ': ' + context.raw + ' مدينة';
                             }
                         }
@@ -420,7 +455,7 @@ function initCharts() {
 function createMiniChart(elementId, percentage) {
     const ctx = document.getElementById(elementId)?.getContext('2d');
     if (!ctx) return;
-    
+
     new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -465,7 +500,7 @@ function initNavbar() {
     menuToggle?.addEventListener('click', () => {
         menuToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
-        
+
         const spans = menuToggle.querySelectorAll('span');
         if (menuToggle.classList.contains('active')) {
             spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
@@ -482,7 +517,7 @@ function initNavbar() {
         link.addEventListener('click', () => {
             menuToggle.classList.remove('active');
             navMenu.classList.remove('active');
-            
+
             const spans = menuToggle.querySelectorAll('span');
             spans[0].style.transform = 'none';
             spans[1].style.opacity = '1';
@@ -493,7 +528,7 @@ function initNavbar() {
     window.addEventListener('scroll', () => {
         let current = '';
         const sections = document.querySelectorAll('section');
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
@@ -517,12 +552,12 @@ function initSmoothScroll() {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const target = document.querySelector(targetId);
             if (target) {
                 const offset = 80;
                 const targetPosition = target.offsetTop - offset;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -545,7 +580,7 @@ function initSmoothScroll() {
 
 function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
             navbar.classList.add('scrolled');
@@ -557,13 +592,13 @@ function initNavbarScroll() {
 
 function initProgressBars() {
     const progressBars = document.querySelectorAll('.progress-fill[data-progress]');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const progress = entry.target.getAttribute('data-progress');
                 entry.target.style.width = progress + '%';
-                
+
                 const parent = entry.target.closest('.ai-category');
                 if (parent) {
                     const valueElement = parent.querySelector('.progress-value');
@@ -585,9 +620,9 @@ function showNotification(message, type = 'info') {
         <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
         <span>${message}</span>
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     notification.style.cssText = `
         position: fixed;
         bottom: 20px;
@@ -602,7 +637,7 @@ function showNotification(message, type = 'info') {
         z-index: 10000;
         animation: slideIn 0.3s ease;
     `;
-    
+
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => {
@@ -660,15 +695,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // تهيئة Three.js بعد تأخير بسيط
-    setTimeout(() => {
-        try {
-            initThreeScene();
-        } catch (error) {
-            console.error('Three.js initialization error:', error);
-        }
-    }, 500);
-
     // تهيئة المكونات الأخرى
     initNavbar();
     initSmoothScroll();
@@ -681,7 +707,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loader.updateProgress(45);
         loader.updateMessage(loader.loadingMessages[1]);
     }, 500);
-    
+
     setTimeout(() => {
         loader.updateProgress(78);
         loader.updateMessage(loader.loadingMessages[3]);
@@ -696,20 +722,185 @@ document.addEventListener('DOMContentLoaded', () => {
     // معالجة حدث التمرير لتجميد الرسوم البيانية
     window.addEventListener('scroll', freezeChartsOnScroll);
     window.addEventListener('resize', freezeChartsOnScroll);
-});
 
-// معالجة نموذج الاتصال
-document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    
-    console.log('Form submitted:', data);
-    
-    showNotification('تم إرسال رسالتك بنجاح!', 'success');
-    
-    e.target.reset();
+    // معالجة نموذج الاتصال
+    document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+
+        console.log('Form submitted:', data);
+
+        showNotification('تم إرسال رسالتك بنجاح!', 'success');
+
+        e.target.reset();
+    });
+
+    // ========== Contact Suggestions Form Handler ==========
+    const suggestionForm = document.getElementById('suggestionForm');
+    if (suggestionForm) {
+        const submitBtn = document.getElementById('submitSuggestion');
+        const btnText = submitBtn.querySelector('span');
+        const btnIcon = submitBtn.querySelector('.fa-paper-plane');
+        const btnLoader = submitBtn.querySelector('.btn-loader');
+        const successMessage = document.getElementById('successMessage');
+
+        // معالجة رفع الملفات - عرض اسم الملف المختار
+        const fileInput = document.getElementById('suggestionAttachment');
+        const fileCustom = document.querySelector('.file-custom');
+
+        if (fileInput && fileCustom) {
+            fileInput.addEventListener('change', function(e) {
+                if (this.files && this.files[0]) {
+                    fileCustom.textContent = this.files[0].name;
+                } else {
+                    fileCustom.textContent = 'اختر ملفاً...';
+                }
+            });
+        }
+
+        // التحقق من صحة البريد الإلكتروني
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // التحقق من صحة رقم الهاتف المصري (اختياري)
+        function validatePhone(phone) {
+            if (!phone) return true; // اختياري
+            const re = /^(01)[0-9]{9}$/;
+            return re.test(phone);
+        }
+
+        // عرض رسالة خطأ
+        function showError(input, message) {
+            const formGroup = input.closest('.form-group');
+            let errorElement = formGroup.querySelector('.error-message');
+            
+            if (!errorElement) {
+                errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.style.cssText = 'color: #ff6b6b; font-size: 0.8rem; margin-top: 0.3rem;';
+                formGroup.appendChild(errorElement);
+            }
+            
+            errorElement.textContent = message;
+            input.style.borderColor = '#ff6b6b';
+        }
+
+        // إزالة رسالة الخطأ
+        function clearError(input) {
+            const formGroup = input.closest('.form-group');
+            const errorElement = formGroup.querySelector('.error-message');
+            if (errorElement) {
+                errorElement.remove();
+            }
+            input.style.borderColor = '';
+        }
+
+        // معالجة تقديم النموذج
+        suggestionForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // جمع البيانات
+            const name = document.getElementById('suggestionName').value.trim();
+            const email = document.getElementById('suggestionEmail').value.trim();
+            const phone = document.getElementById('suggestionPhone').value.trim();
+            const type = document.getElementById('suggestionType').value;
+            const message = document.getElementById('suggestionMessage').value.trim();
+            const agree = document.getElementById('agreeTerms').checked;
+
+            // التحقق من الحقول
+            let isValid = true;
+
+            // التحقق من الاسم
+            const nameInput = document.getElementById('suggestionName');
+            if (name.length < 3) {
+                showError(nameInput, 'الاسم يجب أن يكون 3 أحرف على الأقل');
+                isValid = false;
+            } else {
+                clearError(nameInput);
+            }
+
+            // التحقق من البريد الإلكتروني
+            const emailInput = document.getElementById('suggestionEmail');
+            if (!validateEmail(email)) {
+                showError(emailInput, 'البريد الإلكتروني غير صحيح');
+                isValid = false;
+            } else {
+                clearError(emailInput);
+            }
+
+            // التحقق من الهاتف (إذا تم إدخاله)
+            const phoneInput = document.getElementById('suggestionPhone');
+            if (phone && !validatePhone(phone)) {
+                showError(phoneInput, 'رقم الهاتف غير صحيح (يجب أن يبدأ بـ 01 ويتبعه 9 أرقام)');
+                isValid = false;
+            } else {
+                clearError(phoneInput);
+            }
+
+            // التحقق من نوع الاقتراح
+            const typeInput = document.getElementById('suggestionType');
+            if (!type) {
+                showError(typeInput, 'الرجاء اختيار نوع الاقتراح');
+                isValid = false;
+            } else {
+                clearError(typeInput);
+            }
+
+            // التحقق من الرسالة
+            const messageInput = document.getElementById('suggestionMessage');
+            if (message.length < 10) {
+                showError(messageInput, 'الرجاء كتابة اقتراح أكثر تفصيلاً (10 أحرف على الأقل)');
+                isValid = false;
+            } else {
+                clearError(messageInput);
+            }
+
+            // التحقق من الموافقة على الشروط
+            if (!agree) {
+                alert('الرجاء الموافقة على شروط الاستخدام');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // تغيير حالة الزر إلى تحميل
+            submitBtn.disabled = true;
+            btnText.style.opacity = '0.7';
+            btnIcon.style.display = 'none';
+            if (btnLoader) btnLoader.style.display = 'inline-block';
+
+            // محاكاة إرسال البيانات (استبدلها بـ API حقيقي)
+            setTimeout(() => {
+                // إظهار رسالة نجاح منبثقة
+                showNotification('✅ تم تقديم اقتراحك بنجاح! شكراً لمشاركتك.', 'success');
+                
+                // إعادة تعيين الزر
+                submitBtn.disabled = false;
+                btnText.style.opacity = '1';
+                btnIcon.style.display = 'inline-block';
+                if (btnLoader) btnLoader.style.display = 'none';
+
+                // إعادة تعيين الفورم
+                suggestionForm.reset();
+                if (fileCustom) fileCustom.textContent = 'اختر ملفاً...';
+                // إزالة أي رسائل خطأ
+                suggestionForm.querySelectorAll('.error-message').forEach(el => el.remove());
+                suggestionForm.querySelectorAll('input, select, textarea').forEach(input => {
+                    input.style.borderColor = '';
+                });
+
+                // هنا يمكنك إرسال البيانات فعلياً إلى الخادم
+                console.log({
+                    name, email, phone, type, message,
+                    timestamp: new Date().toISOString()
+                });
+            }, 1500);
+        });
+    }
 });
 
 // ========== نظام Pop-up المتقدم للمشروعات ==========
@@ -717,7 +908,7 @@ document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
     // الحصول على عناصر الـ Popup
     const popup = document.getElementById('project-popup');
     if (!popup) return; // التأكد من وجود العنصر
-    
+
     const popupTitle = document.getElementById('popup-title');
     const popupImage = document.getElementById('popup-image');
     const popupDesc = document.getElementById('popup-description');
@@ -732,6 +923,7 @@ document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
     const projectsDatabase = [
         {
             id: 0,
+            jsonId: 1,
             title: 'العاصمة الإدارية الجديدة',
             image: 'images/Projects/Administratibe capital.jpg',
             description: 'أول مدينة ذكية ومستدامة من الجيل الرابع في مصر، تمثل المركز الإداري والاقتصادي الجديد. تضم حي مال وأعمال عالمي، والبرج الأيقوني، ومركز قيادة وسيطرة ذكي يدير كافة مرافق المدينة بتقنيات الذكاء الاصطناعي',
@@ -748,6 +940,7 @@ document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
         },
         {
             id: 1,
+            jsonId: 2,
             title: 'محطة بنبان للطاقة الشمسية',
             image: 'images/Projects/Bnban.jpg',
             description: 'يُعد أحد أكبر مجمعات الطاقة الشمسية في العالم، ويمتد على مساحة 37 كم². يضم 32 محطة بقدرة إجمالية تصل إلى 1465 ميجاوات (كقدرة تشغيلية فعلية مستقرة)، مع خطط توسعية لرفع القدرات الإجمالية للمنطقة المحيطة. يمثل المشروع ركيزة أساسية لتحويل مصر إلى مركز إقليمي للطاقة الخضراء',
@@ -764,6 +957,7 @@ document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
         },
         {
             id: 2,
+            jsonId: 7,
             title: 'مشروع التحول الرقمي',
             image: 'images/Projects/Digital transformation.png',
             description: 'يهدف إلى ميكنة جميع الخدمات الحكومية وتقديمها عبر منصة "مصر الرقمية". يشمل ذلك خدمات الأحوال المدنية، المرور، الضرائب، الشهر العقاري، والتوثيق. تم تدريب آلاف الموظفين على النظام الجديد، وتم إنشاء مراكز بيانات عملاقة لتأمين المعلومات. الهدف هو توفير الوقت والجهد على المواطنين وتحسين كفاءة الأداء الحكومي.',
@@ -780,6 +974,7 @@ document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
         },
         {
             id: 3,
+            jsonId: 4,
             title: 'شبكة القطار الكهربائي',
             image: 'images/Projects/Fast tarin.jpg',
             description: 'منظومة نقل ذكية ومتكاملة تُعد قناة سويس جديدة على قضبان، تربط البحر الأحمر بالبحر المتوسط وكافة أنحاء الجمهورية. تتكون من 4 خطوط رئيسية (بعد إضافة الخط الرابع) بطول يتجاوز 2250 كم، لتوفر وسيلة نقل حضارية فائقة السرعة وصديقة للبيئة',
@@ -800,14 +995,14 @@ document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
     document.querySelectorAll('.project-card').forEach((card) => {
         // إضافة مؤشر لليد لتوضيح إمكانية الضغط
         card.style.cursor = 'pointer';
-        
-        card.addEventListener('click', function(e) {
+
+        card.addEventListener('click', function (e) {
             // منع انتشار الحدث إذا تم الضغط على رابط داخل البطاقة
             e.stopPropagation();
-            
+
             // الحصول على ID المشروع من البيانات المخصصة
             const projectId = this.getAttribute('data-project-id');
-            
+
             if (projectId !== null) {
                 const project = projectsDatabase[parseInt(projectId)];
                 if (project) {
@@ -844,7 +1039,7 @@ document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
         popupProgress.textContent = project.progress;
         popupStartDate.textContent = project.startDate;
         popupCost.textContent = project.cost;
-        
+
         // تعبئة قائمة المميزات
         popupFeaturesList.innerHTML = '';
         project.features.forEach(feature => {
@@ -855,13 +1050,19 @@ document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
 
         // إظهار الـ Popup
         popup.classList.add('show');
-        
+
+        // تحديث الرابط للصفحة الخاصة
+        const fullDetailsBtn = document.getElementById('popup-full-details');
+        if (fullDetailsBtn) {
+            fullDetailsBtn.href = 'project.html?id=' + project.jsonId;
+        }
+
         // منع تمرير الصفحة خلف الـ Popup
         document.body.style.overflow = 'hidden';
-        
+
         // تأثير إضافي عند الفتح
         if (typeof gsap !== 'undefined') {
-            gsap.fromTo(popup.querySelector('.popup-content'), 
+            gsap.fromTo(popup.querySelector('.popup-content'),
                 { scale: 0.8, opacity: 0 },
                 { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.2)' }
             );
@@ -872,7 +1073,7 @@ document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
     function closePopup() {
         popup.classList.remove('show');
         document.body.style.overflow = 'auto';
-        
+
         // تأثير عند الإغلاق
         if (typeof gsap !== 'undefined') {
             gsap.to(popup.querySelector('.popup-content'), {
@@ -888,22 +1089,24 @@ document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
     if (closePopupBtn) {
         closePopupBtn.addEventListener('click', closePopup);
     }
-    
+
     if (closeBtnAlt) {
         closeBtnAlt.addEventListener('click', closePopup);
     }
 
     // إغلاق عند الضغط خارج محتوى الـ Popup
-    popup.addEventListener('click', function(e) {
+    popup.addEventListener('click', function (e) {
         if (e.target === popup) {
             closePopup();
         }
     });
 
     // إغلاق عند الضغط على زر ESC
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && popup.classList.contains('show')) {
             closePopup();
         }
     });
 })();
+
+

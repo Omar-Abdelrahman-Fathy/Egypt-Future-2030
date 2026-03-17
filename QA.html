@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسئلة الشائعة - مصر 2030</title>
+
+    <!-- CSS Local Files -->
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="libs/all.min.css">
+    <link rel="stylesheet" href="libs/aos.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ================ */
+        /* FAQ Page */
+        /* ================ */
+        .faq-page {
+            padding-top: 120px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
+            position: relative;
+        }
+
+        .faq-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 234, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(106, 92, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .faq-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 234, 255, 0.3);
+        }
+
+        .faq-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .faq-search {
+            max-width: 600px;
+            margin: 2rem auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .faq-search .search-box {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            background: rgba(10, 15, 28, 0.8);
+            border: 2px solid rgba(0, 234, 255, 0.3);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            padding-right: 3.5rem;
+        }
+
+        .faq-search .search-box:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 30px rgba(0, 234, 255, 0.3);
+        }
+
+        .faq-search i {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .category-btn {
+            padding: 0.8rem 2rem;
+            background: rgba(10, 15, 28, 0.6);
+            border: 1px solid rgba(0, 234, 255, 0.3);
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            font-size: 1rem;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            border-color: transparent;
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 234, 255, 0.3);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .faq-item {
+            background: rgba(10, 15, 28, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 234, 255, 0.2);
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(0, 234, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 234, 255, 0.2);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .faq-question h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+            flex: 1;
+        }
+
+        .faq-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 234, 255, 0.1);
+            color: var(--primary-blue);
+            transition: all 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            background: var(--primary-blue);
+            color: var(--dark-bg);
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            padding: 0 1.5rem;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            border-top: 0px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem;
+            border-top-width: 1px;
+        }
+
+        .faq-answer p {
+            margin: 0;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(10, 15, 28, 0.7);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            display: none;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .no-results h3 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .no-results p {
+            color: var(--text-secondary);
+        }
+
+        .faq-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 15, 28, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(106, 92, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(0, 234, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+        }
+
+        .stat-label {
+            color: #fff;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-purple);
+        }
+
+        .breadcrumb i {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .faq-page {
+                padding-top: 100px;
+            }
+            
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+            
+            .category-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar (Imported from main page) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">مصر<span>2030</span></div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">الرئيسية</a></li>
+                <li><a href="index.html#vision">الرؤية</a></li>
+                <li><a href="index.html#projects">المشاريع</a></li>
+                <li><a href="index.html#ai">الذكاء الاصطناعي</a></li>
+                <li><a href="index.html#stats">الإحصاءات</a></li>
+                <li><a href="index.html#about">من نحن</a></li>
+                <li><a href="faq.html" class="active">الأسئلة الشائعة</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="faq-page">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb" data-aos="fade-up">
+                <a href="index.html">الرئيسية</a>
+                <i class="fas fa-chevron-left"></i>
+                <span>الأسئلة الشائعة</span>
+            </div>
+
+            <!-- Page Header -->
+            <div class="faq-header" data-aos="fade-up">
+                <h1>الأسئلة الشائعة</h1>
+                <p>إجابات على أكثر الأسئلة شيوعاً حول رؤية مصر 2030 والمشروعات القومية</p>
+            </div>
+
+            <!-- Search Box -->
+            <div class="faq-search" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-search"></i>
+                <input type="text" class="search-box" id="faqSearch" placeholder="ابحث عن سؤال...">
+            </div>
+
+            <!-- Category Buttons -->
+            <div class="faq-categories" data-aos="fade-up" data-aos-delay="150">
+                <button class="category-btn active" data-category="all">الكل</button>
+                <button class="category-btn" data-category="vision">الرؤية</button>
+                <button class="category-btn" data-category="projects">المشروعات</button>
+                <button class="category-btn" data-category="digital">التحول الرقمي</button>
+                <button class="category-btn" data-category="ai">الذكاء الاصطناعي</button>
+                <button class="category-btn" data-category="services">الخدمات</button>
+            </div>
+
+            <!-- FAQ List -->
+            <div class="faq-container" id="faqContainer" data-aos="fade-up" data-aos-delay="200">
+                <!-- Questions will be populated here via JavaScript -->
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults">
+                <i class="fas fa-search"></i>
+                <h3>لا توجد نتائج</h3>
+                <p>لم نتمكن من العثور على أي سؤال يطابق بحثك</p>
+            </div>
+
+            <!-- Statistics -->
+            <div class="faq-stats">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number">+50</div>
+                    <div class="stat-label">سؤال وجواب</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">تصنيفات رئيسية</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">دعم متاح</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">رضاء المستخدمين</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Imported from main page) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h2>مصر<span>2030</span></h2>
+                    </div>
+                    <p>رؤية مصر للتحول الرقمي والتنمية المستدامة</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="index.html#home"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                        <li><a href="index.html#vision"><i class="fas fa-chevron-left"></i> الرؤية</a></li>
+                        <li><a href="index.html#projects"><i class="fas fa-chevron-left"></i> المشاريع</a></li>
+                        <li><a href="index.html#ai"><i class="fas fa-chevron-left"></i> الذكاء الاصطناعي</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>الدعم</h4>
+                    <ul>
+                        <li><a href="faq.html" class="active"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> شروط الاستخدام</a></li>
+                        <li><a href="index.html#about"><i class="fas fa-chevron-left"></i> من نحن</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>النشرة البريدية</h4>
+                    <p>اشترك لتصلك آخر الأخبار</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="بريدك الإلكتروني">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>مصر 2030 - جميع الحقوق محفوظة. تصميم وتنفيذ: Freedom522</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smart Chatbot -->
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-toggle glass">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-window glass">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> المستشار الذكي</h3>
+                <button class="close-chat"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-content">
+                        <p>مرحباً! أنا المستشار الذكي لمستقبل مصر 2030. كيف يمكنني مساعدتك؟</p>
+                    </div>
+                    <span class="message-time">الآن</span>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="userInput" placeholder="اكتب سؤالك هنا...">
+                <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts Local Files -->
+    <script src="libs/gsap.min.js"></script>
+    <script src="libs/aos.js"></script>
+
+    <script>
+        // ================================================
+        // Local FAQ Database
+        // ================================================
+        const faqData = [
+            // الرؤية
+            {
+                id: 1,
+                category: 'vision',
+                question: 'ما هي رؤية مصر 2030؟',
+                answer: 'رؤية مصر 2030 هي أجندة وطنية مَطوّرة لتحقيق التنمية المستدامة وتوطينها، تشمل أربعة أبعاد رئيسية: الاقتصادي، الاجتماعي، البيئي، والحضري. تهدف الرؤية إلى تحسين جودة حياة المواطن المصري ورفع كفاءة الأداء الحكومي وجعل مصر من الدول الرائدة في المنطقة.'
+            },
+            {
+                id: 2,
+                category: 'vision',
+                question: 'ما هي أهداف رؤية مصر 2030 الرئيسية؟',
+                answer: 'الأهداف الرئيسية تشمل: تحقيق نمو اقتصادي بمعدل 7-8% سنوياً، خفض البطالة إلى 5%، زيادة مساهمة الطاقة المتجددة إلى 42%، تحقيق رقمنة شاملة للخدمات الحكومية، تحسين مؤشرات الصحة والتعليم، ورفع تنافسية الاقتصاد المصري عالمياً.'
+            },
+            {
+                id: 3,
+                category: 'vision',
+                question: 'كيف يتم قياس تقدم رؤية مصر 2030؟',
+                answer: 'يتم قياس التقدم من خلال مؤشرات أداء رئيسية (KPIs) محدثة بشكل دوري، وتقارير سنوية تصدرها وزارة التخطيط والتنمية الاقتصادية، بالإضافة إلى تقارير المنظمات الدولية مثل البنك الدولي والأمم المتحدة.'
+            },
+
+            // المشروعات
+            {
+                id: 4,
+                category: 'projects',
+                question: 'كم عدد المدن الذكية الجديدة في مصر؟',
+                answer: 'تخطط مصر لإنشاء 31 مدينة من الجيل الرابع (مدن ذكية) في مختلف أنحاء الجمهورية. من أبرزها: العاصمة الإدارية الجديدة، العلمين الجديدة، المنصورة الجديدة، ناصر الجديدة (غرب أسيوط)، ورفح الجديدة.'
+            },
+            {
+                id: 5,
+                category: 'projects',
+                question: 'ما هو أكبر مشروع قومي في مصر حالياً؟',
+                answer: 'من أكبر المشروعات القومية: العاصمة الإدارية الجديدة، محطة بنبان للطاقة الشمسية (أكبر محطة في العالم)، شبكة القطار الكهربائي السريع (أطول شبكة في الشرق الأوسط)، ومشروع تطوير الريف المصري "حياة كريمة" الذي يستفيد منه أكثر من 58 مليون مواطن.'
+            },
+            {
+                id: 6,
+                category: 'projects',
+                question: 'ما هو مشروع حياة كريمة؟',
+                answer: 'مشروع "حياة كريمة" هو أكبر مشروع تنموي في تاريخ مصر لتحسين مستوى المعيشة في الريف المصري. يستهدف المشروع تطوير البنية التحتية والخدمات الأساسية في 4500 قرية يعيش بها أكثر من 58 مليون مواطن، بتكلفة تصل إلى 700 مليار جنيه.'
+            },
+
+            // التحول الرقمي
+            {
+                id: 7,
+                category: 'digital',
+                question: 'ما هي منصة مصر الرقمية؟',
+                answer: 'منصة مصر الرقمية هي بوابة موحدة تقدم أكثر من 170 خدمة حكومية إلكترونياً للمواطنين، تشمل خدمات الأحوال المدنية، المرور، التوثيق، الضرائب، والتموين. تهدف المنصة إلى توفير الوقت والجهد وتقليل الحاجة للذهاب إلى المكاتب الحكومية.'
+            },
+            {
+                id: 8,
+                category: 'digital',
+                question: 'كيف يمكنني الحصول على الرقم القومي إلكترونياً؟',
+                answer: 'يمكنك استخراج الرقم القومي إلكترونياً عبر منصة مصر الرقمية أو تطبيق الهاتف المحمول، بشرط توثيق الحساب بالبريد الإلكتروني والرقم القومي. سيتم إرسال الوثيقة عبر البريد السريع أو يمكنك استلامها من مكتب السجل المدني المختار.'
+            },
+            {
+                id: 9,
+                category: 'digital',
+                question: 'ما هي خدمات المرور المتاحة إلكترونياً؟',
+                answer: 'تشمل خدمات المرور الإلكترونية: تجديد رخصة السيارة، الاستعلام عن المخالفات، سداد الرسوم، حجز موعد لفحص السيارة، استبدال رخصة القيادة التالفة، والاستعلام عن الحالة المرورية.'
+            },
+
+            // الذكاء الاصطناعي
+            {
+                id: 10,
+                category: 'ai',
+                question: 'ما هي الاستراتيجية الوطنية للذكاء الاصطناعي؟',
+                answer: 'أطلقت مصر الاستراتيجية الوطنية للذكاء الاصطناعي في 2021 بهدف توظيف تقنيات الذكاء الاصطناعي في مختلف القطاعات، وتعزيز مكانة مصر كمركز إقليمي في هذا المجال. تركز الاستراتيجية على 5 محاور رئيسية: الحوكمة، التنمية المستدامة، بناء القدرات، البحث والتطوير، والشراكات الدولية.'
+            },
+            {
+                id: 11,
+                category: 'ai',
+                question: 'كيف يستخدم الذكاء الاصطناعي في التعليم؟',
+                answer: 'تستخدم وزارة التربية والتعليم منصات تعليمية ذكية تحلل أداء الطلاب وتقدم محتوى مخصص لكل طالب. كما يتم استخدام تقنيات التعرف على الصوت لتصحيح النطق في اللغات، وأنظمة تحليل البيانات لتحديد نقاط الضعف والقوة في العملية التعليمية.'
+            },
+            {
+                id: 12,
+                category: 'ai',
+                question: 'هل يوجد مركز متخصص للذكاء الاصطناعي في مصر؟',
+                answer: 'نعم، تم افتتاح المركز المصري للذكاء الاصطناعي في مدينة المعرفة بالعاصمة الإدارية الجديدة. يضم المركز معامل بحثية متطورة، ومركز تدريب متخصص، وحاضنة أعمال للشركات الناشئة في مجال الذكاء الاصطناعي.'
+            },
+
+            // الخدمات
+            {
+                id: 13,
+                category: 'services',
+                question: 'كيف يمكنني الاستفادة من خدمات مصر الرقمية؟',
+                answer: 'يمكنك تحميل تطبيق "مصر الرقمية" على الهاتف المحمول (متوفر لأندرويد وiOS)، أو زيارة الموقع الرسمي www.digital.gov.eg. ستحتاج إلى إنشاء حساب موثق برقم هاتفك المحمول وبريدك الإلكتروني، ثم يمكنك اختيار الخدمة التي تريدها واتباع الخطوات.'
+            },
+            {
+                id: 14,
+                category: 'services',
+                question: 'ما هي طرق الدفع المتاحة للخدمات الحكومية؟',
+                answer: 'تتوفر عدة طرق للدفع: الدفع الإلكتروني عبر بطاقات الائتمان (فيزا، ماستركارد)، كروت ميزة، المحافظ الإلكترونية (فوري، أمان، بي)، الدفع عبر الهاتف المحمول، والدفع نقداً في منافذ فوري أو مكاتب البريد.'
+            },
+            {
+                id: 15,
+                category: 'services',
+                question: 'كيف يمكنني تقديم شكوى أو اقتراح؟',
+                answer: 'يمكنك تقديم شكوى أو اقتراح عبر بوابة الشكاوى الحكومية الموحدة (www.shakwa.eg)، أو الاتصال بالخط الساخن لرئاسة مجلس الوزراء (16528)، أو من خلال تطبيق "في خدمتك" على الهواتف الذكية.'
+            },
+            {
+                id: 16,
+                category: 'services',
+                question: 'ما هو تطبيق "صحة مصر"؟',
+                answer: 'تطبيق "صحة مصر" هو منصة موحدة للخدمات الصحية الإلكترونية، يتيح حجز المواعيد في المستشفيات الحكومية، الاستعلام عن نتائج التحاليل، متابعة حالات الأمراض المزمنة، والاستشارات الطبية عن بعد مع أطباء متخصصين.'
+            },
+
+            // إضافات
+            {
+                id: 17,
+                category: 'vision',
+                question: 'ما هو دور الشباب في رؤية مصر 2030؟',
+                answer: 'يعد الشباب محور أساسي في رؤية مصر 2030، حيث يتم تمكينهم من خلال برامج التدريب والتأهيل، دعم ريادة الأعمال والمشروعات الناشئة، المشاركة في البرامج الرئاسية لتأهيل القيادات الشابة، وتمثيل مصر في المحافل الدولية.'
+            },
+            {
+                id: 18,
+                category: 'projects',
+                question: 'ما هي مشروعات الطاقة المتجددة في مصر؟',
+                answer: 'تشمل مشروعات الطاقة المتجددة: محطة بنبان للطاقة الشمسية (1465 ميجاوات)، مشروعات طاقة الرياح في خليج السويس وجبل الزيت (أكثر من 1000 ميجاوات)، إنشاء أول محطة طاقة نووية سلمية في الضبعة، ومشروعات تحويل المخلفات إلى طاقة.'
+            }
+        ];
+
+        // ================================================
+        // Page Elements
+        // ================================================
+        const faqContainer = document.getElementById('faqContainer');
+        const searchInput = document.getElementById('faqSearch');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const noResults = document.getElementById('noResults');
+        
+        let currentCategory = 'all';
+        let searchTerm = '';
+
+        // ================================================
+        // Display FAQs
+        // ================================================
+        function displayFAQs() {
+            // تصفية الأسئلة حسب الفئة والبحث
+            const filteredFAQs = faqData.filter(item => {
+                const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
+                const matchesSearch = item.question.includes(searchTerm) || 
+                                     item.answer.includes(searchTerm) ||
+                                     searchTerm === '';
+                return matchesCategory && matchesSearch;
+            });
+
+            // إخفاء/إظهار رسالة عدم وجود نتائج
+            if (filteredFAQs.length === 0) {
+                noResults.style.display = 'block';
+                faqContainer.innerHTML = '';
+            } else {
+                noResults.style.display = 'none';
+                
+                // Display FAQs
+                faqContainer.innerHTML = filteredFAQs.map(item => `
+                    <div class="faq-item" data-category="${item.category}" data-id="${item.id}">
+                        <div class="faq-question">
+                            <h3>${item.question}</h3>
+                            <div class="faq-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>${item.answer}</p>
+                        </div>
+                    </div>
+                `).join('');
+
+                // إضافة حدث النقر لكل سؤال
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        // منع الإغلاق إذا تم الضغط على رابط داخل الإجابة
+                        if (e.target.tagName === 'A') return;
+                        
+                        this.classList.toggle('active');
+                        
+                        // تغيير الأيقونة
+                        const icon = this.querySelector('.faq-icon i');
+                        if (this.classList.contains('active')) {
+                            icon.classList.remove('fa-plus');
+                            icon.classList.add('fa-minus');
+                        } else {
+                            icon.classList.remove('fa-minus');
+                            icon.classList.add('fa-plus');
+                        }
+                    });
+                });
+            }
+        }
+
+        // ================================================
+        // Search Events
+        // ================================================
+        searchInput.addEventListener('input', function() {
+            searchTerm = this.value;
+            displayFAQs();
+        });
+
+        // ================================================
+        // Category Events
+        // ================================================
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // تحديث الزر النشط
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // تحديث الفئة الحالية
+                currentCategory = this.dataset.category;
+                
+                // إعادة عرض الأسئلة
+                displayFAQs();
+            });
+        });
+
+        // ================================================
+        // Initialize on page load
+        // ================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // عرض جميع الأسئلة
+            displayFAQs();
+
+            // تهيئة AOS
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 100,
+                    easing: 'ease-in-out',
+                    mirror: false
+                });
+            }
+
+            // تهيئة القائمة المنسدلة (من main.js)
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    menuToggle.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+
+                    const spans = menuToggle.querySelectorAll('span');
+                    if (menuToggle.classList.contains('active')) {
+                        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        spans[1].style.opacity = '0';
+                        spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+                    } else {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    }
+                });
+            }
+
+            // إغلاق القائمة عند النقر على رابط
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    
+                    const spans = menuToggle.querySelectorAll('span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                });
+            });
+
+            // تأثير شريط التنقل عند التمرير
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // تهيئة الشات بوت
+            const chatbotToggle = document.querySelector('.chatbot-toggle');
+            const closeChat = document.querySelector('.close-chat');
+            const chatbotContainer = document.getElementById('chatbot');
+
+            if (chatbotToggle && closeChat && chatbotContainer) {
+                chatbotToggle.addEventListener('click', () => {
+                    chatbotContainer.classList.toggle('active');
+                });
+
+                closeChat.addEventListener('click', () => {
+                    chatbotContainer.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
