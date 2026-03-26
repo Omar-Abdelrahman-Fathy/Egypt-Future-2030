@@ -36,7 +36,13 @@
 ```
 📁 Project Root/
 ├── 📄 index.html (الصفحة الرئيسية)
+├── 📄 projects.html (صفحة المشاريع القومية)
 ├── 📄 QA.html (صفحة الأسئلة الشائعة)
+├── � README.md (ملف التوثيق العام)
+├── 📄 TODO.md (قائمة المهام)
+├── 📄 Card.md (وصف المشروع)
+├── �📁 Presentation/
+│   └── 📄 index1.html - index10.html (شرائح العرض التقديمي)
 ├── 📁 css/
 │   ├── 📄 style.css (الأنماط الرئيسية)
 │   └── 📄 fonts.css (خطوط Cairo و Tajawal)

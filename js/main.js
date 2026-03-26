@@ -992,7 +992,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     // إضافة حدث النقر لكل بطاقة مشروع
-    document.querySelectorAll('.project-card').forEach((card) => {
+    document.querySelectorAll('.project-card-horizontal').forEach((card) => {
         // إضافة مؤشر لليد لتوضيح إمكانية الضغط
         card.style.cursor = 'pointer';
 
