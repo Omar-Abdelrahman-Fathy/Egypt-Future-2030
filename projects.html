@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المشاريع القومية - مصر 2030 | بطاقات متقلبة</title>
+    <link rel="icon" type="image/png" href="images/Icons/favicon.ico">
     
     <!-- CSS Local Files -->
     <link rel="stylesheet" href="css/fonts.css">
@@ -629,11 +630,6 @@
 
     <!-- Main Content -->
     <div class="container">
-        <!-- Back Button -->
-        <a href="index.html" class="back-button" data-aos="fade-right">
-            <i class="fas fa-arrow-right"></i>
-            العودة للرئيسية
-        </a>
         
         <!-- Projects Filter -->
         <div class="projects-filter" data-aos="fade-up">
@@ -704,9 +700,43 @@
     <script src="libs/gsap.min.js"></script>
     <script src="libs/ScrollTrigger.min.js"></script>
     <script src="libs/aos.js"></script>
-    <script src="js/main.js"></script>
     
     <script>
+        // ================
+        // Navigation functionality for projects page
+        // ================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navbar toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    menuToggle.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+            
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Initialize AOS
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 100
+                });
+            }
+        });
+        
         // ================
         // Projects Database
         // ================
