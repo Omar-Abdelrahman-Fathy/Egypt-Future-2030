@@ -6,11 +6,11 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)
+![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)
 
 **Interactive Website Showcasing Egypt's Vision for Digital Transformation and Sustainable Development**
 
----
+**فريق Freedom522 - ثانوي 2025/2026**
 
 </div>
 
@@ -34,11 +34,14 @@
 - **Vision 2030** strategic goals
 - **National projects** including the New Administrative Capital, Benban Solar Power Station
 - **Artificial Intelligence** initiatives
-- **Smart cities** development
+- **Smart cities** development (31 cities)
 - **Interactive statistics** and charts
 - **Smart chatbot** for user assistance
+- **Story Timeline** showing Egypt's transformation journey
+- **FAQ Page** with search and category filtering
+- **Projects Page** with flip cards showcasing national projects
 
-This project demonstrates modern web technologies including 3D graphics, animations, and responsive design.
+This project demonstrates modern web technologies including advanced animations, responsive design, and interactive user experiences.
 
 ---
 
@@ -46,32 +49,36 @@ This project demonstrates modern web technologies including 3D graphics, animati
 
 ### 🎨 Visual Features
 - **Loading Screen**: Animated preloader with progress bar and neon effects
-- **3D Globe**: Interactive Three.js powered globe with glowing effects
+- **Video Background**: Hero section with autoplay video background
 - **Glass Morphism**: Modern glass effect design throughout
 - **Animations**: GSAP-powered entrance and scroll animations
 - **Neon Effects**: Cyan and purple neon glow effects
+- **Lottie Animations**: Vector-based animations for smooth performance
 
 ### 📱 Interactive Elements
 - **Smart Chatbot**: AI-powered chatbot answering questions about Egypt 2030
 - **Interactive Charts**: Dynamic Chart.js visualizations
-- **Project Cards**: Clickable project details with popup modals
+- **Project Cards**: Clickable project details with popup modals and flip cards
 - **Statistics Counters**: Animated number counters
 - **Navigation**: Smooth scroll navigation with active state
 - **Swiper Carousel**: Touch-enabled project showcase
+- **Before/After Comparisons**: Interactive image comparison functionality
+- **FAQ System**: Searchable FAQ page with accordion answers and category filtering
 
 ### 🖥️ Technical Features
 - **Responsive Design**: Works on all screen sizes
 - **RTL Support**: Full Arabic language support
+- **SEO Optimized**: Meta tags, Open Graph, and structured data
 - **Performance Optimized**: Lazy loading and optimized assets
 - **Local Development**: Works with local files (no CDN required)
-- **Before/After Comparisons**: Interactive image comparison functionality
 - **Presentation Ready**: Complete 10-slide presentation deck included
 
 ### 📊 Content Features
-- **National Projects**: Administrative Capital, Benban Solar Power, AI initiatives
-- **Smart Cities**: 15+ smart city developments showcased
-- **Digital Services**: 100+ digital government services
+- **31 Smart Cities**: Comprehensive smart city developments showcased
+- **43 National Projects**: Administrative Capital, Benban Solar Power, AI initiatives
+- **210+ Digital Services**: Digital government services statistics
 - **AI Applications**: Multiple AI categories and implementations
+- **Transformation Journey**: Timeline showcasing Egypt's digital transformation
 - **Team Profiles**: Complete team member information and roles
 
 ---
@@ -81,8 +88,7 @@ This project demonstrates modern web technologies including 3D graphics, animati
 | Category | Technologies |
 |----------|-------------|
 | **Core** | HTML5, CSS3, JavaScript (ES6+) |
-| **3D Graphics** | Three.js |
-| **Animations** | GSAP, ScrollTrigger, AOS |
+| **Animations** | GSAP, ScrollTrigger, AOS, Lottie |
 | **Charts** | Chart.js |
 | **Sliders** | Swiper.js |
 | **Icons** | Font Awesome 6 |
@@ -94,62 +100,70 @@ This project demonstrates modern web technologies including 3D graphics, animati
 
 ```
 Egypt-Future-2030/
-├── index.html              # Main HTML file
+├── index.html              # Main HTML file (Homepage)
+├── projects.html           # National projects page with flip cards
+├── QA.html                 # FAQ page with search and filtering
 ├── README.md               # This file
-├── TODO.md                 # Project tasks and naming refactor plan
+├── Card.md                 # Project description card (Arabic)
 │
 ├── css/
-│   ├── fonts.css          # Font definitions
-│   └── style.css          # Main styles (updated with Egypt2030-themed naming)
+│   ├── fonts.css          # Font definitions (Cairo, Tajawal)
+│   └── style.css          # Main stylesheet
 │
 ├── js/
 │   ├── main.js            # Main JavaScript (charts, stats, popup)
-│   ├── animations.js      # GSAP animations
-│   ├── chatbot.js         # Smart chatbot
-│   ├── three-scene.js    # Three.js 3D scene
-│   ├── before-after.js   # Before/after comparison functionality
-│   └── project.js        # Project-specific JavaScript
+│   ├── animations.js      # GSAP animations and scroll effects
+│   ├── chatbot.js         # Smart chatbot with localStorage
+│   └── before-after.js    # Before/after comparison functionality
 │
-├── libs/                   # External libraries
-│   ├── OrbitControls.js
+├── libs/                   # External libraries (local files)
+│   ├── gsap.min.js        # GSAP animation library
 │   ├── ScrollTrigger.min.js
-│   ├── all.min.css & .js (Font Awesome)
-│   └── Additional animation libraries
+│   ├── aos.js & aos.css   # Animate On Scroll
+│   ├── swiper-bundle.min.js & .css
+│   ├── chart.umd.min.js   # Chart.js
+│   ├── lottie.min.js      # Lottie animations
+│   ├── all.min.css & .js  # Font Awesome
+│   └── OrbitControls.js   # Three.js controls
 │
-├── fonts/
-│   ├── Cairo/            # Cairo Arabic font family
-│   └── Tajawal/          # Tajawal Arabic font family
+├── fonts/                  # Cairo and Tajawal font files
 │
 ├── images/
-│   ├── Projects/         # National project images (AI, Admin Capital, etc.)
-│   ├── Team/             # Team member photos
-│   └── before.webp       # Before/after comparison image
+│   ├── Icons/             # Favicon and icons
+│   ├── Projects/          # National project images
+│   └── Team/              # Team member photos
 │
-├── webfonts/             # Font Awesome webfonts
+├── webfonts/              # Font Awesome webfonts
 │
-├── video/                # Video content
+├── video/                 # Hero background video
 │
-├── Presentation/         # Presentation slides (10 HTML files)
-│   ├── index1.html through index10.html
-│   └── presentation.html
-│
-├── QA.html & QA copy.html # Quality assurance testing files
+└── Presentation/          # 10-slide presentation deck
+    ├── index1.html through index10.html
+    └── presentation.html
 ```
 
 ---
 
-## � Recent Updates & Current Status
+## 🔄 Recent Updates & Current Status (2025/2026)
 
+### Latest Updates
+- **Projects Page**: New dedicated page with flip cards showcasing national projects
+- **FAQ Page (QA.html)**: Complete FAQ system with search, category filtering, and accordion answers
+- **Card.md**: Arabic project description file for educational submission
+- **Video Background**: Hero section with autoplay video background
+- **Story Timeline**: New section showing Egypt's transformation journey (2021-2030)
+- **Updated Statistics**: 31 smart cities, 43 national projects, 210+ digital services
+- **SEO Optimization**: Added meta tags, Open Graph, and structured data
+- **AOS & Lottie**: Added Animate On Scroll and Lottie animation libraries
 
-### Additional Features Added
+### Previous Features
 - **Before/After Comparison**: Interactive comparison functionality (`before-after.js`)
-- **Enhanced Project Management**: Dedicated `project.js` for project-specific logic
-- **Quality Assurance**: QA testing files for validation
-- **Presentation Materials**: 10-slide presentation deck
+- **Smart Chatbot**: AI-powered chatbot with localStorage history
+- **Presentation Deck**: 10-slide presentation materials
 
 ---
 
-## �� Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 - Any modern web browser (Chrome, Firefox, Edge, Safari)
@@ -197,23 +211,29 @@ Egypt-Future-2030/
 
 ### Hero Section
 - Main title "مصر 2030" with neon effects
-- Animated 3D globe background
-- Statistics showcase (15 smart cities, 42 national projects, 100+ digital services)
+- Video background with autoplay
+- Statistics showcase (31 smart cities, 43 national projects, 210+ digital services)
 
 ### Vision Section
 - Strategic goals display
-- Roadmap timeline (2023-2030)
+- Story Timeline (2021-2030) - Egypt's transformation journey
 - Six key pillars: Economy, Social Justice, Environment, Digital, Education, Health
 
 ### Projects Section
-- Project cards with hover effects
+- Project cards with hover effects and flip cards
 - Interactive popup details
 - Swiper carousel for project showcase
+- Dedicated Projects Page (`projects.html`)
 
 ### AI Section
 - AI categories with progress bars
 - Statistics grid
 - Showcase cards with AI applications
+
+### FAQ Page (QA.html)
+- Searchable questions
+- Category filtering
+- Accordion-style answers
 
 ### Chatbot
 - Smart AI-powered chatbot
@@ -222,7 +242,7 @@ Egypt-Future-2030/
 
 ---
 
-## �️ Presentation Materials
+## 📊 Presentation Materials
 
 The project includes a complete 10-slide presentation deck located in the `/Presentation` folder:
 - **Slides 1-10**: Comprehensive overview of Egypt Vision 2030
@@ -232,7 +252,7 @@ The project includes a complete 10-slide presentation deck located in the `/Pres
 
 ---
 
-## �📄 License
+## 📄 License
 
 This project is for educational and demonstration purposes.
 
