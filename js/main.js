@@ -593,12 +593,20 @@ class ChatBot {
     }
 
     init() {
-        this.toggleBtn?.addEventListener('click', () => this.toggle());
-        this.closeBtn?.addEventListener('click', () => this.close());
-        this.sendBtn?.addEventListener('click', () => this.sendMessage());
-        this.userInput?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.sendMessage();
-        });
+        if (this.toggleBtn) {
+            this.toggleBtn.onclick = () => this.toggle();
+        }
+        if (this.closeBtn) {
+            this.closeBtn.onclick = () => this.close();
+        }
+        if (this.sendBtn) {
+            this.sendBtn.onclick = () => this.sendMessage();
+        }
+        if (this.userInput) {
+            this.userInput.onkeypress = (e) => {
+                if (e.key === 'Enter') this.sendMessage();
+            };
+        }
     }
 
     toggle() {

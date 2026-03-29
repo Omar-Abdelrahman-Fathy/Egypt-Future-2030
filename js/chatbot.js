@@ -421,6 +421,8 @@ style.textContent = `
 
 document.head.appendChild(style);
 
-document.addEventListener('DOMContentLoaded', () => {
-    new SmartChatbot();
-});
+window.initSmartChatbot = () => {
+    if (window.__smartChatbotInstance) return window.__smartChatbotInstance;
+    window.__smartChatbotInstance = new SmartChatbot();
+    return window.__smartChatbotInstance;
+};

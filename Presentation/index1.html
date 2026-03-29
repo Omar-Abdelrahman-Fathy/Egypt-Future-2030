@@ -611,158 +611,158 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
     </style>
-</head>
+    </head>
 
-<body>
-    <div class="particles" id="particles"></div>
+    <body>
+        <div class="particles" id="particles"></div>
 
-    <div class="slide-container">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-        <div class="grid-floor"></div>
-        <div class="decoration-ring ring-1"></div>
-        <div class="decoration-ring ring-2"></div>
+        <div class="slide-container">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+            <div class="grid-floor"></div>
+            <div class="decoration-ring ring-1"></div>
+            <div class="decoration-ring ring-2"></div>
 
-        <div class="scene-3d">
-            <div class="card-3d card-vision">
-                <i class="fas fa-eye icon-glow text-cyan-400"></i>
-                <p class="card-label">رؤية 2030</p>
+            <div class="scene-3d">
+                <div class="card-3d card-vision">
+                    <i class="fas fa-eye icon-glow text-cyan-400"></i>
+                    <p class="card-label">رؤية 2030</p>
+                </div>
+
+                <div class="hero-content">
+                    <div class="badge">مصر المستقبل</div>
+                    <h1 class="main-title">
+                        مصر 2030<br>
+                        <span class="title-highlight" style="color: #00eaff; text-shadow: 0 0 20px rgba(0,234,255,0.5);">الجمهورية الجديدة</span>
+                    </h1>
+                    <p class="subtitle">منصة متكاملة للتحول الرقمي والتنمية المستدامة</p>
+                </div>
+
+                <div class="card-3d card-digital">
+                    <i class="fas fa-laptop icon-glow text-green-400"></i>
+                    <p class="card-label">التحول الرقمي</p>
+                </div>
+
+                <div class="card-3d card-ai">
+                    <i class="fas fa-brain icon-glow text-purple-400"></i>
+                    <p class="card-label">الذكاء الاصطناعي</p>
+                </div>
+
+                <div class="access-button">
+                    <button class="access-btn" onclick="parent.next()">
+                        <i class="fas fa-terminal"></i> ابدأ الرحلة
+                    </button>
+                </div>
             </div>
 
-            <div class="hero-content">
-                <div class="badge">مصر المستقبل</div>
-                <h1 class="main-title">
-                    مصر 2030<br>
-                    <span class="title-highlight" style="color: #00eaff; text-shadow: 0 0 20px rgba(0,234,255,0.5);">الجمهورية الجديدة</span>
-                </h1>
-                <p class="subtitle">منصة متكاملة للتحول الرقمي والتنمية المستدامة</p>
-            </div>
-
-            <div class="card-3d card-digital">
-                <i class="fas fa-laptop icon-glow text-green-400"></i>
-                <p class="card-label">التحول الرقمي</p>
-            </div>
-
-            <div class="card-3d card-ai">
-                <i class="fas fa-brain icon-glow text-purple-400"></i>
-                <p class="card-label">الذكاء الاصطناعي</p>
-            </div>
-
-            <div class="access-button">
-                <button class="access-btn" onclick="parent.next()">
-                    <i class="fas fa-terminal"></i> ابدأ الرحلة
-                </button>
+            <div class="footer">
+                <div class="footer-item">
+                    <i class="fas fa-rocket"></i>
+                    <span>رؤية 2030</span>
+                </div>
+                <div class="footer-item">
+                    <span>تحول رقمي شامل</span>
+                    <i class="fas fa-bolt text-yellow-400"></i>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>مستقبل مستدام</span>
+                </div>
             </div>
         </div>
 
-        <div class="footer">
-            <div class="footer-item">
-                <i class="fas fa-rocket"></i>
-                <span>رؤية 2030</span>
-            </div>
-            <div class="footer-item">
-                <span>تحول رقمي شامل</span>
-                <i class="fas fa-bolt text-yellow-400"></i>
-            </div>
-            <div class="footer-item">
-                <i class="fas fa-shield-alt"></i>
-                <span>مستقبل مستدام</span>
-            </div>
-        </div>
-    </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                createParticles();
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
+                document.addEventListener('touchstart', function(event) {
+                    if (event.touches.length > 1) event.preventDefault();
+                }, { passive: false });
 
-            document.addEventListener('touchstart', function(event) {
-                if (event.touches.length > 1) event.preventDefault();
-            }, { passive: false });
+                let lastTouchEnd = 0;
+                document.addEventListener('touchend', function(event) {
+                    const now = (new Date()).getTime();
+                    if (now - lastTouchEnd <= 300) event.preventDefault();
+                    lastTouchEnd = now;
+                }, false);
 
-            let lastTouchEnd = 0;
-            document.addEventListener('touchend', function(event) {
-                const now = (new Date()).getTime();
-                if (now - lastTouchEnd <= 300) event.preventDefault();
-                lastTouchEnd = now;
-            }, false);
-
-            document.addEventListener('contextmenu', function(event) {
-                event.preventDefault();
-            });
-
-            // تفاعل الكروت
-            document.querySelectorAll('.card-3d').forEach(card => {
-                card.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const icon = this.querySelector('.icon-glow');
-                    const label = this.querySelector('.card-label');
-                    
-                    this.style.transform += ' rotateY(180deg)';
-                    icon.style.transform += ' rotateY(-180deg) scale(1.2)';
-                    label.style.transform += ' rotateY(-180deg) translateZ(40px)';
-
-                    setTimeout(() => {
-                        this.style.transform = this.style.transform.replace(' rotateY(180deg)', '');
-                        icon.style.transform = icon.style.transform.replace(' rotateY(-180deg) scale(1.2)', '');
-                        label.style.transform = label.style.transform.replace(' rotateY(-180deg) translateZ(40px)', '');
-                    }, 600);
+                document.addEventListener('contextmenu', function(event) {
+                    event.preventDefault();
                 });
 
-                card.addEventListener('mouseenter', function() {
-                    const ripple = document.createElement('div');
-                    ripple.style.position = 'absolute';
-                    ripple.style.width = '100%';
-                    ripple.style.height = '100%';
-                    ripple.style.background = 'radial-gradient(circle at center, rgba(0,234,255,0.2) 0%, transparent 70%)';
-                    ripple.style.borderRadius = 'inherit';
-                    ripple.style.zIndex = '-1';
-                    ripple.style.animation = 'ripple-effect 0.6s ease-out';
-                    this.appendChild(ripple);
+                // تفاعل الكروت
+                document.querySelectorAll('.card-3d').forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const icon = this.querySelector('.icon-glow');
+                        const label = this.querySelector('.card-label');
+                        
+                        this.style.transform += ' rotateY(180deg)';
+                        icon.style.transform += ' rotateY(-180deg) scale(1.2)';
+                        label.style.transform += ' rotateY(-180deg) translateZ(40px)';
 
-                    setTimeout(() => {
-                        if (ripple.parentNode === this) this.removeChild(ripple);
-                    }, 600);
+                        setTimeout(() => {
+                            this.style.transform = this.style.transform.replace(' rotateY(180deg)', '');
+                            icon.style.transform = icon.style.transform.replace(' rotateY(-180deg) scale(1.2)', '');
+                            label.style.transform = label.style.transform.replace(' rotateY(-180deg) translateZ(40px)', '');
+                        }, 600);
+                    });
+
+                    card.addEventListener('mouseenter', function() {
+                        const ripple = document.createElement('div');
+                        ripple.style.position = 'absolute';
+                        ripple.style.width = '100%';
+                        ripple.style.height = '100%';
+                        ripple.style.background = 'radial-gradient(circle at center, rgba(0,234,255,0.2) 0%, transparent 70%)';
+                        ripple.style.borderRadius = 'inherit';
+                        ripple.style.zIndex = '-1';
+                        ripple.style.animation = 'ripple-effect 0.6s ease-out';
+                        this.appendChild(ripple);
+
+                        setTimeout(() => {
+                            if (ripple.parentNode === this) this.removeChild(ripple);
+                        }, 600);
+                    });
                 });
+
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes ripple-effect {
+                        0% { transform: scale(0.8); opacity: 1; }
+                        100% { transform: scale(2); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
             });
 
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes ripple-effect {
-                    0% { transform: scale(0.8); opacity: 1; }
-                    100% { transform: scale(2); opacity: 0; }
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = 40;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+
+                    const left = Math.random() * 100;
+                    const delay = Math.random() * 2;
+                    const duration = 3 + Math.random() * 3;
+                    const size = 2 + Math.random() * 3;
+
+                    particle.style.left = `${left}%`;
+                    particle.style.animationDelay = `${delay}s`;
+                    particle.style.animationDuration = `${duration}s`;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+
+                    const colors = ['#00eaff', '#6a5cff', '#00ff9d'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.background = color;
+
+                    particlesContainer.appendChild(particle);
                 }
-            `;
-            document.head.appendChild(style);
-        });
-
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 40;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-
-                const left = Math.random() * 100;
-                const delay = Math.random() * 2;
-                const duration = 3 + Math.random() * 3;
-                const size = 2 + Math.random() * 3;
-
-                particle.style.left = `${left}%`;
-                particle.style.animationDelay = `${delay}s`;
-                particle.style.animationDuration = `${duration}s`;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-
-                const colors = ['#00eaff', '#6a5cff', '#00ff9d'];
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.background = color;
-
-                particlesContainer.appendChild(particle);
             }
-        }
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>
