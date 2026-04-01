@@ -48,12 +48,13 @@ This project demonstrates modern web technologies including advanced animations,
 ## ✨ Features
 
 ### 🎨 Visual Features
-- **Loading Screen**: Animated preloader with progress bar and neon effects
+- **Loading Screen**: Lotus Tech animated preloader with neon effects, particles, and progress bar
 - **Video Background**: Hero section with autoplay video background
 - **Glass Morphism**: Modern glass effect design throughout
 - **Animations**: GSAP-powered entrance and scroll animations
-- **Neon Effects**: Cyan and purple neon glow effects
+- **Neon Effects**: Cyan (#00eaff) and electric blue neon glow effects
 - **Lottie Animations**: Vector-based animations for smooth performance
+- **Story Timeline**: Interactive timeline with dot navigation and scroll-based progress
 
 ### 📱 Interactive Elements
 - **Smart Chatbot**: AI-powered chatbot answering questions about Egypt 2030
@@ -151,10 +152,10 @@ Egypt-Future-2030/
 - **FAQ Page (QA.html)**: Complete FAQ system with search, category filtering, and accordion answers
 - **Card.md**: Arabic project description file for educational submission
 - **Video Background**: Hero section with autoplay video background
-- **Story Timeline**: New section showing Egypt's transformation journey (2021-2030)
-- **Updated Statistics**: 31 smart cities, 43 national projects, 210+ digital services
-- **SEO Optimization**: Added meta tags, Open Graph, and structured data
-- **AOS & Lottie**: Added Animate On Scroll and Lottie animation libraries
+- **Story Timeline**: Enhanced interactive timeline (2014-2030) with dot navigation and scroll progress
+- **Lotus Tech Loading Screen**: Premium animated preloader with neon cyan effects and particle animations
+- **FAQ Page**: Complete FAQ system with search, category filtering, and accordion answers
+- **Projects Page**: National projects showcase with flip cards and detailed popups
 
 ### Previous Features
 - **Before/After Comparison**: Interactive comparison functionality (`before-after.js`)

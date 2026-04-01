@@ -32,6 +32,148 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Loading Screen - Lotus Tech Premium -->
+    <div id="loading-screen" aria-live="polite" aria-label="شاشة التحميل">
+        <div class="lotus-bg">
+            <div class="lotus-particles">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="lotus-grid"></div>
+        </div>
+        
+        <div class="lotus-container">
+            <div class="lotus-glow-outer"></div>
+            <div class="lotus-glow-inner"></div>
+            
+            <!-- Lotus Tech SVG Premium -->
+            <div class="lotus-svg-wrapper" aria-hidden="true">
+                <svg class="lotus-tech" viewBox="0 0 400 400" role="img" aria-label="Lotus Technology">
+                    <defs>
+                        <linearGradient id="lotusGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00f5ff"/>
+                            <stop offset="50%" stop-color="#0080ff"/>
+                            <stop offset="100%" stop-color="#00f5ff"/>
+                        </linearGradient>
+                        <linearGradient id="lotusGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                            <stop offset="100%" stop-color="#00f5ff" stop-opacity="0.3"/>
+                        </linearGradient>
+                        <filter id="glowPremium" x="-100%" y="-100%" width="300%" height="300%">
+                            <feGaussianBlur stdDeviation="3" result="blur1"/>
+                            <feGaussianBlur stdDeviation="6" result="blur2"/>
+                            <feMerge>
+                                <feMergeNode in="blur2"/>
+                                <feMergeNode in="blur1"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="2" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Outer decorative rings -->
+                    <circle class="lotus-ring orbit-1" cx="200" cy="200" r="180" fill="none" stroke="url(#lotusGrad1)" stroke-width="0.3" opacity="0.2"/>
+                    <circle class="lotus-ring orbit-2" cx="200" cy="200" r="160" fill="none" stroke="#00f5ff" stroke-width="0.5" opacity="0.3"/>
+                    <circle class="lotus-ring orbit-3" cx="200" cy="200" r="140" fill="none" stroke="url(#lotusGrad1)" stroke-width="0.8" opacity="0.4"/>
+                    
+                    <!-- Tech hexagon frame -->
+                    <polygon class="hex-frame" points="200,70 295,125 295,235 200,290 105,235 105,125" fill="none" stroke="#00f5ff" stroke-width="0.5" opacity="0.3" stroke-dasharray="8 4"/>
+                    
+                    <!-- Lotus petals outer layer -->
+                    <g class="lotus-petals-outer" filter="url(#softGlow)">
+                        <path class="petal-outer" d="M200 200 L200 50 Q240 100 200 140 Q160 100 200 50" fill="none" stroke="url(#lotusGrad1)" stroke-width="2"/>
+                        <path class="petal-outer" d="M200 200 L300 80 Q340 150 270 170 Q240 140 200 200" fill="none" stroke="url(#lotusGrad1)" stroke-width="2"/>
+                        <path class="petal-outer" d="M200 200 L300 320 Q260 370 230 290 Q240 250 200 200" fill="none" stroke="url(#lotusGrad1)" stroke-width="2"/>
+                        <path class="petal-outer" d="M200 200 L200 350 Q160 300 200 260 Q240 300 200 350" fill="none" stroke="url(#lotusGrad1)" stroke-width="2"/>
+                        <path class="petal-outer" d="M200 200 L100 320 Q60 250 130 230 Q160 260 200 200" fill="none" stroke="url(#lotusGrad1)" stroke-width="2"/>
+                        <path class="petal-outer" d="M200 200 L100 80 Q140 30 170 110 Q160 150 200 200" fill="none" stroke="url(#lotusGrad1)" stroke-width="2"/>
+                    </g>
+                    
+                    <!-- Lotus petals inner layer -->
+                    <g class="lotus-petals-inner" filter="url(#glowPremium)">
+                        <path class="petal-inner" d="M200 200 L200 100 Q225 130 200 155 Q175 130 200 100" fill="none" stroke="url(#lotusGrad2)" stroke-width="1.5"/>
+                        <path class="petal-inner" d="M200 200 L270 140 Q285 180 250 185 Q235 165 200 200" fill="none" stroke="url(#lotusGrad2)" stroke-width="1.5"/>
+                        <path class="petal-inner" d="M200 200 L270 260 Q240 285 225 245 Q235 225 200 200" fill="none" stroke="url(#lotusGrad2)" stroke-width="1.5"/>
+                        <path class="petal-inner" d="M200 200 L200 300 Q175 270 200 245 Q225 270 200 300" fill="none" stroke="url(#lotusGrad2)" stroke-width="1.5"/>
+                        <path class="petal-inner" d="M200 200 L130 260 Q115 220 150 215 Q165 235 200 200" fill="none" stroke="url(#lotusGrad2)" stroke-width="1.5"/>
+                        <path class="petal-inner" d="M200 200 L130 140 Q160 115 175 155 Q165 175 200 200" fill="none" stroke="url(#lotusGrad2)" stroke-width="1.5"/>
+                    </g>
+                    
+                    <!-- Central Core -->
+                    <g class="core-system" filter="url(#glowPremium)">
+                        <polygon class="core-hex" points="200,140 235,160 235,200 200,220 165,200 165,160" fill="none" stroke="#00f5ff" stroke-width="2"/>
+                        <circle class="core-center" cx="200" cy="180" r="15" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+                        <circle class="core-dot" cx="200" cy="180" r="5" fill="#00f5ff"/>
+                    </g>
+                    
+                    <!-- Circuit connections -->
+                    <g class="circuit-connections" opacity="0.6">
+                        <line x1="200" y1="180" x2="200" y2="100" stroke="#00f5ff" stroke-width="1"/>
+                        <line x1="200" y1="180" x2="270" y2="140" stroke="#00f5ff" stroke-width="1"/>
+                        <line x1="200" y1="180" x2="270" y2="260" stroke="#00f5ff" stroke-width="1"/>
+                        <line x1="200" y1="180" x2="200" y2="300" stroke="#00f5ff" stroke-width="1"/>
+                        <line x1="200" y1="180" x2="130" y2="260" stroke="#00f5ff" stroke-width="1"/>
+                        <line x1="200" y1="180" x2="130" y2="140" stroke="#00f5ff" stroke-width="1"/>
+                        
+                        <!-- Branch lines -->
+                        <line x1="200" y1="100" x2="180" y2="70" stroke="#00f5ff" stroke-width="0.5"/>
+                        <line x1="200" y1="100" x2="220" y2="70" stroke="#00f5ff" stroke-width="0.5"/>
+                        <line x1="270" y2="140" x2="300" y2="120" stroke="#00f5ff" stroke-width="0.5"/>
+                        <line x1="270" y1="260" x2="300" y2="280" stroke="#00f5ff" stroke-width="0.5"/>
+                    </g>
+                    
+                    <!-- Data nodes -->
+                    <g class="data-nodes">
+                        <circle class="node-primary" cx="200" cy="100" r="3" fill="#ffffff" filter="url(#softGlow)"/>
+                        <circle class="node-primary" cx="270" cy="140" r="3" fill="#ffffff" filter="url(#softGlow)"/>
+                        <circle class="node-primary" cx="270" cy="260" r="3" fill="#ffffff" filter="url(#softGlow)"/>
+                        <circle class="node-primary" cx="200" cy="300" r="3" fill="#ffffff" filter="url(#softGlow)"/>
+                        <circle class="node-primary" cx="130" cy="260" r="3" fill="#ffffff" filter="url(#softGlow)"/>
+                        <circle class="node-primary" cx="130" cy="140" r="3" fill="#ffffff" filter="url(#softGlow)"/>
+                        
+                        <circle class="node-secondary" cx="180" cy="70" r="2" fill="#00f5ff"/>
+                        <circle class="node-secondary" cx="220" cy="70" r="2" fill="#00f5ff"/>
+                        <circle class="node-secondary" cx="300" cy="120" r="2" fill="#00f5ff"/>
+                        <circle class="node-secondary" cx="300" cy="280" r="2" fill="#00f5ff"/>
+                    </g>
+                    
+                    <!-- Energy pulses -->
+                    <circle class="energy-pulse" cx="200" cy="180" r="20" fill="none" stroke="#00f5ff" stroke-width="0.5" opacity="0"/>
+                </svg>
+            </div>
+            
+            <!-- Premium Loading Card -->
+            <div class="lotus-card">
+                <div class="card-glass">
+                    <div class="lotus-brand">
+                        <span class="brand-text">EGYPT</span>
+                        <span class="brand-year">2030</span>
+                    </div>
+                    <div class="lotus-tagline">المستقبل يبدأ الآن</div>
+                    
+                    <div class="lotus-status-bar">
+                        <span class="status-indicator"></span>
+                        <span id="loading-message-neon" class="status-text">جاري تهيئة النظام</span>
+                    </div>
+                    
+                    <div class="lotus-progress-premium">
+                        <div class="progress-track">
+                            <div id="loading-progress-bar" class="progress-fill" style="width: 0%"></div>
+                            <div class="progress-shine"></div>
+                        </div>
+                        <div id="loading-percentage-neon" class="progress-value">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar" id="navbar" role="navigation" aria-label="القائمة الرئيسية">
         <div class="nav-container">
@@ -49,6 +191,7 @@
                 <li><a href="#stats">الإحصاءات</a></li>
                 <li><a href="#story-timeline">رحلة التحول</a></li>
                 <li><a href="#about">من نحن</a></li>
+                
             </ul>
         </div>
     </nav>
