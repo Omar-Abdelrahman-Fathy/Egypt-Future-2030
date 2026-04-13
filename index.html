@@ -201,7 +201,7 @@
         <!-- Background Video -->
         <video class="hero-video" autoplay loop muted playsinline
                aria-hidden="true" role="presentation">
-            <source src="video/From Main Klickpin CF- Pinterest Video - 4H1aSaDv0.mp4" type="video/mp4">
+            <source src="video/planet digital earth FULL HD.mp4" type="video/mp4">
         </video>
         
         <div class="hero-overlay"></div>
@@ -1376,7 +1376,7 @@
                     </div>
                     
                     <!-- Attach File (Optional) -->
-                    <div class="form-group file-upload-group">
+                    <div class="file-upload-group">
                         <label for="suggestionAttachment"><i class="fas fa-paperclip"></i> إرفاق ملف (صورة/مستند)</label>
                         <div class="file-upload">
                             <input type="file" id="suggestionAttachment" accept=".jpg,.png,.pdf,.docx">
@@ -1385,10 +1385,20 @@
                     </div>
                     
                     <!-- Terms Agreement -->
-                    <div class="form-checkbox">
-                        <input type="checkbox" id="agreeTerms" required>
-                        <label for="agreeTerms">أوافق على <a href="#">شروط الاستخدام</a> وسياسة الخصوصية</label>
-                    </div>
+                    <label class="checkbox-wrapper">
+                      <input type="checkbox" id="agreeTerms" required />
+                      <div class="checkmark">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path
+                            d="M20 6L9 17L4 12"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                        </svg>
+                      </div>
+                      <span class="label">أوافق على <a href="#">شروط الاستخدام</a> و<a href="#">سياسة الخصوصية</a></span>
+                    </label>
                     
                     <!-- Submit Button -->
                     <button type="submit" class="suggestions-submit-btn" id="submitSuggestion">
@@ -1536,7 +1546,6 @@
     <script src="libs/ScrollTrigger.min.js"></script>
     <script src="libs/aos.js"></script>
     <script src="libs/swiper-bundle.min.js"></script>
-    <script src="libs/chart.umd.min.js"></script>
     <script src="libs/lottie.min.js"></script>
     
     <!-- ملفات المشروع -->

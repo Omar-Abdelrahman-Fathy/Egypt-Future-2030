@@ -1231,12 +1231,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         new Navigation();
         new StatsManager();
-        new ChartsManager();
+        // new ChartsManager(); // سيتم تحميله لاحقاً عند الحاجة
         new ProjectsCarousel();
         new ProjectPopup();
         new ChatBot();
         new SuggestionForm();
         new StoryStackedTimeline();
+        
+        // إعداد التحميل المتأخر لـ Chart.js
+        initLazyCharts();
         
         // TypeWriter
         const heroSubtitle = document.querySelector('.hero-subtitle');
@@ -1253,6 +1256,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 100);
 });
+
+// دالة التحميل المتأخر للمكتبات الثقيلة (Chart.js)
+function initLazyCharts() {
+    const statsSection = document.getElementById('stats');
+    if (!statsSection) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            loadScript('libs/chart.umd.min.js')
+                .then(() => {
+                    if (typeof ChartsManager !== 'undefined') {
+                        new ChartsManager();
+                    }
+                })
+                .catch(err => console.error('Failed to load Chart.js:', err));
+            
+            observer.unobserve(statsSection);
+        }
+    }, { threshold: 0.1 });
+
+    observer.observe(statsSection);
+}
+
+// دالة مساعدة لتحميل السكربتات برمجياً
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) {
+            resolve();
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
 
 // ================================================
 // الرحلة الزمنية المكدّسة (#story-timeline)
